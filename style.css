@@ -11,6 +11,9 @@ body{
   background-color: mintcream;
 }
 
+#contact-info{
+  text-align: center;
+}
 #button {
   background-color: gold;
   color: red;

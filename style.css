@@ -1,0 +1,55 @@
+html {
+  height: 100%;
+  width: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font: Ubuntu;
+}
+.hidden{
+  opacity: 0;
+}
+body{
+  background-color: mintcream;
+}
+
+#button {
+  background-color: gold;
+  color: red;
+  margin: 10px;
+}
+#button2 {
+  background-color: gold;
+  color: red;
+  align-content: right;
+  margin: 10px;
+}
+.heading{
+  text-align: center;
+}
+#webTop{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: -40px;
+  background-color: #44ff00;
+  text-align: center;
+  font-size: 80px;
+  margin: 25px;
+}
+
+.linkButton{
+  margin:5px;
+}
+
+#image{
+  background-image: url(Pictures/what_is_a_programming_language.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 400px;
+  padding-top: 10px;
+}
+
+#busyText{
+  text-align: center;
+  padding-left: 250px;
+  padding-right: 250px;
+}

@@ -1,0 +1,35 @@
+### Update 1.0.1 ###
+**Added JavaScript code to script.js**
+
+### Update 1.0.2
+**Added bug tracker (with one bug)**
+
+### Update 1.1.0 ###
+**Updated the header**
+**Changed the buttons to three new, cooler buttons**
+**Added three subpages**
+**Made a picture banner for the header**
+
+### Update 1.1.1 ###
+**Added subpage folders for our four services**
+**Changed the wording of these services**
+**Added links to two of these services**
+
+### Update 1.1.2 ###
+**Tweaked the image**
+**Removed the blue background on the header**
+
+### Update 1.1.3 ###
+**Added extra text on the main page**
+**Changed header background to green**
+**Added title to page "Our Services"**
+
+### Update 1.1.4 ###
+**Added 4 new subpages describing our services**
+**Changed the subpage folders' names**
+**Added titles to all the subpages**
+**Added two hyperlinks**
+**Tweaked two of the hyperlinks**
+
+### Update 1.2.0 ###
+**Began migration to GitHub**

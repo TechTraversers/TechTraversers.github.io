@@ -33,3 +33,6 @@
 
 ### Update 1.2.0 ###
 **Began migration to GitHub**
+
+### Update 1.2.1 ###
+**Added readme**

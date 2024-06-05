@@ -39,3 +39,6 @@
 
 ### Update 1.2.2 ###
 **Deprecated Replit**
+
+### Update 1.2.3 ###
+**Fixed hyperlink in /ourvalues**

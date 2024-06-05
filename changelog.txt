@@ -36,3 +36,6 @@
 
 ### Update 1.2.1 ###
 **Added readme**
+
+### Update 1.2.2 ###
+**Deprecated Replit**

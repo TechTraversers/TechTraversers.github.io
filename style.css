@@ -12,8 +12,10 @@ body{
 }
 
 #contact-info{
+  position: fixed;
+  left: 0;
+  bottom: 0;
   text-align: center;
-  padding: 70px;
 }
 #button {
   background-color: gold;

@@ -13,6 +13,7 @@ body{
 
 #contact-info{
   position: fixed;
+  padding: 5px;
   left: 0;
   bottom: 0;
   width: 100%;

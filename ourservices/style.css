@@ -17,8 +17,8 @@ html {
 /* Style The Dropdown Button */
 .dropbtn {
   border-radius: 10px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: lime;
+  color: black;
   padding: 16px;
   font-size: 16px;
   border: none;

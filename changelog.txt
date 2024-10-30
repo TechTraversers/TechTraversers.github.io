@@ -42,3 +42,6 @@
 
 ### Update 1.2.3 ###
 **Fixed hyperlink in /ourvalues**
+
+### Update 2.0 ###
+**Completely overhauled entire site**

@@ -1,0 +1,2 @@
+- Finish styling and adding buttons (M)
+- Add background images to other pages (L)

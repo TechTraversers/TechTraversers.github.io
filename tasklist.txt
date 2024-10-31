@@ -1,2 +1,3 @@
-- Finish styling and adding buttons (M)
+- Finish styling and adding buttons (M) ** Done **
 - Add background images to other pages (L)
+- 

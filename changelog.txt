@@ -45,3 +45,7 @@
 
 ### Update 2.0 ###
 **Completely overhauled entire site**
+
+### Update 2.1.0 ###
+**Added downloads page for the Rock Paper Scissors game**
+**Added MacOS and Linux downloads for Rock Paper Scissors**

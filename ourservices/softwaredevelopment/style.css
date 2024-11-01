@@ -5,6 +5,10 @@ html {
   font: Ubuntu;
 }
 
+h1 {
+  text-align: center;
+}
+
 /* Dropdown Button */
 /* Style The Dropdown Button */
 .dropbtn {

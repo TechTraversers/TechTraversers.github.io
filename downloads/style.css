@@ -9,6 +9,12 @@ html {
   text-align: center;
 }
 
+#rps {
+  cursor: link;
+  border: none;
+  background-color: orange;
+}
+
 /* Dropdown Button */
 /* Style The Dropdown Button */
 .dropbtn {

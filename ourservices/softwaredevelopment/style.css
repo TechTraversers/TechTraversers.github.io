@@ -9,6 +9,14 @@ h1 {
   text-align: center;
 }
 
+#image{
+  background-image: url(../../Pictures/pic1.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 400px;
+  padding-top: 10px;
+}
+
 /* Dropdown Button */
 /* Style The Dropdown Button */
 .dropbtn {

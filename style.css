@@ -21,17 +21,6 @@ body{
   color: black;
   text-align: center;
 }
-#button {
-  background-color: gold;
-  color: red;
-  margin: 10px;
-}
-#button2 {
-  background-color: gold;
-  color: red;
-  align-content: right;
-  margin: 10px;
-}
 .heading{
   text-align: center;
 }
@@ -62,6 +51,11 @@ body{
   text-align: center;
   padding-left: 250px;
   padding-right: 250px;
+}
+
+#offerText {
+  text-align: center;
+  color: red;
 }
 
 /* Dropdown Button */

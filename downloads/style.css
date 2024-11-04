@@ -11,7 +11,8 @@ html {
 }
 
 #rps {
-  cursor: link;
+  cursor: pointer;
+  border-radius: 5px;
   border: none;
   background-color: orange;
 }

@@ -72,6 +72,14 @@ body{
   clear: both;
 }
 
+#column1 {
+  background-color: blue;
+}
+
+#column2 {
+  background-color: orange;
+}
+
 /* Dropdown Button */
 /* Style The Dropdown Button */
 .dropbtn {

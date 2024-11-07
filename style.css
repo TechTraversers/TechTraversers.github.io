@@ -64,6 +64,7 @@ body{
   float: left;
   width: 50%;
   text-align: center;
+  border-radius: 20px;
 }
 
 /* Clear floats after the columns */

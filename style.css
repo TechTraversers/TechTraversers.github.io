@@ -60,7 +60,7 @@ body{
   text-align: center;
   color: red;
   flex: 1;
-  padding: 20px;
+  padding-left: 200px;
   box-sizing: border-box;
   margin-left: 200px;
 }

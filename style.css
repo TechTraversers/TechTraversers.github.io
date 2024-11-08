@@ -62,14 +62,13 @@ body{
   flex: 1;
   padding-left: 200px;
   box-sizing: border-box;
-  margin-left: 200px;
 }
 
-p {
+.nonColumnText {
   flex: 1;
   padding: 20px;
   box-sizing: border-box;
-  margin-left: 200px;
+  padding-left: 200px;
 }
 
 /* Create two equal columns that float next to each other */
@@ -81,7 +80,6 @@ p {
   flex: 1;
   padding: 20px;
   box-sizing: border-box;
-  margin-left: 200px;
 }
 
 /* Clear floats after the columns */

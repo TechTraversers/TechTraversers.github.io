@@ -20,6 +20,9 @@ body{
   background-color: lime;
   color: black;
   text-align: center;
+  flex: 1;
+  box-sizing: border-box;
+  margin-left: 200px;
 }
 .heading{
   text-align: center;
@@ -56,6 +59,17 @@ body{
 #offerText {
   text-align: center;
   color: red;
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: 200px;
+}
+
+p {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: 200px;
 }
 
 /* Create two equal columns that float next to each other */
@@ -64,6 +78,10 @@ body{
   width: 50%;
   text-align: center;
   border-radius: 20px;
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: 200px;
 }
 
 /* Clear floats after the columns */
@@ -97,14 +115,6 @@ body {
   background-color: #136a13;
   color: #fff;
   box-sizing: border-box;
-}
-
-.content {
-  flex: 1;
-  padding: 20px;
-  box-sizing: border-box;
-  margin-left: 200px;
-  text-align: justify;
 }
 
 .sidebar a {

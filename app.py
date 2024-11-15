@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, render_template, request
 import sqlite3
 
 app = Flask(__name__)
@@ -24,7 +24,7 @@ def log_ip(ip):
 def index():
     user_ip = request.remote_addr  # Get the user's IP address
     log_ip(user_ip)  # Store the IP address in the database
-    return "Your IP has been logged."
+    return render_template('index.html')  # Render the index.html template
 
 @app.route('/view_ips')
 def view_ips():
@@ -40,3 +40,4 @@ def view_ips():
 if __name__ == '__main__':
     init_db()  # Initialize the database
     app.run(debug=True)
+

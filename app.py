@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import sqlite3
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')  # Set the template folder to the current directory
 
 # Create database and table if it doesn't exist
 def init_db():
@@ -40,4 +40,3 @@ def view_ips():
 if __name__ == '__main__':
     init_db()  # Initialize the database
     app.run(debug=True)
-

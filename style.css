@@ -52,26 +52,28 @@ body{
 
 #busyText{
   text-align: center;
+  float: right;
 }
 
 #offerText {
   text-align: center;
   color: red;
-  flex: 1;
-  box-sizing: border-box;
+  float: right;
 }
 
 #startLowerPage {
   text-align: center;
+  float: right;
 }
 
 .nonColumnText {
   padding: 20px;
+  float: right;
 }
 
 /* Create two equal columns that float next to each other */
 .column {
-  float: left;
+  float: right;
   width: 50%;
   text-align: center;
   border-radius: 20px;

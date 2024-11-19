@@ -13,6 +13,7 @@ body{
 }
 
 #contact-info{
+  position: fixed;
   padding: 5px;
   left: 0;
   bottom: 0;
@@ -52,10 +53,13 @@ body{
 
 #busyText{
   text-align: center;
+  margin-left: 200px;
   float: right;
 }
 
 #offerText {
+  position: absolute;
+  top: 5px;
   text-align: center;
   color: red;
   float: right;

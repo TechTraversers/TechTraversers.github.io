@@ -52,25 +52,21 @@ body{
 
 #busyText{
   text-align: center;
-  padding-left: 200px;
 }
 
 #offerText {
   text-align: center;
   color: red;
   flex: 1;
-  padding-left: 200px;
   box-sizing: border-box;
 }
 
 #startLowerPage {
-  padding-left: 200px;
   text-align: center;
 }
 
 .nonColumnText {
   padding: 20px;
-  padding-left: 200px;
 }
 
 /* Create two equal columns that float next to each other */
@@ -79,7 +75,6 @@ body{
   width: 50%;
   text-align: center;
   border-radius: 20px;
-  padding-left: 200px;
   box-sizing: border-box;
 }
 

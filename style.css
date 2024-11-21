@@ -103,10 +103,6 @@ body {
   padding: 0;
 }
 
-.container {
-  display: flex;
-}
-
 .sidebar {
   width: 200px;
   height: 100vh;

@@ -25,11 +25,11 @@ html {
   cursor: pointer;
   border-radius: 5px;
   border: none;
-  background-color: lightgrey;
+  background-color: white;
 }
 
 #rpsMac:active {
-  background-color: grey;
+  background-color: lightgrey;
 }
 
 /* Create two equal columns that float next to each other */

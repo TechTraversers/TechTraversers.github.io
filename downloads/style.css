@@ -5,6 +5,11 @@ html {
   font: Ubuntu;
 }
 
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 #head {
   text-align: center;
   font-size: 40px;

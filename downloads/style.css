@@ -18,12 +18,15 @@ a {
 #rpsLinux {
   cursor: pointer;
   border-radius: 5px;
-  border: 1px outset;
+  border: 1px dotted;
   background-color: orange;
 }
 
 #rpsLinux:active {
   background-color: #dd9000;
+}
+#rpsLinux:hover{
+  color: blue;
 }
 
 #rpsMac {

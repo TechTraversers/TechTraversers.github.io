@@ -31,6 +31,8 @@ a {
   border-radius: 5px;
   border: none;
   background-color: white;
+  font-size: 24px;
+  padding: 40px 8px;
 }
 
 #rpsMac:active {

@@ -22,27 +22,12 @@ a {
   border-radius: 5px;
   border: none;
   background-color: orange;
-  font-size: 24px;
-  padding: 40px 8px;
-  margin: 10px;
-  box-shadow: 5px 10px #888888;
+  font-size: 10px;
   color: inherit;
   text-decoration: none;
   text-align: center;
   font-weight: normal;
   transition: background-color 0.2s, color 0.2s, font-weight 0.2s, border 0.2s;
-}
-
-#rpsLinux:active {
-  background-color: #dd9000;
-}
-
-#rpsLinux:hover {
-  color: blue;
-  font-weight: bold;
-  background-color: yellow;
-  border: 2px solid;
-  text-decoration: none;
 }
 
 #rpsMac {

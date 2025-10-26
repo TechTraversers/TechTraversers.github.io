@@ -49,7 +49,19 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.centerText {
+#techWel {
+  text-align: center;
+}
+
+#sofDev {
+  text-align: center;
+}
+
+#footer {
+  text-align: center;
+}
+
+#itHelp {
   text-align: center;
 }
 

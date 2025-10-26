@@ -1,75 +1,108 @@
+:root {
+  --primary-color: #1a73e8;
+  --secondary-color: #34a853;
+  --background-color: #ffffff;
+  --text-color: #202124;
+  --sidebar-color: #f8f9fa;
+  --hover-color: #e8f0fe;
+  --header-bg: rgba(255, 255, 255, 0.95);
+}
+
 html {
   height: 100%;
   width: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font: Ubuntu;
-  background-color: grey;
-}
-.hidden{
-  opacity: 0;
-}
-body{
-  background-color: mintcream;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-color);
 }
 
-#contact-info{
-  padding: 5px;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: lime;
-  color: black;
-  text-align: center;
-  flex: 1;
-  box-sizing: border-box;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  min-height: 100vh;
 }
-.heading{
+
+#contact-info {
+  background-color: var(--sidebar-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.heading {
   text-align: center;
 }
-#webTop{
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: -40px;
-  background-color: #44ff00;
+
+#webTop {
+  color: white;
   text-align: center;
-  font-size: 80px;
-  margin: 25px;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .linkButton{
   margin:5px;
 }
 
-#image{
+#image {
   background-image: url(Pictures/what_is_a_programming_language.jpg);
   background-position: center;
   background-size: cover;
   height: 400px;
-  padding-top: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#busyText{
-  text-align: center;
-  margin-left: 200px;
-  float: right;
+#image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+  z-index: 1;
 }
 
-#offerText {
-  top: 5px;
-  text-align: center;
-  color: red;
-  float: right;
+#current {
+  font-weight: bold;
+  background-color: var(--hover-color);
+  color: var(--primary-color);
 }
 
-#startLowerPage {
-  text-align: center;
-  float: right;
+/* Main container */
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
 }
 
-.nonColumnText {
-  padding: 20px;
-  float: right;
+/* Main content */
+main {
+  width: calc(100% - 300px); /* 250px sidebar + 50px for gap and padding */
+  min-width: 0; /* Prevents flex item from overflowing */
+}
+
+.container h2 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 2rem;
 }
 
 /* Create two equal columns that float next to each other */
@@ -96,32 +129,70 @@ body{
   background-color: orange;
 }
 
-/*Sidebar*/
-body {
-  margin: 0;
-  padding: 0;
-}
-
+/* Sidebar navigation */
 .sidebar {
-  width: 200px;
-  height: 230px;
-  background-color: #136a13;
-  color: #fff;
-  box-sizing: border-box;
+  width: 250px;
+  flex-shrink: 0; /* Prevents sidebar from shrinking */
+  background-color: var(--sidebar-color);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 2rem; /* Matches container padding */
+  align-self: flex-start; /* Prevents stretch */
+  height: fit-content;
 }
 
 .sidebar a {
   display: block;
-  color: #fff;
+  color: var(--text-color);
   text-decoration: none;
-  padding: 10px;
-  margin-bottom: 10px;
-  transition: background-color 0.3s;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-/* Change background color on hover */
 .sidebar a:hover {
-  background-color: #2980b9;
+  background-color: var(--hover-color);
+  color: var(--primary-color);
+  transform: translateX(4px);
+}
+
+/* Responsive design */
+@media (max-width: 1240px) { /* 1200px + 40px padding */
+  .container {
+    width: auto;
+    margin: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 1rem;
+    margin: 0 10px;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-top: 1rem;
+    position: static;
+  }
+
+  #webTop {
+    font-size: 2.5rem;
+    padding: 1rem;
+  }
+
+  #image {
+    height: 300px;
+  }
 }
 
 /*

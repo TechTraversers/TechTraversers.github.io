@@ -3,7 +3,7 @@
   --secondary-color: #34a853;
   --background-color: #ffffff;
   --text-color: #202124;
-  --sidebar-color: #f8f9fa;
+  --sidebar-color: rgba(255, 100, 100, 0.2);
   --hover-color: #e8f0fe;
   --header-bg: rgba(255, 255, 255, 0.95);
 }
@@ -89,6 +89,10 @@ body {
   display: flex;
   gap: 2rem;
   justify-content: space-between;
+  background-color: rgba(0, 255, 255, 0.2);
+  border-radius: 15px;
+  margin-top: 20px;
+
 }
 
 /* Main content */

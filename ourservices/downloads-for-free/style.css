@@ -1,0 +1,72 @@
+/* Page-specific styles for ourservices/downloads-for-free */
+
+.service-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.resource-card {
+  background: var(--background-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.resource-card h4 {
+  color: var(--primary-color);
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+}
+
+.resource-card p {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.cta-section {
+  text-align: center;
+  margin: 3rem 0;
+  padding: 2rem;
+  background: var(--hover-color);
+  border-radius: 12px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+  background: #1557b0;
+  transform: translateY(-2px);
+}
+
+.note {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--sidebar-color);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 4px;
+}

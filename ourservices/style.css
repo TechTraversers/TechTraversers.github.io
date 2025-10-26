@@ -14,8 +14,11 @@ html {
   margin: 25px;
 }
 
-#services{
-  text-align: center;
+#services li{
+  border: #3e8e41 dashed 2px;
+  border-radius: 10px;
+  margin: 7px;
+  padding: 5px;
 }
 
 #image{

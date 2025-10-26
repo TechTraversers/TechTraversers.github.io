@@ -1,3 +1,2 @@
-- Finish styling and adding buttons (M) ** Done **
-- Add background images to other pages (L)
-- 
+- Add background colors in Services
+- Keep adding text

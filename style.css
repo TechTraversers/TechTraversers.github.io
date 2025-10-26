@@ -49,6 +49,11 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+#techWelcome {
+  text-align: center;
+  position: relative;
+}
+
 .linkButton{
   margin:5px;
 }

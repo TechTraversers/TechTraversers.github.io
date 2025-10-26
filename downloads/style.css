@@ -21,7 +21,23 @@ a {
   cursor: pointer;
   border-radius: 5px;
   border: none;
-  padding: 20px 8px;
+  padding: 8px 8px;
+  margin: 10px;
+  background-color: orange;
+  font-size: 10px;
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+  font-weight: normal;
+  transition: background-color 0.2s, color 0.2s, font-weight 0.2s, border 0.2s;
+}
+
+#langDownL {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  padding: 8px 8px;
   margin: 10px;
   background-color: orange;
   font-size: 10px;

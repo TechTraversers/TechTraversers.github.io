@@ -1,3 +1,6 @@
+**Tech Traversers: The Website
+*Your one-stop shop for basically nothing right now but that's fine we're in the process of learning stop looking at me like that.
+
 Hello! I'm Levi Bryan, a co-owner of Tech Traverser. We are a new technology business based out of Buffalo, Wyoming and would love your support! Thank you for viewing.
 
 Hi! I'm Codesmith95. I'm the other co-owner of Tech Traverser. We'd love to help you with any of your tech-related requests or problems.^

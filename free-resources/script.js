@@ -18,11 +18,11 @@ function download(file, text) {
 
 // Start file download.
 
-document.getElementById("rpsLinux")
+document.getElementById("BookCatalog")
     .addEventListener("click", function () {
         let text =
             document.getElementById("text").value;
-        let filename = "rps-linux";
+        let filename = "BookCatalog.exe";
 
         download(filename, text);
     }, false);

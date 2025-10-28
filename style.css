@@ -53,18 +53,9 @@ body {
   text-align: center;
 }
 
-#sofDev {
-  text-align: center;
-}
-
 #footer {
   text-align: center;
 }
-
-#itHelp {
-  text-align: center;
-}
-
 .linkButton{
   margin:5px;
 }
@@ -95,6 +86,10 @@ body {
   font-weight: bold;
   background-color: var(--hover-color);
   color: var(--primary-color);
+}
+
+.subtitle{
+  text-align: left;
 }
 
 /* Main container */

@@ -48,23 +48,10 @@ a {
   transition: background-color 0.2s, color 0.2s, font-weight 0.2s, border 0.2s;
 }
 
-#rpsMac {
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
-  background-color: white;
-  font-size: 24px;
-  padding: 40px 8px;
-}
-
-#rpsMac:active {
-  background-color: lightgrey;
-}
-
 /* Create two equal columns that float next to each other */
 .column {
   float: left;
-  width: 50%;
+  width: 45%;
   text-align: center;
 }
 

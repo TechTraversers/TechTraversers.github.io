@@ -1,36 +1,35 @@
-/* ==========================
-   Tech Traversers - style.css
-   ========================== */
+/* Tech Traversers: style.css
+   Alternating service layout (image-left for odd rows),
+   easy to add more services: always put text (groupLeft) THEN image (groupRight)
+*/
 
-/* ----- base variables ----- */
+/* Variables */
 :root {
-  --primary-color: #1a73e8;
-  --background-color: #ffffff;
-  --text-color: #202124;
-  --sidebar-bg: rgba(255, 100, 100, 0.12);
+  --primary: #1a73e8;
+  --bg: #ffffff;
+  --text: #202124;
+  --sidebar-bg: rgba(255,100,100,0.12);
   --hover-bg: #e8f0fe;
-  --container-bg: rgba(0, 255, 255, 0.06);
+  --container-bg: rgba(0,255,255,0.06);
   --radius: 12px;
   --max-width: 1200px;
 }
 
-/* ----- global reset ----- */
-*,
-*::before,
-*::after {
+/* Reset box sizing */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  color: var(--text-color);
-  background: var(--background-color);
-  overflow-x: hidden;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ----- header / hero ----- */
+/* Hero */
 #image {
   background: url("Pictures/what_is_a_programming_language.jpg") center/cover no-repeat;
   height: 400px;
@@ -39,23 +38,21 @@ body {
   justify-content: center;
   position: relative;
 }
-
 #image::before {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.28));
 }
-
 #webTop {
   position: relative;
   z-index: 1;
-  color: white;
+  color: #fff;
   font-size: 3rem;
   text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
 }
 
-/* ----- layout container ----- */
+/* Container */
 .container {
   display: flex;
   gap: 2rem;
@@ -65,13 +62,12 @@ body {
   background: var(--container-bg);
   border-radius: var(--radius);
 }
-
 main {
   flex: 1;
   min-width: 0;
 }
 
-/* ----- sidebar ----- */
+/* Sidebar */
 .sidebar {
   width: 250px;
   flex-shrink: 0;
@@ -82,30 +78,27 @@ main {
   position: sticky;
   top: 1.5rem;
 }
-
 .sidebar a {
   display: block;
-  padding: 0.8rem 1rem;
-  margin-bottom: 0.5rem;
+  padding: .8rem 1rem;
+  margin-bottom: .5rem;
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--text);
   border-radius: 8px;
-  transition: 0.2s ease;
 }
-
 .sidebar a:hover {
   background: var(--hover-bg);
-  color: var(--primary-color);
+  color: var(--primary);
   transform: translateX(4px);
+  transition: all 0.2s ease-in-out;
 }
-
 #current {
   background: var(--hover-bg);
-  color: var(--primary-color);
+  color: var(--primary);
   font-weight: bold;
 }
 
-/* ----- service blocks ----- */
+/* Services */
 .service {
   display: flex;
   align-items: center;
@@ -115,58 +108,49 @@ main {
   flex-wrap: wrap;
 }
 
-.groupLeft,
-.groupRight {
-  flex: 1 1 45%;
-  min-width: 0;
+.service h2{
+  text-align: center;
+}
+.service button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.groupLeft img,
-.groupRight img {
+.groupLeft, .groupRight {
+  flex: 1 1 45%;
+  min-width: 0;
+  padding: 0.25rem;
+}
+.groupLeft img, .groupRight img {
   width: 100%;
   height: auto;
-  border-radius: 10px;
   display: block;
+  border-radius: 8px;
   object-fit: cover;
 }
 
-/* Alternate layout automatically */
+/* CORE: alternate layout automatically
+   DOM rule: every service must be text (groupLeft) THEN image (groupRight).
+   CSS: odd services are reversed so the image appears left for service #1, #3, ...
+*/
 .service:nth-of-type(odd) {
-  flex-direction: row-reverse; /* image LEFT for first, third, etc. */
+  flex-direction: row-reverse;
+} /* odd -> image left */
+.service:nth-of-type(even){ flex-direction: row; }      /* even -> image right */
+
+/* Responsive: stack on small screens */
+@media (max-width:768px){
+  .container{ flex-direction:column; padding:1rem; margin:0 10px; }
+  .sidebar{ width:100%; position:static; margin-top:0.75rem; }
+  .service{ flex-direction:column !important; gap:1rem; }
+  .groupLeft, .groupRight{ flex:1 1 100%; width:100%; }
 }
 
-.service:nth-of-type(even) {
-  flex-direction: row; /* image RIGHT for second, fourth, etc. */
-}
-
-/* ----- footer ----- */
-#footer {
-  text-align: center;
-  padding: 1rem 0 2rem;
-  color: rgba(32, 33, 36, 0.8);
-}
-
-/* ----- responsive ----- */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    padding: 1rem;
-    margin: 0 10px;
-  }
-
-  .sidebar {
-    width: 100%;
-    position: static;
-  }
-
-  .service {
-    flex-direction: column !important;
-    gap: 1rem;
-  }
-
-  .groupLeft,
-  .groupRight {
-    flex: 1 1 100%;
-    width: 100%;
-  }
-}
+/* Footer */
+#footer{ text-align:center; padding:1rem 0 2rem; color:rgba(32,33,36,0.8); }

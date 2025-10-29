@@ -24,40 +24,43 @@
           We're not experts, but we learn as we go, and we're learning new things all the time.
         </p>
 
-        <!-- Service 1: Image LEFT -->
+        <!-- Service #1: DOM order = text then image (CSS will reverse odd rows to make image LEFT) -->
         <section class="service">
-          <div class="groupRight">
-            <img src="Pictures/Software Dev.jpg" alt="Software development illustration" />
-          </div>
           <div class="groupLeft">
             <h2 class="subtitle">Software Development</h2>
             <p>We make applications in two languages, Python and C++. We program both text-based and graphical apps, with a wide range of features and customizations.</p>
+            <button type="button" onclick='window.location.href="https://techtraversers.github.io/ourservices/index.html"'>Find Help</button>
+          </div>
+          <div class="groupRight">
+            <img src="Pictures/Software Dev.jpg" alt="Software development illustration" />
           </div>
         </section>
 
-        <!-- Service 2: Image RIGHT -->
+        <!-- Service #2: DOM order still text then image (CSS leaves even rows normal -> image RIGHT) -->
         <section class="service">
           <div class="groupLeft">
             <h2 class="subtitle">IT Help</h2>
             <p>Currently we are offering IT Help. This can be done remotely over phone or in-person. In person visit costs vary by location. We also service some of Rapid City, SD.</p>
+            <button type="button" onclick='window.location.href="https://techtraversers.github.io/ourservices/index.html"'>Find Help</button>
           </div>
           <div class="groupRight">
             <img src="Pictures/IT Help.jpg" alt="IT support illustration" />
           </div>
         </section>
 
-        <!-- Example for future: just copy & paste this pattern -->
-        <!--
+        <!-- Add more services by copying the same pattern (text then image). The layout alternates automatically. -->
+        <!-- Example:
         <section class="service">
-          <div class="groupRight">
-            <img src="Pictures/NewService.jpg" alt="New service illustration" />
-          </div>
           <div class="groupLeft">
             <h2 class="subtitle">New Service</h2>
-            <p>Describe your new service here.</p>
+            <p>Description here.</p>
+          </div>
+          <div class="groupRight">
+            <img src="Pictures/NewService.jpg" alt="New service" />
           </div>
         </section>
         -->
+
       </main>
 
       <!-- Sidebar navigation -->

@@ -1,11 +1,22 @@
+
+
+/* ----- variables ----- */
 :root {
   --primary-color: #1a73e8;
   --secondary-color: #34a853;
   --background-color: #ffffff;
   --text-color: #202124;
-  --sidebar-color: rgba(255, 100, 100, 0.2);
+  --sidebar-color: rgba(255, 100, 100, 0.12);
   --hover-color: #e8f0fe;
-  --header-bg: rgba(255, 255, 255, 0.95);
+  --container-bg: rgba(0, 255, 255, 0.06);
+  --radius: 12px;
+  --max-width: 1200px;
+  --gap: 1rem;
+}
+
+/* ----- global reset / sensible defaults ----- */
+html, *, *::before, *::after {
+  box-sizing: border-box; /* prevents padding from blowing out widths */
 }
 
 html {
@@ -15,6 +26,8 @@ html {
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -22,46 +35,12 @@ body {
   padding: 0;
   background-color: var(--background-color);
   min-height: 100vh;
+  overflow-x: hidden; /* final safety to prevent horizontal scrollbars from tiny overflows */
 }
 
-#contact-info {
-  background-color: var(--sidebar-color);
-  color: var(--text-color);
-  text-align: center;
-  padding: 2rem;
-  margin-top: 2rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.heading {
-  text-align: center;
-}
-
-#webTop {
-  color: white;
-  text-align: center;
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin: 0;
-  padding: 2rem;
-  position: relative;
-  z-index: 2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-#techWel {
-  text-align: center;
-}
-
-#footer {
-  text-align: center;
-}
-.linkButton{
-  margin:5px;
-}
-
+/* ----- hero / header ----- */
 #image {
-  background-image: url(Pictures/what_is_a_programming_language.jpg);
+  background-image: url("Pictures/what_is_a_programming_language.jpg");
   background-position: center;
   background-size: cover;
   height: 400px;
@@ -69,105 +48,114 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 1rem;
 }
 
 #image::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+  inset: 0;
+  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.28));
   z-index: 1;
 }
 
-#current {
-  font-weight: bold;
-  background-color: var(--hover-color);
-  color: var(--primary-color);
-}
-
-.groupLeft{
-  max-width: 35%;
-  text-align: right;
-  float: left;
-  padding: 10px;
-}
-
-.groupRight{
-  flex: auto;
-  max-width: 40%;
-}
-
-.subtitle{
-  text-align: left;
-}
-
-/* Main container */
-.container {
-  width: 1200px;
-  margin: 0 auto;
+#webTop {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin: 0;
   padding: 2rem;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.45);
+}
+
+/* ----- container layout ----- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 20px auto;
+  padding: 1.5rem;
   display: flex;
   gap: 2rem;
+  align-items: flex-start;
   justify-content: space-between;
-  background-color: rgba(0, 255, 255, 0.2);
+  background-color: var(--container-bg);
   border-radius: 15px;
-  margin-top: 20px;
-
 }
 
-/* Main content */
+/* Make main flexible so sidebar can be stable */
 main {
-  width: calc(100% - 300px); /* 250px sidebar + 50px for gap and padding */
-  min-width: 0; /* Prevents flex item from overflowing */
+  flex: 1 1 auto;
+  min-width: 0; /* allows flex children to shrink without overflow */
 }
 
-.container h2 {
-  font-size: 1.5rem;
-  line-height: 1.4;
+/* Lead paragraph styling */
+.lead {
+  font-size: 1.05rem;
+  color: rgba(32,33,36,0.9);
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+/* ----- services: responsive two-column rows ----- */
+.service {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* allows children to wrap on small screens */
+  margin-bottom: 1.25rem;
+  padding: 0.25rem;
+}
+
+/* group columns */
+.groupLeft {
+  flex: 1 1 45%;
+  padding: 10px;
+  text-align: left;
+  min-width: 0; /* allow text to break instead of overflow */
+}
+
+.groupRight {
+  flex: 1 1 45%;
+  padding: 10px;
+  min-width: 0;
+}
+
+/* images scale responsively and don't cause overflow */
+.groupRight img,
+.groupLeft img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* subtitle style */
+.subtitle {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
   color: var(--text-color);
-  margin-top: 0;
-  margin-bottom: 2rem;
+  font-weight: 600;
 }
 
-/* Create two equal columns that float next to each other */
-.column {
-  float: right;
-  width: 50%;
-  text-align: center;
-  border-radius: 20px;
-  box-sizing: border-box;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-#column1 {
-  background-color: yellow;
-}
-
-#column2 {
-  background-color: orange;
-}
-
-/* Sidebar navigation */
+/* ----- sidebar ----- */
 .sidebar {
   width: 250px;
-  flex-shrink: 0; /* Prevents sidebar from shrinking */
+  flex-shrink: 0; /* don't let it shrink under normal desktop layout */
   background-color: var(--sidebar-color);
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   position: sticky;
-  top: 2rem; /* Matches container padding */
-  align-self: flex-start; /* Prevents stretch */
+  top: 1.5rem;
+  align-self: flex-start;
   height: fit-content;
+  min-width: 0;
 }
 
 .sidebar a {
@@ -178,7 +166,7 @@ main {
   margin-bottom: 0.5rem;
   border-radius: 8px;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: transform .18s ease, background-color .18s ease, color .18s ease;
 }
 
 .sidebar a:hover {
@@ -187,45 +175,76 @@ main {
   transform: translateX(4px);
 }
 
-/* Responsive design */
-@media (max-width: 1240px) { /* 1200px + 40px padding */
-  .container {
-    width: auto;
-    margin: 0 20px;
-  }
+#current {
+  font-weight: 700;
+  background-color: var(--hover-color);
+  color: var(--primary-color);
 }
 
+/* ----- accessibility and small touches ----- */
+#footer {
+  text-align: center;
+  padding: 1rem 0 2rem;
+  color: rgba(32,33,36,0.8);
+}
+
+/* ----- desktop: alternate service layout (image left for even rows) ----- */
+@media (min-width: 769px) {
+  /* Reverse even-numbered service rows so the image appears on the left.
+     This targets only the service elements in document order. */
+  main .service:nth-of-type(even) {
+    flex-direction: row-reverse;
+  }
+
+  /* Keep explicit ordering for deterministic layout */
+  main .service .groupLeft  { order: 1; }
+  main .service .groupRight { order: 2; }
+  main .service:nth-of-type(even) .groupLeft  { order: 2; } /* swapped */
+  main .service:nth-of-type(even) .groupRight { order: 1; } /* swapped */
+}
+
+/* ----- responsive / mobile ----- */
 @media (max-width: 768px) {
+  :root { --max-width: 100%; }
+
+  #webTop { font-size: 2.2rem; padding: 1.25rem; }
+  #image { height: 300px; }
+
   .container {
     flex-direction: column;
     padding: 1rem;
     margin: 0 10px;
   }
 
-  main {
-    width: 100%;
-  }
+  main { width: 100%; }
 
   .sidebar {
     width: 100%;
-    margin-top: 1rem;
     position: static;
+    margin-top: 0.75rem;
   }
 
-  #webTop {
-    font-size: 2.5rem;
-    padding: 1rem;
+  /* Force all services to stack vertically on narrow screens for predictable reading order */
+  .service {
+    flex-direction: column !important;
+    gap: 0.75rem;
   }
 
-  #image {
-    height: 300px;
+  .groupLeft, .groupRight {
+    flex: 1 1 100%;
+    width: 100%;
+    order: 0; /* reset any desktop ordering so mobile always reads top-to-bottom */
   }
+
+  /* reduce spacing on very small screens */
+  .container { padding: 0.75rem; gap: 0.5rem; }
 }
 
-/*
-    ___
-   / + \
-  / {}ı \
-  |(EGG)|
-  \_____/
-*/
+/* ----- safety tweaks for display edge-cases ----- */
+.container, .sidebar, main, .service, .groupLeft, .groupRight {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 0;
+}
+
+/* End of file */

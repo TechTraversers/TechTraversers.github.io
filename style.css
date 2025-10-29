@@ -89,9 +89,10 @@ body {
 }
 
 .groupLeft{
-  max-width: 45%;
+  max-width: 40%;
   text-align: right;
-  float: right;
+  float: left;
+  padding: 10px;
 }
 
 .subtitle{

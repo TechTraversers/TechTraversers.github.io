@@ -88,6 +88,12 @@ body {
   color: var(--primary-color);
 }
 
+.groupLeft{
+  max-width: 45%;
+  text-align: right;
+  float: right;
+}
+
 .subtitle{
   text-align: left;
 }

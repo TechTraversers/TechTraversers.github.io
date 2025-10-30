@@ -51,3 +51,7 @@
 **Added MacOS and Linux downloads for Rock Paper Scissors**
 **Added background image to Our Services page**
 
+### Update 2.2 ###
+**Complete site revamp**
+**Remove MacOS, Linux, and Windows downloads for rps**
+**Added more to home page**

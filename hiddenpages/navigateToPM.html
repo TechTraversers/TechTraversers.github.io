@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Redirecting to papa's markdown</title>
+	<!-- Meta-refresh fallback (percent-encode the apostrophe) -->
+	<meta http-equiv="refresh" content="0; url=papa%27s-markdown.md">
+	<script>
+		// JavaScript redirect (uses percent-encoded filename to avoid breaking JS strings)
+		(function(){
+			var encoded = 'papa%27s-markdown.md';
+			try {
+				// decode for nicer display in history/navigation when possible
+				window.location.replace(decodeURIComponent(encoded));
+			} catch (e) {
+				window.location.href = encoded;
+			}
+		})();
+	</script>
+</head>
+<body>
+	<p>Redirecting to <a href="papa%27s-markdown.md">papa's-markdown.md</a>. If you are not redirected automatically, click the link.</p>
+</body>
+</html>

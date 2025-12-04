@@ -1,10 +1,7 @@
 
 # Using the Lookup technique
 
-`=LOOKUP(2,1/(A2:A100<>""),A2:A100)`
-
-
-
+<span style="color:yellow;">`=LOOKUP(2,1/(A2:A100<>""),A2:A100)`</span>
 
 Here’s a **clear, older-Excel-friendly** breakdown of how the formula works behind the scenes. This will make the whole “LOOKUP trick” feel logical instead of magical.
 
@@ -13,7 +10,7 @@ Here’s a **clear, older-Excel-friendly** breakdown of how the formula works be
 # ✔ The formula
 
 ```excel
-=LOOKUP(2,1/(A2:A100<>""),A2:A100)
+LOOKUP(2,1/(A2:A100<>""),A2:A100)
 ```
 
 This returns the **last non-empty value** in A2:A100.

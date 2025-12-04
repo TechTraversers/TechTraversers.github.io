@@ -1,4 +1,6 @@
 
+# Using the Lookup technique
+
 `=LOOKUP(2,1/(A2:A100<>""),A2:A100)`
 
 
@@ -28,7 +30,7 @@ This checks each cell and produces an **array of TRUE/FALSE** values.
 
 Example (imagine A2–A8):
 
-```
+```text
 A2: Apple      → TRUE
 A3: (blank)    → FALSE
 A4: Cat        → TRUE
@@ -40,7 +42,7 @@ A8: (blank)    → FALSE
 
 So the array looks like:
 
-```
+```text
 {TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE}
 ```
 
@@ -55,7 +57,7 @@ Now we divide 1 by each TRUE or FALSE.
 
 So the array becomes:
 
-```
+```text
 {1, #DIV/0!, 1, 1, #DIV/0!, 1, #DIV/0!}
 ```
 
@@ -97,7 +99,7 @@ Choosing **2** as the lookup value guarantees there is no exact match, so it ret
 
 Imagine A2:A8 contains:
 
-```
+```text
 Apple
 (blank)
 Cat
@@ -109,13 +111,13 @@ Pizza
 
 Step 1: TRUE/FALSE
 
-```
+```text
 {T, F, T, T, F, T, F}
 ```
 
 Step 2: 1/(…)
 
-```
+```text
 {1, err, 1, 1, err, 1, err}
 ```
 

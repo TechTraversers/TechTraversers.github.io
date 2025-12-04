@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Markdown Viewer</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div id="content"></div>
+
+  <script>
+    fetch("papas-markdown.md")
+      .then(response => response.text())
+      .then(text => {
+        document.getElementById("content").innerHTML = marked.parse(text);
+      });
+  </script>
+</body>
+</html>

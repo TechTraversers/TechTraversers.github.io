@@ -3,10 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Markdown Viewer</title>
+
+  <!-- GitHub-style Markdown CSS -->
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+
+  <!-- Marked.js Markdown parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    /* Center content like GitHub README pages */
+    .markdown-body {
+      box-sizing: border-box;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+  </style>
 </head>
+
 <body>
-  <div id="content"></div>
+  <article id="content" class="markdown-body"></article>
 
   <script>
     fetch("papas-markdown.md")

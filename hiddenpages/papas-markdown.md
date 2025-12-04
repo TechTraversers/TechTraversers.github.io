@@ -1,35 +1,34 @@
 
 `=LOOKUP(2,1/(A2:A100<>""),A2:A100)`
 
+
+
+
+Here’s a **clear, older-Excel-friendly** breakdown of how the formula works behind the scenes. This will make the whole “LOOKUP trick” feel logical instead of magical.
+
+---
+
+# ✔ The formula
+
 ```excel
 =LOOKUP(2,1/(A2:A100<>""),A2:A100)
 ```
 
-Here’s a clear, older-Excel-friendly breakdown of how the formula works behind the scenes. The goal: make the LOOKUP trick feel logical instead of magical.
+This returns the **last non-empty value** in A2:A100.
 
 ---
 
-## The formula
+# ✔ Step-by-step explanation
 
-```excel
-=LOOKUP(2,1/(A2:A100<>""),A2:A100)
-```
+We’ll walk through the three parts:
 
-This returns the last non-empty value in the range A2:A100.
+## **1. (A2:A100 <> "")**
 
----
-
-## Step-by-step explanation
-
-We’ll walk through the three parts.
-
-### 1) (A2:A100 <> "")
-
-This checks each cell and produces an array of TRUE/FALSE values.
+This checks each cell and produces an **array of TRUE/FALSE** values.
 
 Example (imagine A2–A8):
 
-```text
+```
 A2: Apple      → TRUE
 A3: (blank)    → FALSE
 A4: Cat        → TRUE
@@ -41,51 +40,64 @@ A8: (blank)    → FALSE
 
 So the array looks like:
 
-```text
+```
 {TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE}
 ```
 
-### 2) 1 / (A2:A100<>"")
+---
 
-Divide 1 by each TRUE/FALSE.
+## **2. 1 / (A2:A100<>"")**
 
-* TRUE behaves like 1 → `1/1 = 1`
-* FALSE behaves like 0 → `1/0 = #DIV/0!` (an error)
+Now we divide 1 by each TRUE or FALSE.
 
-The array becomes:
+* TRUE acts like **1** → `1/1 = 1`
+* FALSE acts like **0** → `1/0 = #DIV/0!` (an error)
 
-```text
+So the array becomes:
+
+```
 {1, #DIV/0!, 1, 1, #DIV/0!, 1, #DIV/0!}
 ```
 
-Non-empty cells are represented by `1`; empty cells become a division error.
-
-### 3) LOOKUP(2, lookup_array, result_array)
-
-Now the trick:
-
-* LOOKUP searches for the largest value less than or equal to the lookup value (2).
-* Errors are ignored by LOOKUP.
-* All non-empty cells provide `1` in the lookup array. Since `1 ≤ 2`, LOOKUP finds the last `1` and returns the corresponding value from the result array (`A2:A100`).
-
-So the formula returns the last filled cell in the range.
+Only non-empty cells become a **1**.
+Empty cells become an **error**.
 
 ---
 
-## Why this works (and why it's useful)
+## **3. LOOKUP(2, these_values, A2:A100)**
 
-* LOOKUP ignores errors and does an approximate match.
-* Choosing `2` ensures no exact match is found, so LOOKUP falls back to the last valid `1` in the lookup array.
-* Works in older Excel versions (no dynamic arrays, no Ctrl+Shift+Enter needed).
-* Works with text and numbers and is efficient on large ranges.
+Now the clever trick.
+
+### How LOOKUP behaves:
+
+* LOOKUP searches for the largest value **≤ 2**.
+* Errors (`#DIV/0!`) are ignored.
+* All the non-empty cells appear as **1** in the lookup array.
+* 1 is ≤ 2, so LOOKUP will use **the last 1 in the array**.
+
+Since the 1’s correspond to non-empty entries, the **last 1** corresponds to the **last filled cell** in A2:A100.
+
+LOOKUP then returns the value from the result array (**A2:A100**) at that same position.
 
 ---
 
-## Example walkthrough
+# ✔ Why it’s brilliant
 
-If A2:A8 contains:
+Because LOOKUP:
 
-```text
+* **Ignores errors**
+* **Searches from top to bottom**
+* **Returns the last matching item when the lookup value is “too big”**
+
+Choosing **2** as the lookup value guarantees there is no exact match, so it returns the **last possible good value**.
+
+---
+
+# ✔ Example walkthrough
+
+Imagine A2:A8 contains:
+
+```
 Apple
 (blank)
 Cat
@@ -95,16 +107,30 @@ Pizza
 (blank)
 ```
 
-Then the intermediate steps are:
+Step 1: TRUE/FALSE
 
-1) TRUE/FALSE → `{T, F, T, T, F, T, F}`
-2) 1/(...) → `{1, err, 1, 1, err, 1, err}`
-3) LOOKUP(2,...) finds the last `1` (Pizza) and returns `Pizza`.
+```
+{T, F, T, T, F, T, F}
+```
+
+Step 2: 1/(…)
+
+```
+{1, err, 1, 1, err, 1, err}
+```
+
+Step 3: LOOKUP(2,…)
+
+* LOOKUP scans for the last **1**.
+* The last 1 is at the row containing **Pizza**.
+* So it returns **Pizza**.
 
 ---
 
-## Notes
+# ✔ Why this works in old Excel
 
-* Works reliably in legacy Excel versions because LOOKUP's approximate-match behavior is longstanding.
-* Use a slightly larger lookup value (like `2`) than the values produced in the lookup array (`1`) to force the last match behavior.
-* This trick is handy when you need the last non-empty cell without VBA or modern dynamic array functions.
+* No dynamic arrays needed
+* No Ctrl+Shift+Enter
+* LOOKUP’s "approximate match" behavior goes back decades
+* Works with text and numbers
+* Fast even on large spreadsheets

@@ -134,3 +134,7 @@ Step 3: LOOKUP(2,…)
 * LOOKUP’s "approximate match" behavior goes back decades
 * Works with text and numbers
 * Fast even on large spreadsheets
+
+# Note
+
+As always, Papa, don't forget the equal (🟰) sign!

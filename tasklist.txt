@@ -1,3 +1,0 @@
-- Add background colors in Services
-- Keep adding text
-- Change AI pic

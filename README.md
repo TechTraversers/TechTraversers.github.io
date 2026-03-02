@@ -1,6 +1,6 @@
 # Tech Traversers Website
 
-Thank you for viewing! It is a work in progress. Only certain parts are viewable through the github static loading webpage.
+Thank you for viewing! It is a work in progress. Parts of the website may not be viewbable depending if your hosting server is in-file, GitHub Pages, or third-party.
 
 ## How to host
 

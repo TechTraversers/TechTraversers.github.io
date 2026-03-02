@@ -55,3 +55,10 @@
 **Complete site revamp**
 **Remove MacOS, Linux, and Windows downloads for rps**
 **Added more to home page**
+
+### Update 2.2.1 ###
+**Moved sidebar markup into shared /sidebar.html**
+**Updated pages to load sidebar via script.js placeholder injection**
+**Centralized current-page highlighting with data-sidebar-current**
+**Removed old hidden page**
+**Deleted Downloads Page**

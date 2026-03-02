@@ -5,7 +5,17 @@ function loadSidebar() {
     return;
   }
 
-  fetch("/sidebar.html")
+  const scriptTag =
+    document.currentScript ||
+    document.querySelector('script[src$="/script.js"]') ||
+    document.querySelector('script[src="script.js"]') ||
+    document.querySelector('script[src="../script.js"]') ||
+    document.querySelector('script[src="../../script.js"]');
+
+  const scriptSrc = scriptTag ? scriptTag.src : new URL("script.js", document.baseURI).href;
+  const sidebarUrl = new URL("sidebar.html", scriptSrc).href;
+
+  fetch(sidebarUrl)
     .then(function (response) {
       if (!response.ok) {
         throw new Error("Failed to load sidebar.");

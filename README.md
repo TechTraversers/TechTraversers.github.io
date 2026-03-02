@@ -1,15 +1,21 @@
-**Tech Traversers: The Website
-*Your one-stop shop for basically nothing right now but that's fine we're in the process of learning stop looking at me like that.
+# Tech Traversers Website
 
-Hello! I'm Levi Bryan, a co-owner of Tech Traverser. We are a new technology business based out of Buffalo, Wyoming and would love your support! Thank you for viewing.
+Thank you for viewing! It is a work in progress. Only certain parts are viewable through the github static loading webpage.
 
-Hi! I'm Codesmith95. I'm the other co-owner of Tech Traverser. We'd love to help you with any of your tech-related requests or problems.^
+## How to host
 
+### Windows
 
+1. Download the website
+2. Open powershell
+3. Navigate to the techtraversers folder
+4. Type in `python -m http.server 5000`
+5. The website should be viewable through [here](http://localhost:5000)
 
+### Mac
 
-
-
-^currently only servicing software issues and technical difficulties,^^ as well as some custom applications.^^^
-^^Problems will be assessed on whether we can actually help.
-^^^Custom applications will be similarly considered based on our skill in programming.
+1. Download the website
+2. Open Terminal
+3. Navigate to the techtraversers folder
+4. Type in `python3 -m http.server 8000
+5. You should be able to view it through [here](http://localhost:8000)

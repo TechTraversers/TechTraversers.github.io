@@ -5,6 +5,14 @@ function loadSidebar() {
     return;
   }
 
+  if (window.location.protocol === "file:") {
+    const warning = document.createElement("aside");
+    warning.className = "sidebar";
+    warning.textContent = "I'm sorry, please use a dynamic hosting service to view the site to use this function";
+    placeholder.replaceWith(warning);
+    return;
+  }
+
   const scriptTag =
     document.currentScript ||
     document.querySelector('script[src$="/script.js"]') ||

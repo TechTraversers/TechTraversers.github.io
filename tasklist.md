@@ -52,6 +52,6 @@
 ## 8. QA and Release Process
 
 - [ ] Add a pre-release checklist (links, mobile layout, console errors, accessibility spot-check).
-- [ ] Test in current Chrome, Firefox, Edge, and mobile browsers.
+- [ ] Test in current Chrome, Firefox, Edge, Vivaldi, and mobile browsers.
 - [ ] Add lightweight smoke tests for critical routes/navigation.
 - [ ] Set up preview deployment checks before production publish.

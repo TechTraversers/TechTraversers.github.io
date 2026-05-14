@@ -27,12 +27,52 @@ html, body {
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  background: var(--primary);
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 6px;
+  width: 50px;
+  height: 50px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
 }
 
 /* Hero */
 #image {
   background: url("Pictures/what_is_a_programming_language.jpg") center/cover no-repeat;
-  height: 400px;
+  background-size: cover;
+  background-attachment: fixed;
+  height: clamp(250px, 50vh, 400px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +88,7 @@ html, body {
   position: relative;
   z-index: 1;
   color: #fff;
-  font-size: 3rem;
+  font-size: clamp(1.75rem, 5vw, 3rem);
   text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
 }
 
@@ -112,7 +152,7 @@ main {
   text-align: center;
 }
 .service button {
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.5rem;
   font-size: 1rem;
   color: #fff;
   background-color: var(--primary);
@@ -120,6 +160,8 @@ main {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .groupLeft, .groupRight {
@@ -133,6 +175,8 @@ main {
   display: block;
   border-radius: 8px;
   object-fit: cover;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
 }
 
 /* CORE: alternate layout automatically
@@ -145,11 +189,56 @@ main {
 .service:nth-of-type(even){ flex-direction: row; }      /* even -> image right */
 
 /* Responsive: stack on small screens */
-@media (max-width:768px){
-  .container{ flex-direction:column; padding:1rem; margin:0 10px; }
-  .sidebar{ width:100%; position:static; margin-top:0.75rem; }
-  .service{ flex-direction:column !important; gap:1rem; }
-  .groupLeft, .groupRight{ flex:1 1 100%; width:100%; }
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+  .container { 
+    flex-direction: column; 
+    padding: 1rem; 
+    margin: 0 10px; 
+    gap: 1rem;
+    margin-top: 0;
+  }
+  .sidebar { 
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    bottom: 0;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: var(--sidebar-bg);
+    z-index: 999;
+    transition: right 0.3s ease-in-out;
+    padding-top: 5rem;
+    border-radius: 0;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+  }
+  .sidebar.open {
+    right: 0;
+  }
+  main {
+    order: 1;
+  }
+  .service { 
+    flex-direction: column !important; 
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .groupLeft, .groupRight { 
+    flex: 1 1 100%; 
+    width: 100%;
+    padding: 0;
+  }
+  .service button {
+    width: 100%;
+    font-size: 1.05rem;
+  }
+  .service h2 {
+    margin-top: 0;
+  }
 }
 
 /* Footer */

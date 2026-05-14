@@ -50,10 +50,49 @@ function loadSidebar() {
       }
 
       placeholder.replaceWith(sidebar);
+      
+      // Setup mobile menu toggle
+      setupMobileMenu();
     })
     .catch(function (error) {
       console.error(error);
     });
+}
+
+function setupMobileMenu() {
+  const menuToggle = document.getElementById("menu-toggle");
+  const sidebar = document.querySelector(".sidebar");
+
+  if (!menuToggle || !sidebar) {
+    return;
+  }
+
+  menuToggle.addEventListener("click", function () {
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+    menuToggle.setAttribute("aria-expanded", !isOpen);
+    sidebar.classList.toggle("open");
+  });
+
+  // Close menu when clicking a link
+  const sidebarLinks = sidebar.querySelectorAll("a");
+  sidebarLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      menuToggle.setAttribute("aria-expanded", "false");
+      sidebar.classList.remove("open");
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", function (event) {
+    const isMenuClick = menuToggle.contains(event.target);
+    const isSidebarClick = sidebar.contains(event.target);
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+
+    if (isOpen && !isMenuClick && !isSidebarClick) {
+      menuToggle.setAttribute("aria-expanded", "false");
+      sidebar.classList.remove("open");
+    }
+  });
 }
 
 if (document.readyState === "loading") {

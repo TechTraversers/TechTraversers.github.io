@@ -35,7 +35,10 @@ function loadSidebar() {
       const wrapper = document.createElement("div");
       wrapper.innerHTML = html.trim();
 
-      const sidebar = wrapper.firstElementChild;
+      // Get all children (button and sidebar)
+      const children = Array.from(wrapper.children);
+      const sidebar = children.find(child => child.classList && child.classList.contains("sidebar"));
+      const menuToggle = children.find(child => child.id === "menu-toggle");
 
       if (!sidebar) {
         return;
@@ -49,6 +52,10 @@ function loadSidebar() {
         }
       }
 
+      // Insert menu toggle and sidebar into the page
+      if (menuToggle && !document.getElementById("menu-toggle")) {
+        document.body.insertBefore(menuToggle, document.body.firstChild);
+      }
       placeholder.replaceWith(sidebar);
       
       // Setup mobile menu toggle
@@ -71,6 +78,7 @@ function setupMobileMenu() {
     const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
     menuToggle.setAttribute("aria-expanded", !isOpen);
     sidebar.classList.toggle("open");
+    document.body.classList.toggle("sidebar-open");
   });
 
   // Close menu when clicking a link
@@ -79,6 +87,7 @@ function setupMobileMenu() {
     link.addEventListener("click", function () {
       menuToggle.setAttribute("aria-expanded", "false");
       sidebar.classList.remove("open");
+      document.body.classList.remove("sidebar-open");
     });
   });
 
@@ -91,6 +100,7 @@ function setupMobileMenu() {
     if (isOpen && !isMenuClick && !isSidebarClick) {
       menuToggle.setAttribute("aria-expanded", "false");
       sidebar.classList.remove("open");
+      document.body.classList.remove("sidebar-open");
     }
   });
 }

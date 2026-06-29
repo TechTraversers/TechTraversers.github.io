@@ -62,3 +62,6 @@
 **Centralized current-page highlighting with data-sidebar-current**
 **Removed old hidden page**
 **Deleted Downloads Page**
+
+### Update 3.0.0 ###
+- Attempted to add a page using Astro

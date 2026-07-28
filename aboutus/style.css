@@ -1,65 +1,142 @@
-html {
-  height: 100%;
-  width: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font: Ubuntu;
+.about-page,
+.profile-page {
+  background:
+    radial-gradient(circle at 10% 15%, rgba(26, 115, 232, 0.12), transparent 35%),
+    radial-gradient(circle at 85% 30%, rgba(9, 92, 178, 0.1), transparent 40%),
+    linear-gradient(180deg, #f7fbff 0%, #eef5ff 100%);
 }
 
-#aboutHead{
-  text-align: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font: Ubuntu;
+.about-page h2,
+.about-page h3,
+.profile-page h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.01em;
 }
 
-#aboutText{
-  font: sans-serif;
+.about-page h2,
+.profile-page h2 {
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  margin-bottom: 0.35rem;
 }
 
-/* Dropdown Button */
-/* Style The Dropdown Button */
-.dropbtn {
-  border-radius: 10px;
-  background-color: lime;
-  color: black;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
+.about-page h3 {
+  margin-top: 1.6rem;
+  margin-bottom: 0.9rem;
+  font-size: 1.25rem;
+  color: #0d3d78;
 }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
+.about-intro {
+  max-width: 72ch;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  color: #1f2e40;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.team-card,
+.company-card,
+.profile-card-detail {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 252, 255, 0.95) 100%);
+  border: 1px solid rgba(26, 115, 232, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(8, 28, 54, 0.08);
+  padding: 1rem 1.2rem;
+  transition: transform 200ms ease, box-shadow 220ms ease, border-color 200ms ease;
+  animation: cardFadeIn 520ms ease both;
+}
+
+.team-card:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.team-card h4,
+.company-card h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #0a2f5f;
+}
+
+.team-card p,
+.company-card p,
+.profile-card-detail p {
+  line-height: 1.65;
+  color: #23364d;
+}
+
+.team-card:hover,
+.company-card:hover,
+.profile-card-detail:hover {
+  transform: translateY(-3px);
+  border-color: rgba(26, 115, 232, 0.35);
+  box-shadow: 0 14px 34px rgba(8, 28, 54, 0.12);
+}
+
+.profile-link,
+.back-link {
   display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
+  margin-top: 0.25rem;
   text-decoration: none;
-  display: block;
+  font-weight: 600;
+  color: #0b4f9f;
+  padding: 0.25rem 0;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
+.profile-link:hover,
+.back-link:hover {
+  text-decoration: underline;
 }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+.profile-link:focus-visible,
+.back-link:focus-visible {
+  outline: 2px solid #0b4f9f;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.company-contact {
+  margin-bottom: 0;
+  font-size: 0.92rem;
+}
+
+.profile-kicker {
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  font-size: 0.84rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #355577;
+}
+
+.profile-page h2 {
+  margin-top: 0;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 860px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-card,
+  .company-card,
+  .profile-card-detail {
+    border-radius: 12px;
+  }
 }

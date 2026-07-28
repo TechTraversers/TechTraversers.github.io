@@ -44,27 +44,34 @@ html, body {
   border-radius: 6px;
   width: 50px;
   height: 50px;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
 }
 .menu-toggle span {
-  display: block;
+  position: absolute;
   width: 24px;
   height: 3px;
   background: white;
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
 }
+.menu-toggle span:nth-child(1) {
+  transform: translateY(-8px);
+}
+.menu-toggle span:nth-child(2) {
+  transform: translateY(0);
+}
+.menu-toggle span:nth-child(3) {
+  transform: translateY(8px);
+}
 .menu-toggle[aria-expanded="true"] span:nth-child(1) {
-  transform: rotate(45deg) translate(10px, 10px);
+  transform: rotate(45deg);
 }
 .menu-toggle[aria-expanded="true"] span:nth-child(2) {
   opacity: 0;
 }
 .menu-toggle[aria-expanded="true"] span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
+  transform: rotate(-45deg);
 }
 
 /* Hero */
@@ -105,6 +112,53 @@ html, body {
 main {
   flex: 1;
   min-width: 0;
+}
+
+.techWel {
+  margin-bottom: 0.5rem;
+}
+
+.lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 70ch;
+  margin-bottom: 1.5rem;
+}
+
+.intro-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.highlight-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(26, 115, 232, 0.16);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.highlight-card h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+  color: var(--primary);
+}
+
+.highlight-card p,
+.highlight-card ul {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.highlight-card ul {
+  padding-left: 1.1rem;
+}
+
+.highlight-card li + li {
+  margin-top: 0.35rem;
 }
 
 /* Sidebar */
@@ -168,6 +222,19 @@ main {
   flex: 1 1 45%;
   min-width: 0;
   padding: 0.25rem;
+}
+.service-image-mobile {
+  display: none;
+  margin-bottom: 1rem;
+}
+.service-image-mobile img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0f0 100%);
 }
 .groupLeft img, .groupRight img {
   width: 100%;
@@ -241,6 +308,10 @@ body.sidebar-open::before {
   main {
     order: 1;
   }
+  .intro-highlights {
+    grid-template-columns: 1fr;
+  }
+
   .service { 
     flex-direction: column !important; 
     gap: 1.5rem;
@@ -250,6 +321,18 @@ body.sidebar-open::before {
     flex: 1 1 100%; 
     width: 100%;
     padding: 0;
+  }
+  .service-image-mobile {
+    display: block;
+  }
+  .groupRight {
+    display: none;
+  }
+  .service .groupLeft {
+    order: 1;
+  }
+  .service .groupRight {
+    order: 2;
   }
   .service button {
     width: 100%;

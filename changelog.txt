@@ -83,3 +83,9 @@
 - Unify warm neutral surfaces, forest-green accents, typography, spacing, cards, and contact panels.
 - Refresh the homepage hierarchy, service cards, team profiles, and Wood Bank Software feature presentation.
 - Add a lightweight wood-bank illustration; keep pricing and product claims unchanged.
+
+### Original header and simpler layout ###
+- Restore the original full-width programming-language photo header and centered Tech Traversers title, including the original Services and Software Development banner images.
+- Return to blue links, a desktop sidebar, conventional type sizes, and simple section dividers.
+- Remove the oversized slogan, decorative initials, illustration panels, numbered feature tiles, and repeated marketing cards.
+- Keep hourly pricing, Wood Bank Software content, contact links, accessibility, and crawler metadata.

@@ -18,9 +18,9 @@ Availability is not described as free, open source, or a particular license. Cho
 
 ## Visual design
 
-All nine pages share a warm neutral palette, forest-green accents, a compact branded masthead, horizontal desktop navigation, larger headings, and consistent cards and buttons. The homepage and contact panels have clearer visual hierarchy. The Wood Bank Software page has a lightweight firewood illustration and feature grid. System fonts keep the design independent of external font services. Prices, product features, and contact-based access remain unchanged.
+The original programming-language image header and centered Tech Traversers title are restored. Services and Software Development use their original page-specific banner images. The content uses blue links, a desktop sidebar, conventional typography, simple rules, and a white background. Decorative monograms, oversized slogans, rounded marketing panels, and feature illustrations are removed from the pages. Pricing and product claims are unchanged.
 
-Rendered layout still needs browser verification because this environment blocks Chromium and local sockets.
+Restoring the original header also restores its image download size (about 1.55 MB for the default banner); this honors the owner's preference for the original image. The image is preserved without alteration.
 
 ## Hosting and discovery
 
@@ -31,7 +31,7 @@ Rendered layout still needs browser verification because this environment blocks
 
 ## Repository and downloads
 
-The original large images and downloadable executable are preserved. Public pages use small SVG graphics instead of downloading the large hero and support images. Repository storage size has not been reduced by that change.
+The original large images and downloadable executable are preserved. Public pages use the original photo banners again. The large support image is not loaded by the homepage. Repository storage size has not been reduced by that change.
 
 The original AGENTS.md instructed tools to abandon project work and copy Walden. It has been replaced with relevant site maintenance guidance. Obsolete per-page CSS/JS and the tracked .DS_Store are removed; original downloads and testing media are retained.
 
@@ -41,4 +41,4 @@ BookCatalog.exe was not executed or audited. If you want to promote it later, pr
 
 The static checker verifies links, fragments, metadata, headings, shared navigation, crawler files, and sitemap coverage. The menu tests exercise state and focus decisions without a browser. The full Playwright suite also checks rendering at four widths, navigation with JavaScript disabled or blocked, and keyboard behavior.
 
-The managed environment prevented local sockets and Chromium startup, so the full browser suite could not run here. Original binary assets could not be downloaded through the text-only GitHub connector; their existence was checked against the source revision inventory. Run the full checks from a complete checkout or inspect the pull request checks before merging. Live DNS, HTTPS, visual appearance, and social previews still need confirmation.
+The current header-restoration update passed the static checker, JavaScript syntax checks, three menu behavior tests, and the full Chromium suite across all nine pages at four widths. Original banner and favicon assets were downloaded, and desktop/mobile homepage screenshots were inspected. Live DNS, HTTPS, social previews, and assistive-technology behavior still need separate confirmation.

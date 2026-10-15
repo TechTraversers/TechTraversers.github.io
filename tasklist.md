@@ -2,12 +2,14 @@
 
 ## Completed in this update
 
-- [x] Refresh all page aesthetics: brand masthead, desktop navigation, typography, color, spacing, service/team cards, contact panels, and product visuals.
+- [x] Restore the original photo headers and simplify the design around the original site identity.
+
+- [x] Simplify typography, colors, service sections, profiles, and contact areas around the original photo header.
 
 - [x] Embed navigation in each page so JavaScript and fetch failures do not remove it.
 - [x] Add mobile menu keyboard support, hidden-state handling, focus restoration, and responsive focus behavior.
 - [x] Fix nested interactive elements and heading hierarchy; add skip links and visible focus styles.
-- [x] Replace large active-page images with small SVG graphics; keep originals in the repository.
+- [x] Keep original photo banners as requested; remove repeated service illustrations from the homepage.
 - [x] Remove duplicated mobile images, obsolete per-page styles/scripts, and tracked OS metadata.
 - [x] Make contact actions and service-area language consistent across public pages.
 - [x] Set IT support and custom development to $25/hour; remove all fixed application prices.
@@ -27,7 +29,7 @@
 - [ ] Confirm Wood Bank Software access/licensing terms, setup requirements, and support expectations.
 - [ ] Optionally supply a product name, approved screenshots, and supported platforms for the contact page.
 - [ ] Confirm DNS, HTTPS enforcement, and apex-to-www redirection in GitHub Pages.
-- [ ] Run the browser suite in an environment that permits local sockets and Chromium; inspect mobile/desktop screenshots.
+- [x] Run the browser suite across all nine pages at four widths and inspect desktop/mobile screenshots.
 - [ ] Review contrast, layout, and assistive-technology behavior in real browsers.
 - [ ] Inspect social sharing previews and decide on a branded preview image.
 - [ ] Review pull request checks before merging; verify the live site after publishing.

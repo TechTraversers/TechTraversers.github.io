@@ -113,3 +113,8 @@
 ### Mobile performance — 2026-10-15 ###
 Keep original banner photos while serving compressed WebP assets with high-priority preloads.
 Initialize navigation immediately after its HTML, before main content is parsed, to avoid the mobile menu collapsing after content appears. Prevent flex layouts from shrinking the banner.
+
+### PageSpeed follow-up — 2026-10-15 ###
+Embed shared styles and navigation to remove render-blocking asset requests. Add a sync/check tool and CI verification for generated copies and CSP hashes. Add a hash-based CSP with Trusted Types, a referrer policy, and homepage Organization/WebSite structured data. Extend browser checks for security enforcement and script fallback. Document GitHub Pages cache/header limitations.
+
+Reviewed sitemap against all ten canonical public pages, sorted entries, and recorded the 2026-10-15 page modifications.

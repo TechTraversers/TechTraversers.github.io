@@ -22,11 +22,18 @@ On Windows, use `python` if `python3` is unavailable. Open http://localhost:8000
 - Keep prices and service commitments consistent across pages. Do not publish prices without current owner approval. Website development, maintenance, custom software, automation, and IT help are the current service areas.
 - See `OWNER-NOTES.md` for business decisions and verification limits. Update `tasklist.md` and `changelog.txt` with releases.
 
+## Embedded assets and security
+
+After editing `style.css`, `aboutus/style.css`, or `script.js`, run `python scripts/sync_assets.py`. This embeds the shared sources in the public HTML and regenerates CSP hashes. Do not edit generated blocks directly. There is no build step required to serve the checked-in pages. The navigation runs before main content to avoid layout shifts. The homepage includes Organization and WebSite structured data using existing public details.
+
+The CSP meta policy restricts resources, disallows unapproved scripts/styles, and enforces Trusted Types in supporting browsers. It cannot set HSTS, COOP, or frame-ancestors. GitHub Pages controls response headers and currently serves assets with a ten-minute cache lifetime. Full header hardening and longer caching require a configurable host/CDN; HTML meta tags and a `_headers` file do not change these GitHub Pages response headers. Keep HTML revalidated; use versioned asset names before setting long immutable asset caching. Stage HSTS after checking all affected domains; do not enable includeSubDomains/preload without reviewing them.
+
 ## Checks
 
 These checks use Python's standard library and Node's built-in test runner:
 
 ```sh
+python3 scripts/sync_assets.py --check
 python3 scripts/check_site.py
 node --check script.js
 node scripts/menu_check.cjs

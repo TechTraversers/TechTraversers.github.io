@@ -2,6 +2,12 @@
 
 ## Completed in this update
 
+- [x] Review sitemap coverage and canonical URLs; record modification dates for the updated public pages.
+
+- [x] Remove blocking style/script requests, enforce a hash-based CSP, add structured data, and check generated assets in CI.
+- [ ] Configure longer asset caching and HSTS, COOP, and clickjacking response headers through a configurable host/CDN.
+- [ ] Complete a human screen-reader review; automated keyboard tests cover navigation and focus behavior.
+
 - [x] Compress original banner photos to WebP, preload the matching banner, and initialize mobile navigation before main content to reduce loading delays and layout shifts.
 
 - [x] Clarify Buffalo, Wyoming as the base, with remote services available worldwide.

@@ -36,6 +36,7 @@ def run(executable=None, text_only=False):
                 context.route('**/Pictures/ttIcon.png', lambda route: route.fulfill(status=204))
             context.on('page', lambda page: page.on('pageerror', lambda error: errors.append(str(error))))
             page = context.new_page()
+            page.on('console', lambda message: errors.append(message.text) if message.type == 'error' else None)
             page.on('response', lambda response: errors.append(f'HTTP {response.status}: {response.url}') if response.status >= 400 else None)
             for width in (360, 768, 1024, 1440):
                 page.set_viewport_size({'width': width, 'height': 900})
@@ -74,8 +75,7 @@ def run(executable=None, text_only=False):
                     else:
                         expect(toggle).to_be_hidden()
                         expect(nav).to_be_visible()
-            # Slow enhancement downloads must not move already-painted main content.
-            from time import sleep
+            # Embedded assets must avoid blocking requests and load without shifts.
             performance = browser.new_context(viewport={'width': 360, 'height': 900})
             performance.add_init_script("""
                 window.layoutShiftScore = 0;
@@ -85,16 +85,32 @@ def run(executable=None, text_only=False):
                     }
                 }).observe({type: 'layout-shift', buffered: true});
             """)
-            def delayed_script(request):
-                sleep(0.6)
-                request.continue_()
-            performance.route('**/script.js', delayed_script)
             measured = performance.new_page()
+            security_errors = []
+            measured.on('console', lambda message: security_errors.append(message.text) if message.type == 'error' else None)
             measured.goto(origin + '/')
             measured.wait_for_timeout(300)
             assert measured.evaluate('window.layoutShiftScore') < 0.01, 'mobile load shifts content'
             assert measured.locator('link[rel="preload"][as="image"]').get_attribute('fetchpriority') == 'high'
             assert measured.locator('#image').evaluate("el => getComputedStyle(el).backgroundImage.includes('.webp')")
+            assert measured.locator('script[src], link[rel=stylesheet]').count() == 0
+            assert not security_errors, security_errors
+            # The policy must reject injected inline scripts and unsafe DOM HTML.
+            assert measured.evaluate('''() => {
+                window.cspProbe = false;
+                const script = document.createElement('script');
+                try {
+                    script.textContent = 'window.cspProbe = true';
+                    document.head.append(script);
+                } catch (error) {
+                    if (!(error instanceof TypeError)) throw error;
+                }
+                return window.cspProbe === false;
+            }''')
+            assert measured.evaluate('''() => {
+                try { document.createElement('div').innerHTML = '<b>unsafe</b>'; return false; }
+                catch (error) { return error instanceof TypeError; }
+            }''')
             performance.close()
             # Resizing must not strand keyboard focus inside a hidden menu.
             page.set_viewport_size({'width': 1000, 'height': 900})
@@ -113,10 +129,15 @@ def run(executable=None, text_only=False):
             page.keyboard.press('Enter')
             expect(page.locator('main')).to_be_focused()
             # Navigation works with the enhancement request blocked.
-            context.route('**/script.js', lambda route: route.abort())
+            import re
+            def remove_enhancement(route):
+                response = route.fetch()
+                html = re.sub(r'<script data-navigation>.*?</script>', '', response.text(), flags=re.S)
+                route.fulfill(response=response, body=html)
+            context.route(origin + '/', remove_enhancement)
             page.goto(origin + '/')
             expect(page.locator('nav')).to_be_visible()
-            context.unroute('**/script.js')
+            context.unroute(origin + '/')
             # Test the actual JavaScript-disabled experience on every page.
             no_js = browser.new_context(java_script_enabled=False, viewport={'width': 360, 'height': 900})
             if text_only:

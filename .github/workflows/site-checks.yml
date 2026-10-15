@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: python scripts/sync_assets.py --check
       - run: python scripts/check_site.py
       - run: node --check script.js
       - run: node scripts/menu_check.cjs

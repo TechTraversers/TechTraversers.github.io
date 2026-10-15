@@ -108,7 +108,7 @@ def check(inventory=()):
         levels = [int(t[1]) for t, _ in page.nodes if re.fullmatch('h[1-6]', t)]
         require(all(b <= a + 1 for a, b in zip(levels, levels[1:])), prefix + 'heading level skipped')
         require(any(t == 'a' and a.get('href') == '#main-content' for t, a in page.nodes), prefix + 'missing skip link')
-        require(any(t == 'a' and a.get('href') == 'mailto:traversertech@gmail.com' for t, a in page.nodes), prefix + 'missing contact link')
+        require(any(t == 'a' and a.get('href', '').split('?')[0] == 'mailto:traversertech@gmail.com' for t, a in page.nodes), prefix + 'missing contact link')
         nav_links = [(a['data-nav'], a.get('href')) for t, a in page.nodes if t == 'a' and 'data-nav' in a]
         require(nav_links == nav_reference, prefix + 'shared navigation differs')
         require(sum(a.get('aria-current') == 'page' for _, a in page.nodes) == 1, prefix + 'needs one current navigation link')

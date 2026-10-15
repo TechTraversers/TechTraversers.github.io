@@ -15,7 +15,7 @@ On Windows, use `python` if `python3` is unavailable. Open http://localhost:8000
 ## Editing pages
 
 - Keep the primary navigation in every page. `sidebar.html` is the reference snippet; update matching navigation markup on all public pages when it changes. Each page uses `aria-current="page"` on its active section.
-- Use one descriptive h1, a skip link to `#main-content`, image alt text and dimensions, and a direct contact action.
+- Use one descriptive h1, a skip link to `#main-content`, image alt text and dimensions, and a direct contact action in the shared site footer.
 - Put shared styles in `style.css`. About/profile styles live in `aboutus/style.css`.
 - Match metadata and canonical URLs to the page. Canonical URLs use `https://www.techtraversers.com` and directory paths with trailing slashes.
 - Add public pages to `sitemap.xml`. `robots.txt` is the crawler standard; `bots.txt` is an informational companion. Neither controls access to private files.

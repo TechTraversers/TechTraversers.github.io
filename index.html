@@ -3,28 +3,56 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tech Traversers</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
-    <link rel="apple-touch-icon" href="/Pictures/ttIcon.png" />
+    <title>Tech Traversers | IT Help &amp; Custom Software in Buffalo, WY</title>
+    <meta name="description" content="Practical IT support, custom Python and C++ applications, and patient technology guidance from a small team in Buffalo, Wyoming." />
+    <link rel="canonical" href="https://www.techtraversers.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tech Traversers" />
+    <meta property="og:title" content="Tech Traversers | IT Help &amp; Custom Software in Buffalo, WY" />
+    <meta property="og:description" content="Practical IT support, custom Python and C++ applications, and patient technology guidance from a small team in Buffalo, Wyoming." />
+    <meta property="og:url" content="https://www.techtraversers.com/" />
+    <meta property="og:image" content="https://www.techtraversers.com/Pictures/pic2.jpg" />
+    <meta property="og:image:alt" content="Tech Traversers technology banner" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tech Traversers | IT Help &amp; Custom Software in Buffalo, WY" />
+    <meta name="twitter:description" content="Practical IT support, custom Python and C++ applications, and patient technology guidance from a small team in Buffalo, Wyoming." />
+    <meta name="twitter:image" content="https://www.techtraversers.com/Pictures/pic2.jpg" />
+    <link rel="stylesheet" href="/style.css" />
+    
     <link rel="icon" type="image/png" href="/Pictures/ttIcon.png" />
+    <link rel="apple-touch-icon" href="/Pictures/ttIcon.png" />
+    <script src="/script.js" defer></script>
   </head>
 
-  <body>
-    <!-- Hero / header -->
-    <header id="image" role="banner" aria-label="Hero image with site title">
-      <h1 id="webTop"><strong>Tech Traversers</strong></h1>
+  <body class="home-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header id="image">
+      <a class="brand" href="/" aria-label="Tech Traversers home">
+        <span class="brand-mark" aria-hidden="true">TT</span>
+        <span><span id="webTop">Tech Traversers</span><span class="brand-caption">Practical tech. Personal support.</span></span>
+      </a>
+      <a class="header-contact" href="mailto:traversertech@gmail.com">Let’s talk about your project</a>
     </header>
-
-    <!-- Page container -->
     <div class="container">
-      <main role="main" aria-labelledby="welcome-heading">
-        <h1 id="welcome-heading" class="techWel">Welcome to Tech Traversers</h1>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation" hidden>
+  <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+</button>
+<nav id="primary-navigation" class="sidebar" aria-label="Primary">
+  <a data-nav="home" aria-current="page" href="/">Home</a>
+  <a data-nav="services" href="/ourservices/">Our Services</a>
+  <a data-nav="woodbank" href="/wood-bank-software/">Wood Bank Software</a>
+  <a data-nav="values" href="/ourvalues/">Our Values</a>
+  <a data-nav="about" href="/aboutus/">About Us</a>
+</nav>
+      <main class="page-content" id="main-content" tabindex="-1">
+        <p class="eyebrow">Buffalo, Wyoming · IT help &amp; custom software</p>
+        <h1 id="welcome-heading" class="techWel">Practical tech.<br /><span class="text-accent">Personal support.</span></h1>
         <p class="lead">
           We’re a small local team helping people in Buffalo and nearby communities with practical tech support, custom software, and patient guidance.
           We focus on clear communication, dependable service, and solutions that make everyday technology easier to use.
         </p>
 
+        <div class="hero-actions"><a class="button" href="/ourservices/it-help-guidance/">Get tech help</a><a class="button button-secondary" href="/wood-bank-software/">Explore Wood Bank Software</a></div>
         <section class="intro-highlights" aria-label="Why choose Tech Traversers">
           <article class="highlight-card">
             <h2>Why people choose us</h2>
@@ -35,32 +63,21 @@
             <ul>
               <li>Remote and in-person IT help</li>
               <li>Custom Python and C++ applications</li>
+              <li><a href="/wood-bank-software/">Wood Bank Software, used by Clear Creek Wood Bank</a></li>
               <li>Support for people who are new to technology</li>
             </ul>
           </article>
         </section>
-
-        <!-- Service #1: DOM order still text then image (CSS leaves even rows normal -> image RIGHT) -->
         <section class="service">
           <div class="groupLeft">
             <h2 class="subtitle">IT Help</h2>
-            <div class="service-image-mobile">
-              <img 
-                src="Pictures/IT Help.jpg" 
-                alt="IT support illustration"
-                loading="lazy"
-                decoding="async"
-                width="400"
-                height="300"
-              />
-            </div>
-            <p>Currently we are offering IT Help. This can be done remotely over phone or in-person. In person visit costs vary by location. We also service some of Rapid City, SD.</p>
-            <a href="ourservices/it-help-guidance/"><button type="button">Find Help</button></a>
+            <p>Get patient troubleshooting by phone or email, or ask about an in-person visit around Buffalo, WY and parts of Rapid City, SD. Support is $25 per hour. Availability and visit costs are agreed before booking.</p>
+            <a class="button" href="/ourservices/it-help-guidance/">Get IT help</a>
           </div>
           <div class="groupRight">
             <img 
-              src="Pictures/IT Help.jpg" 
-              alt="IT support illustration"
+              src="/Pictures/it-help.svg" 
+              alt="Computer with a troubleshooting checklist"
               loading="lazy"
               decoding="async"
               width="400"
@@ -68,28 +85,16 @@
             />
           </div>
         </section>
-
-        <!-- Service #2: DOM order = text then image (CSS will reverse odd rows to make image LEFT) -->
         <section class="service">
           <div class="groupLeft">
             <h2 class="subtitle">Software Development</h2>
-            <div class="service-image-mobile">
-              <img 
-                src="Pictures/Software Dev.jpg" 
-                alt="Software development illustration"
-                loading="lazy"
-                decoding="async"
-                width="400"
-                height="300"
-              />
-            </div>
-            <p>We make applications in two languages, Python and C++. We program both text-based and graphical apps, with a wide range of features and customizations.</p>
-            <a href="/ourservices/softwaredevelopment/"><button type="button">Find Help</button></a>
+            <p>We build small Python and C++ tools for automation, focused tasks, and simple desktop applications. Development is $25 per hour, based on the time required. We discuss the features, target operating system, estimated hours, and timeline with you first.</p>
+            <a class="button" href="/ourservices/softwaredevelopment/">Discuss an app</a>
           </div>
           <div class="groupRight">
             <img 
-              src="Pictures/Software Dev.jpg" 
-              alt="Software development illustration"
+              src="/Pictures/software-development.svg" 
+              alt="Code editor and a small application window"
               loading="lazy"
               decoding="async"
               width="400"
@@ -98,27 +103,17 @@
           </div>
         </section>
 
-        <!-- Add more services by copying the same pattern (text then image). The layout alternates automatically. -->
-        <!-- Example:
-        <section class="service">
-          <div class="groupLeft">
-            <h2 class="subtitle">New Service</h2>
-            <p>Description here.</p>
-          </div>
-          <div class="groupRight">
-            <img src="Pictures/NewService.jpg" alt="New service" />
-          </div>
-        </section>
-        -->
-
+      <section class="contact-card" aria-labelledby="contact-heading">
+  <h2 id="contact-heading">Tell us what you need help with</h2>
+  <p>Email a short description of your issue or app idea. Please leave out passwords, payment details, and other sensitive information.</p>
+  <a class="button" href="mailto:traversertech@gmail.com">Email Tech Traversers</a>
+</section>
       </main>
-
-      <div data-sidebar-placeholder data-sidebar-current="home"></div>
     </div>
-
-    <footer id="footer" role="contentinfo">
-      Contact us at <a href="mailto:traversertech@gmail.com">traversertech@gmail.com</a>
-      <span class="foot-note"> (currently only serving Buffalo, WY area)</span>
-    </footer>
+  <footer id="footer">
+  <p><a href="mailto:traversertech@gmail.com">traversertech@gmail.com</a></p>
+  <p>Based in Buffalo, WY. Ask about remote help and in-person availability, including parts of Rapid City, SD.</p>
+</footer>
   </body>
 </html>
+

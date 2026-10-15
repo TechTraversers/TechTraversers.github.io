@@ -1,12 +1,10 @@
-<button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-  <span></span>
-  <span></span>
-  <span></span>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation" hidden>
+  <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
 </button>
-
-<aside class="sidebar" role="navigation" aria-label="Primary">
-  <a data-nav="home" href="/index.html">Home</a>
-  <a data-nav="services" href="/ourservices/index.html">Our Services</a>
-  <a data-nav="values" href="/ourvalues/index.html">Our Values</a>
-  <a data-nav="about" href="/aboutus/index.html">About Us</a>
-</aside>
+<nav id="primary-navigation" class="sidebar" aria-label="Primary">
+  <a data-nav="home" href="/">Home</a>
+  <a data-nav="services" href="/ourservices/">Our Services</a>
+  <a data-nav="woodbank" href="/wood-bank-software/">Wood Bank Software</a>
+  <a data-nav="values" href="/ourvalues/">Our Values</a>
+  <a data-nav="about" href="/aboutus/">About Us</a>
+</nav>

@@ -1,51 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About Us — Tech Traversers</title>
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="style.css">
-    <link rel="apple-touch-icon" href="../Pictures/ttIcon.png">
-    <link rel="icon" type="image/png" href="../Pictures/ttIcon.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Us | Tech Traversers</title>
+    <meta name="description" content="Meet the Tech Traversers team and learn about our approach to affordable IT help and custom software." />
+    <link rel="canonical" href="https://www.techtraversers.com/aboutus/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tech Traversers" />
+    <meta property="og:title" content="About Us | Tech Traversers" />
+    <meta property="og:description" content="Meet the Tech Traversers team and learn about our approach to affordable IT help and custom software." />
+    <meta property="og:url" content="https://www.techtraversers.com/aboutus/" />
+    <meta property="og:image" content="https://www.techtraversers.com/Pictures/pic2.jpg" />
+    <meta property="og:image:alt" content="Tech Traversers technology banner" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="About Us | Tech Traversers" />
+    <meta name="twitter:description" content="Meet the Tech Traversers team and learn about our approach to affordable IT help and custom software." />
+    <meta name="twitter:image" content="https://www.techtraversers.com/Pictures/pic2.jpg" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/aboutus/style.css" />
+    <link rel="icon" type="image/png" href="/Pictures/ttIcon.png" />
+    <link rel="apple-touch-icon" href="/Pictures/ttIcon.png" />
+    <script src="/script.js" defer></script>
   </head>
   <body class="about-page">
-    <div id="image">
-      <h1 id="webTop">Tech Traversers</h1>
-    </div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header id="image">
+      <a class="brand" href="/" aria-label="Tech Traversers home">
+        <span class="brand-mark" aria-hidden="true">TT</span>
+        <span><span id="webTop">Tech Traversers</span><span class="brand-caption">Practical tech. Personal support.</span></span>
+      </a>
+      <a class="header-contact" href="mailto:traversertech@gmail.com">Let’s talk about your project</a>
+    </header>
 
     <div class="container">
-      <main>
-        <h2>About Us</h2>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation" hidden>
+  <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+</button>
+<nav id="primary-navigation" class="sidebar" aria-label="Primary">
+  <a data-nav="home" href="/">Home</a>
+  <a data-nav="services" href="/ourservices/">Our Services</a>
+  <a data-nav="woodbank" href="/wood-bank-software/">Wood Bank Software</a>
+  <a data-nav="values" href="/ourvalues/">Our Values</a>
+  <a data-nav="about" aria-current="page" href="/aboutus/">About Us</a>
+</nav>
+      <main class="page-content" id="main-content" tabindex="-1">
+        <h1>About Us</h1>
         <p class="about-intro">Our business is dedicated to providing affordable solutions to software issues you may have. We also program custom applications.</p>
 
-        <h3>Meet The Team</h3>
+        <h2>Meet The Team</h2>
         <section class="team-grid" aria-label="Team profiles">
           <article class="team-card">
-            <h4>Levi Bryan</h4>
+            <h3>Levi Bryan</h3>
             <p>Student, builder, and problem solver focused on practical technology that helps people.</p>
-            <a class="profile-link" href="/aboutus/levi-bryan/index.html">Read full profile</a>
+            <a class="profile-link" href="/aboutus/levi-bryan/">Read full profile</a>
           </article>
 
           <article class="team-card">
-            <h4>Codesmith95</h4>
+            <h3>Codesmith95</h3>
             <p>Anonymous tech helper and programmer committed to quality support and clean solutions.</p>
-            <a class="profile-link" href="/codesmith95/index.html">Read full profile</a>
+            <a class="profile-link" href="/codesmith95/">Read full profile</a>
           </article>
         </section>
 
         <section class="company-card" aria-label="About the company">
-          <h4>The Company</h4>
+          <h2>The Company</h2>
           <p>
             Our business is dedicated to providing affordable solutions to software issues you may have, as well as programming custom applications. Our main goal is to provide professional solutions, not to make money, so we keep our rates low in order to make our services more available.
           </p>
           <p class="company-contact"><a href="mailto:traversertech@gmail.com">Contact Us</a></p>
         </section>
+      <section class="contact-card" aria-labelledby="contact-heading">
+  <h2 id="contact-heading">Tell us what you need help with</h2>
+  <p>Email a short description of your issue or app idea. Please leave out passwords, payment details, and other sensitive information.</p>
+  <a class="button" href="mailto:traversertech@gmail.com">Email Tech Traversers</a>
+</section>
       </main>
-
-      <div data-sidebar-placeholder data-sidebar-current="about"></div>
     </div>
-
-    <script src="../script.js"></script>
+  <footer id="footer">
+  <p><a href="mailto:traversertech@gmail.com">traversertech@gmail.com</a></p>
+  <p>Based in Buffalo, WY. Ask about remote help and in-person availability, including parts of Rapid City, SD.</p>
+</footer>
   </body>
 </html>
+

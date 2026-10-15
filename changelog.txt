@@ -65,3 +65,21 @@
 
 ### Update 3.0.0 ###
 - Attempted to add a page using Astro
+
+### Site reliability, hourly pricing, and Wood Bank Software ###
+- Include navigation directly in HTML; improve mobile keyboard and focus behavior.
+- Add contact actions, consistent coverage, accessible headings, and valid link buttons.
+- Replace active-page large image requests with small SVG graphics.
+- Set IT help and custom development to $25/hour; remove fixed application prices.
+- Add a contact-based Wood Bank Software page, including owner-confirmed features and current use by Clear Creek Wood Bank.
+- Add canonical and social metadata, robots.txt, bots.txt, and sitemap.xml.
+- Remove unused page CSS/JS and OS metadata; replace unrelated agent instructions.
+- Add static checks, navigation tests, browser checks, and a pull request workflow.
+- Document owner decisions and verification limits.
+
+
+### Visual design refresh ###
+- Add a compact branded masthead, horizontal desktop navigation, and mobile disclosure.
+- Unify warm neutral surfaces, forest-green accents, typography, spacing, cards, and contact panels.
+- Refresh the homepage hierarchy, service cards, team profiles, and Wood Bank Software feature presentation.
+- Add a lightweight wood-bank illustration; keep pricing and product claims unchanged.

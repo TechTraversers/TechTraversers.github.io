@@ -1,0 +1,6 @@
+# Crawler information for Tech Traversers
+# The standard crawler policy is /robots.txt.
+# This informational file does not replace robots.txt or enforce access controls.
+User-agent: *
+Allow: /
+Sitemap: https://www.techtraversers.com/sitemap.xml

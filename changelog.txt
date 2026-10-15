@@ -102,3 +102,10 @@
 - Remove C++ references, small-app limits, and public prices from current pages.
 - Add factual project experience and distinguish the unadopted printer redesign from software currently in use.
 - Keep personal schedules and other private background out of the public copy.
+
+### Desktop separation and defined footer ###
+- Increase desktop navigation link size and add a restrained active state.
+- Add light section backgrounds and dividers on desktop without changing the mobile reading layout.
+- Consolidate repeated contact panels into one clearly defined full-width footer, with a product-specific inquiry link on the wood bank page.
+- Keep original headers, current copy, and public-information approvals unchanged.
+- Clarify Buffalo, Wyoming as the business base and worldwide availability for remote services; distinguish local in-person help.

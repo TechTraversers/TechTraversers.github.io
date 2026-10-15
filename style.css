@@ -9,7 +9,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { scroll-padding-top: 24px; }
-body { margin: 0; background: white; color: var(--text); font: 16px/1.65 'Segoe UI', Arial, sans-serif; overflow-wrap: break-word; }
+body { min-height: 100vh; display: flex; flex-direction: column; margin: 0; background: white; color: var(--text); font: 16px/1.65 'Segoe UI', Arial, sans-serif; overflow-wrap: break-word; }
 a { color: var(--primary); text-underline-offset: 3px; }
 a:hover { color: #103f72; }
 a:focus-visible, button:focus-visible { outline: 3px solid #a3540b; outline-offset: 4px; }
@@ -23,7 +23,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #a3540b; outline-offs
 #webTop { position: relative; margin: 0; color: white; font-size: clamp(30px, 5vw, 48px); font-weight: 700; line-height: 1.2; text-shadow: 2px 2px 6px #00000080; text-align: center; }
 #webTop a { color: inherit; text-decoration: none; }
 #webTop a:focus-visible { outline-color: white; }
-.container { max-width: 1160px; margin: auto; padding: 0 24px 56px; }
+.container { flex: 1; width: 100%; max-width: 1160px; margin: auto; padding: 0 24px 56px; }
 .sidebar { display: flex; flex-wrap: wrap; gap: 0 30px; margin: 0 0 42px; padding: 0; border-bottom: 1px solid var(--border); }
 .sidebar a { display: block; min-height: 52px; padding: 14px 0 12px; border-bottom: 2px solid transparent; color: #41474e; font-size: 15px; text-decoration: none; }
 .sidebar a:hover { color: var(--primary); border-bottom-color: #b3c6db; }
@@ -46,9 +46,6 @@ li + li { margin-top: 8px; }
 .service h2 { margin-top: 0; font-size: 21px; }
 .service p { flex: 1; margin-bottom: 12px; }
 .service > a { align-self: flex-start; display: inline-block; min-height: 44px; padding: 8px 0; font-weight: 600; }
-.contact-card { padding: 26px 0 0; margin-top: 40px; border-top: 1px solid var(--border); }
-.contact-card h2 { margin-top: 0; font-size: 22px; }
-.contact-card p { color: var(--muted); }
 #services { margin-top: 28px; }
 #services > h2 { margin-top: 0; }
 #services > ul { list-style: none; max-width: none; margin: 24px 0 0; padding: 0; }
@@ -60,8 +57,16 @@ li + li { margin-top: 8px; }
 .feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; margin: 20px 0 28px; }
 .feature-grid > article { padding: 20px 0; border-top: 1px solid var(--border); }
 .feature-grid p { margin-bottom: 0; color: var(--muted); }
-#footer { max-width: 1112px; margin: auto; padding: 24px 24px 36px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
-#footer p { margin-bottom: 8px; }
+/* The footer is the single shared contact area, visually separate from content. */
+#footer { margin: 0; padding: 0; background: #1d2d3e; border-top: 3px solid #52799e; color: #dce4ec; font-size: 14px; }
+.footer-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; max-width: 1160px; margin: auto; padding: 36px 24px; }
+#footer p { max-width: 52ch; margin: 0 0 10px; }
+#footer .footer-name { margin-bottom: 12px; color: white; font-size: 22px; font-weight: 650; }
+#footer .footer-location { color: #bdcbd8; }
+#footer h2 { margin: 0 0 6px; color: white; font-size: 18px; }
+#footer a { display: inline-block; min-height: 44px; padding: 8px 0; color: white; font-size: 16px; font-weight: 600; }
+#footer a:hover { color: #c9e3ff; }
+#footer a:focus-visible { outline-color: #ffcc80; }
 .menu-toggle { position: fixed; top: 16px; right: 16px; z-index: 12; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 46px; height: 46px; border: 1px solid #b9c4d0; border-radius: 4px; background: white; cursor: pointer; }
 .menu-toggle span { width: 20px; height: 2px; background: #24282d; }
 .menu-toggle[aria-expanded='true'] span:first-child { transform: translateY(7px) rotate(45deg); }
@@ -79,8 +84,8 @@ li + li { margin-top: 8px; }
   #image { height: 250px; padding: 28px; }
   #webTop { font-size: clamp(28px, 7vw, 38px); }
   .feature-grid { grid-template-columns: 1fr; }
-  .contact-card .button { width: auto; }
-  #footer { margin: 0 20px; padding: 24px 0; }
+  .footer-inner { display: block; padding: 28px 20px; }
+  .footer-contact { margin-top: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -91,3 +96,19 @@ li + li { margin-top: 8px; }
 .project-list article p:last-child { margin-bottom: 0; }
 .work-example { margin: 30px 0; padding-top: 22px; border-top: 1px solid var(--border); }
 .work-example h2 { margin-top: 0; }
+
+/* Desktop gets stronger section boundaries; the mobile reading layout stays simple. */
+@media (min-width: 769px) {
+  .sidebar { gap: 8px; padding: 12px 0; margin-bottom: 38px; }
+  .sidebar a { display: flex; align-items: center; min-height: 58px; padding: 13px 20px; border: 1px solid transparent; border-bottom-width: 3px; border-radius: 4px; font-size: 17px; }
+  .sidebar a:hover { background: #f4f7fa; border-color: #d9e2eb; }
+  .sidebar a[aria-current='page'] { color: #144e87; background: #ecf3fa; border-color: #d4e1ee; border-bottom-color: #175da6; }
+  main > h2 { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .services-overview { gap: 0; margin: 36px 0 48px; border: 1px solid var(--border); border-top: 3px solid #52799e; background: #f7f9fb; }
+  .service { padding: 26px; border-top: 0; }
+  .service + .service { border-left: 1px solid var(--border); }
+  .work-example { padding: 26px 28px; border-top: 0; border-left: 3px solid #52799e; background: #f3f6f9; }
+  .project-list article, .feature-grid > article { padding-block: 26px; }
+  #services > ul > li { padding: 24px 20px; }
+  #services > ul > li:nth-child(odd) { background: #f7f9fb; }
+}

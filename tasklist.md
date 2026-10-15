@@ -2,6 +2,10 @@
 
 ## Completed in this update
 
+- [x] Clarify Buffalo, Wyoming as the base, with remote services available worldwide.
+
+- [x] Enlarge desktop menu links, separate desktop sections, and consolidate contact content into a defined site footer.
+
 - [x] Update biography and project experience, remove C++ and small-app limits, and add website development and maintenance.
 
 - [x] Keep the original photo headers with top navigation, full-width content, and restrained styling.

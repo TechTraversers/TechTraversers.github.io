@@ -47,7 +47,8 @@ def run(executable=None, text_only=False):
                     expect(page.locator('a[aria-current="page"]')).to_have_count(1)
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (width, route, 'horizontal overflow')
                     assert page.locator('a button, button a').count() == 0
-                    assert page.locator('main a[href^="mailto:"]').count() > 0
+                    assert page.locator('#footer a[href^="mailto:"]').count() > 0
+                    assert page.locator('main .contact-card').count() == 0
                     for image in page.locator('img').all():
                         image.scroll_into_view_if_needed()
                         expect(image).to_have_js_property('complete', True)

@@ -1,112 +1,47 @@
-function loadSidebar() {
-  const placeholder = document.querySelector("[data-sidebar-placeholder]");
-
-  if (!placeholder) {
-    return;
+// Navigation remains usable without JavaScript.
+(() => {
+  const toggle = document.getElementById('menu-toggle');
+  const navigation = document.getElementById('primary-navigation');
+  if (!toggle || !navigation) return;
+  const mobile = window.matchMedia('(max-width: 768px)');
+  let open = false;
+  function render() {
+    toggle.hidden = !mobile.matches;
+    navigation.hidden = mobile.matches && !open;
+    toggle.setAttribute('aria-expanded', String(mobile.matches && open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    document.body.classList.toggle('menu-open', mobile.matches && open);
   }
-
-  if (window.location.protocol === "file:") {
-    const warning = document.createElement("aside");
-    warning.className = "sidebar";
-    warning.textContent = "I'm sorry, please use a dynamic hosting service to view the site to use this function";
-    placeholder.replaceWith(warning);
-    return;
+  function closeMenu(restoreFocus = false) {
+    open = false;
+    render();
+    if (restoreFocus && mobile.matches) toggle.focus();
   }
-
-  const scriptTag =
-    document.currentScript ||
-    document.querySelector('script[src$="/script.js"]') ||
-    document.querySelector('script[src="script.js"]') ||
-    document.querySelector('script[src="../script.js"]') ||
-    document.querySelector('script[src="../../script.js"]');
-
-  const scriptSrc = scriptTag ? scriptTag.src : new URL("script.js", document.baseURI).href;
-  const sidebarUrl = new URL("sidebar.html", scriptSrc).href;
-
-  fetch(sidebarUrl)
-    .then(function (response) {
-      if (!response.ok) {
-        throw new Error("Failed to load sidebar.");
-      }
-
-      return response.text();
-    })
-    .then(function (html) {
-      const wrapper = document.createElement("div");
-      wrapper.innerHTML = html.trim();
-
-      // Get all children (button and sidebar)
-      const children = Array.from(wrapper.children);
-      const sidebar = children.find(child => child.classList && child.classList.contains("sidebar"));
-      const menuToggle = children.find(child => child.id === "menu-toggle");
-
-      if (!sidebar) {
-        return;
-      }
-
-      const currentNav = placeholder.getAttribute("data-sidebar-current");
-      if (currentNav) {
-        const currentLink = sidebar.querySelector('[data-nav="' + currentNav + '"]');
-        if (currentLink) {
-          currentLink.id = "current";
-        }
-      }
-
-      // Insert menu toggle and sidebar into the page
-      if (menuToggle && !document.getElementById("menu-toggle")) {
-        document.body.insertBefore(menuToggle, document.body.firstChild);
-      }
-      placeholder.replaceWith(sidebar);
-      
-      // Setup mobile menu toggle
-      setupMobileMenu();
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
-}
-
-function setupMobileMenu() {
-  const menuToggle = document.getElementById("menu-toggle");
-  const sidebar = document.querySelector(".sidebar");
-
-  if (!menuToggle || !sidebar) {
-    return;
-  }
-
-  menuToggle.addEventListener("click", function () {
-    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-    menuToggle.setAttribute("aria-expanded", !isOpen);
-    sidebar.classList.toggle("open");
-    document.body.classList.toggle("sidebar-open");
+  toggle.addEventListener('click', () => {
+    open = !open;
+    render();
+    if (open) navigation.querySelector('a')?.focus();
   });
-
-  // Close menu when clicking a link
-  const sidebarLinks = sidebar.querySelectorAll("a");
-  sidebarLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      menuToggle.setAttribute("aria-expanded", "false");
-      sidebar.classList.remove("open");
-      document.body.classList.remove("sidebar-open");
-    });
-  });
-
-  // Close menu when clicking outside
-  document.addEventListener("click", function (event) {
-    const isMenuClick = menuToggle.contains(event.target);
-    const isSidebarClick = sidebar.contains(event.target);
-    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-
-    if (isOpen && !isMenuClick && !isSidebarClick) {
-      menuToggle.setAttribute("aria-expanded", "false");
-      sidebar.classList.remove("open");
-      document.body.classList.remove("sidebar-open");
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && open && mobile.matches) {
+      event.preventDefault();
+      closeMenu(true);
     }
   });
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", loadSidebar);
-} else {
-  loadSidebar();
-}
+  document.addEventListener('click', event => {
+    if (open && mobile.matches && !navigation.contains(event.target) && !toggle.contains(event.target)) {
+      closeMenu(navigation.contains(document.activeElement));
+    }
+  });
+  navigation.addEventListener('click', event => {
+    if (mobile.matches && event.target.closest('a')) closeMenu(true);
+  });
+  mobile.addEventListener('change', () => {
+    const focused = document.activeElement;
+    open = false;
+    render();
+    if (mobile.matches && navigation.contains(focused)) toggle.focus();
+    if (!mobile.matches && focused === toggle) navigation.querySelector('a')?.focus();
+  });
+  render();
+})();

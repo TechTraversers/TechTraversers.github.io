@@ -115,7 +115,7 @@ def check(inventory=()):
         nav = next((a for t, a in page.nodes if t == 'nav'), {})
         require('hidden' not in nav, prefix + 'navigation must work without JavaScript')
         canonical = next((a.get('href') for t, a in page.nodes if t == 'link' and a.get('rel') == 'canonical'), '')
-        route = '/' if name == 'index.html' else '/' + name.removesuffix('index.html')
+        route = '/' if name == 'index.html' else '/' + Path(name).as_posix().removesuffix('index.html')
         require(canonical == ORIGIN + route, prefix + 'incorrect canonical')
         canonicals.add(canonical)
         metas = {a.get('name', a.get('property')): a.get('content') for t, a in page.nodes if t == 'meta'}

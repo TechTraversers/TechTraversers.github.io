@@ -74,6 +74,28 @@ def run(executable=None, text_only=False):
                     else:
                         expect(toggle).to_be_hidden()
                         expect(nav).to_be_visible()
+            # Slow enhancement downloads must not move already-painted main content.
+            from time import sleep
+            performance = browser.new_context(viewport={'width': 360, 'height': 900})
+            performance.add_init_script("""
+                window.layoutShiftScore = 0;
+                new PerformanceObserver(list => {
+                    for (const entry of list.getEntries()) {
+                        if (!entry.hadRecentInput) window.layoutShiftScore += entry.value;
+                    }
+                }).observe({type: 'layout-shift', buffered: true});
+            """)
+            def delayed_script(request):
+                sleep(0.6)
+                request.continue_()
+            performance.route('**/script.js', delayed_script)
+            measured = performance.new_page()
+            measured.goto(origin + '/')
+            measured.wait_for_timeout(300)
+            assert measured.evaluate('window.layoutShiftScore') < 0.01, 'mobile load shifts content'
+            assert measured.locator('link[rel="preload"][as="image"]').get_attribute('fetchpriority') == 'high'
+            assert measured.locator('#image').evaluate("el => getComputedStyle(el).backgroundImage.includes('.webp')")
+            performance.close()
             # Resizing must not strand keyboard focus inside a hidden menu.
             page.set_viewport_size({'width': 1000, 'height': 900})
             page.goto(origin + '/')

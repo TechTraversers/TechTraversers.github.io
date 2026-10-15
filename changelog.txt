@@ -109,3 +109,7 @@
 - Consolidate repeated contact panels into one clearly defined full-width footer, with a product-specific inquiry link on the wood bank page.
 - Keep original headers, current copy, and public-information approvals unchanged.
 - Clarify Buffalo, Wyoming as the business base and worldwide availability for remote services; distinguish local in-person help.
+
+### Mobile performance — 2026-10-15 ###
+Keep original banner photos while serving compressed WebP assets with high-priority preloads.
+Initialize navigation immediately after its HTML, before main content is parsed, to avoid the mobile menu collapsing after content appears. Prevent flex layouts from shrinking the banner.

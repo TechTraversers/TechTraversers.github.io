@@ -2,6 +2,8 @@
 
 ## Completed in this update
 
+- [x] Compress original banner photos to WebP, preload the matching banner, and initialize mobile navigation before main content to reduce loading delays and layout shifts.
+
 - [x] Clarify Buffalo, Wyoming as the base, with remote services available worldwide.
 
 - [x] Enlarge desktop menu links, separate desktop sections, and consolidate contact content into a defined site footer.

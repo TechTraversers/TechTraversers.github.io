@@ -9,3 +9,5 @@ This is a static HTML, CSS, and JavaScript site hosted with GitHub Pages. Keep i
 - Use https://www.techtraversers.com as the canonical origin and directory URLs with trailing slashes. Update sitemap.xml when adding or removing public pages.
 - Run python3 scripts/check_site.py, node --check script.js, and node scripts/menu_check.cjs before proposing a change. Run browser checks when dependencies are available; report checks that could not run.
 - Keep changelog.txt and tasklist.md current. Do not merge a pull request or publish a deployment unless requested.
+
+- Current public-copy policy: do not add age, personal schedules, new contact details, prices, or customer testimonials without owner approval. The existing business email is approved. Do not describe C++ as a current service or limit the business to small apps.

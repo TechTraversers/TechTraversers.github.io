@@ -85,3 +85,9 @@ li + li { margin-top: 8px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+.project-list { margin: 26px 0; }
+.project-list article { padding: 22px 0; border-top: 1px solid var(--border); }
+.project-list article p:last-child { margin-bottom: 0; }
+.work-example { margin: 30px 0; padding-top: 22px; border-top: 1px solid var(--border); }
+.work-example h2 { margin-top: 0; }

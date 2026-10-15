@@ -12,7 +12,7 @@ from threading import Thread
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
-ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/codesmith95/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/']
+ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/codesmith95/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/', '/ourservices/websites/']
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -113,7 +113,7 @@ def run(executable=None, text_only=False):
     finally:
         server.shutdown()
         server.server_close()
-    print('PASS: nine pages at four widths; menu keyboard, resize, links, images, skip link, script failure, and JavaScript disabled.')
+    print('PASS: ten pages at four widths; menu keyboard, resize, links, images, skip link, script failure, and JavaScript disabled.')
 
 
 if __name__ == '__main__':

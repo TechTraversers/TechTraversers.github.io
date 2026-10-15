@@ -89,3 +89,9 @@
 - Return to blue links, a desktop sidebar, conventional type sizes, and simple section dividers.
 - Remove the oversized slogan, decorative initials, illustration panels, numbered feature tiles, and repeated marketing cards.
 - Keep hourly pricing, Wood Bank Software content, contact links, accessibility, and crawler metadata.
+
+### Layout clarification and restrained styling ###
+- Keep the original photo headers while returning to top navigation and full-width content.
+- Use an underline for the active navigation item and plain email/contact links.
+- Present the homepage services in three unboxed columns, stacked on mobile.
+- Keep conventional typography, simple dividers, and factual page headings.

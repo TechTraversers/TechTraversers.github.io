@@ -2,7 +2,7 @@
 
 ## Completed in this update
 
-- [x] Restore the original photo headers and simplify the design around the original site identity.
+- [x] Keep the original photo headers with top navigation, full-width content, and restrained styling.
 
 - [x] Simplify typography, colors, service sections, profiles, and contact areas around the original photo header.
 

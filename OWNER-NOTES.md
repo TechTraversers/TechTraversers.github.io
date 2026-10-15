@@ -18,7 +18,7 @@ Availability is not described as free, open source, or a particular license. Cho
 
 ## Visual design
 
-The original programming-language image header and centered Tech Traversers title are restored. Services and Software Development use their original page-specific banner images. The content uses blue links, a desktop sidebar, conventional typography, simple rules, and a white background. Decorative monograms, oversized slogans, rounded marketing panels, and feature illustrations are removed from the pages. Pricing and product claims are unchanged.
+The original programming-language image header and centered Tech Traversers title are restored. Services and Software Development use their original page-specific banner images. The content keeps top navigation and a full-width layout, with blue links, conventional typography, simple rules, and a white background. Homepage services use three unboxed columns on desktop and a single column on mobile. Contact actions are plain links. Decorative monograms, oversized slogans, rounded marketing panels, and feature illustrations are removed from the pages. Pricing and product claims are unchanged.
 
 Restoring the original header also restores its image download size (about 1.55 MB for the default banner); this honors the owner's preference for the original image. The image is preserved without alteration.
 

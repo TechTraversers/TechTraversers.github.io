@@ -1,14 +1,10 @@
-/* Team and profile pages share the site's typography, colors, and controls. */
-.about-intro { margin-bottom: 36px; }
-.team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 24px 0 36px; }
-.team-card, .company-card, .profile-card-detail { padding: clamp(24px, 4vw, 36px); background: white; border: 1px solid var(--border); border-radius: var(--radius); }
-.team-card::before { content: ''; display: block; width: 42px; height: 4px; margin-bottom: 28px; border-radius: 2px; background: #aec7a4; }
-.team-card h3, .company-card h2 { margin-top: 0; }
-.team-card p, .company-card p, .profile-card-detail p { color: var(--muted); }
-.profile-link, .back-link { display: inline-block; min-height: 44px; padding: 10px 0; color: var(--primary); font-size: 14px; font-weight: 650; }
-.profile-link::after { content: ' ↗'; margin-left: 8px; }
-.company-card { margin-top: 36px; }
+.team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin: 22px 0 30px; }
+.team-card { padding: 20px 0 0; border-top: 1px solid var(--border); }
+.team-card p, .profile-card-detail p { color: var(--text); }
+.profile-link, .back-link { display: inline-block; min-height: 44px; padding: 8px 0; font-weight: 600; }
+.company-card { padding-top: 26px; border-top: 1px solid var(--border); }
+.company-card h2 { margin-top: 0; }
 .company-contact { margin-bottom: 0; }
-.profile-card-detail { max-width: 80ch; margin: 30px 0 20px; }
+.profile-card-detail { max-width: 75ch; margin: 24px 0 16px; }
 .profile-card-detail p:last-child { margin-bottom: 0; }
-@media (max-width: 768px) { .team-grid { grid-template-columns: 1fr; gap: 16px; } }
+@media (max-width: 768px) { .team-grid { grid-template-columns: 1fr; gap: 24px; } }

@@ -101,7 +101,7 @@ def check(inventory=()):
             require(any(t == 'meta' and a.get('name') == 'robots' and a.get('content') == 'noindex' for t, a in page.nodes), prefix + 'preview must be noindex')
             continue
         prices = re.findall(r'\$(\d+(?:\.\d+)?)', (ROOT / name).read_text())
-        require(all(price == '25' for price in prices), prefix + 'outdated or unexpected public price')
+        require(not prices, prefix + 'public prices need fresh owner approval')
         counts = Counter(tag for tag, _ in page.nodes)
         require(counts['h1'] == counts['main'] == counts['title'] == 1, prefix + 'needs one h1, main, and title')
         require(any(t == 'html' and a.get('lang') == 'en' for t, a in page.nodes), prefix + 'missing page language')

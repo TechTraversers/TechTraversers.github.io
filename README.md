@@ -1,6 +1,6 @@
 # Tech Traversers Website
 
-A static business website for IT help, custom Python/C++ development, and Wood Bank Software. GitHub Pages serves the HTML, CSS, and JavaScript directly; no build step is required.
+A static business website for IT help, custom software and automation, and Wood Bank Software. GitHub Pages serves the HTML, CSS, and JavaScript directly; no build step is required.
 
 ## Local preview
 
@@ -19,7 +19,7 @@ On Windows, use `python` if `python3` is unavailable. Open http://localhost:8000
 - Put shared styles in `style.css`. About/profile styles live in `aboutus/style.css`.
 - Match metadata and canonical URLs to the page. Canonical URLs use `https://www.techtraversers.com` and directory paths with trailing slashes.
 - Add public pages to `sitemap.xml`. `robots.txt` is the crawler standard; `bots.txt` is an informational companion. Neither controls access to private files.
-- Keep prices and service commitments consistent across pages. The current service rate is $25/hour; custom apps are priced by time rather than fixed application prices.
+- Keep prices and service commitments consistent across pages. Do not publish prices without current owner approval. Website development, maintenance, custom software, automation, and IT help are the current service areas.
 - See `OWNER-NOTES.md` for business decisions and verification limits. Update `tasklist.md` and `changelog.txt` with releases.
 
 ## Checks
@@ -40,7 +40,7 @@ python3 -m playwright install chromium
 python3 scripts/browser_check.py
 ```
 
-On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all nine public pages at 360, 768, 1024, and 1440 pixels, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
+On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all ten public pages at 360, 768, 1024, and 1440 pixels, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
 
 The GitHub Actions workflow runs static, menu, and browser checks on pull requests and pushes to main. It validates changes; it does not deploy them.
 

@@ -24,8 +24,12 @@ def sync(check=False):
         if page.relative_to(ROOT).as_posix() in ('aboutus/index.html', 'aboutus/levi-bryan/index.html', 'codesmith95/index.html'):
             css += '\n' + (ROOT / 'aboutus/style.css').read_text().strip()
         script = (ROOT / 'script.js').read_text().strip()
+        analytics = (ROOT / 'analytics.js').read_text().strip()
+        analytics_tag = ('    <!-- Google tag (gtag.js) -->\n'
+                         '    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHRY359L0X"></script>\n'
+                         f'    <script data-analytics>{analytics}</script>\n')
         schemas = ''
-        hashes = [digest(script)]
+        hashes = [digest(script), digest(analytics)]
         if page == ROOT / 'index.html':
             data = json.dumps({'@context': 'https://schema.org', '@graph': [
                 {'@type': 'Organization', '@id': 'https://www.techtraversers.com/#organization', 'name': 'Tech Traversers', 'url': 'https://www.techtraversers.com/', 'email': 'traversertech@gmail.com'},
@@ -33,8 +37,14 @@ def sync(check=False):
             ]}, separators=(',', ':'))
             schemas = f'    <script type="application/ld+json">{data}</script>\n'
             hashes.append(digest(data))
-        policy = "default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self'; script-src " + ' '.join(hashes) + '; style-src ' + digest(css) + "; require-trusted-types-for 'script'; trusted-types 'none'"
-        generated = f'    <!-- generated:head:start -->\n    <meta http-equiv="Content-Security-Policy" content="{policy}" />\n    <meta name="referrer" content="strict-origin-when-cross-origin" />\n    <style>{css}</style>\n{schemas}    <!-- generated:head:end -->\n'
+        # Analytics-only endpoints; keep inline hashing and Trusted Types enforcement.
+        policy = ("default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; "
+                  "img-src 'self' https://www.googletagmanager.com https://*.google-analytics.com; "
+                  "connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; "
+                  'script-src https://www.googletagmanager.com ' + ' '.join(hashes) +
+                  '; style-src ' + digest(css) +
+                  "; require-trusted-types-for 'script'; trusted-types goog#html")
+        generated = f'    <!-- generated:head:start -->\n    <meta http-equiv="Content-Security-Policy" content="{policy}" />\n    <meta name="referrer" content="strict-origin-when-cross-origin" />\n{analytics_tag}    <style>{css}</style>\n{schemas}    <!-- generated:head:end -->\n'
         text = text.replace('    <meta name="viewport"', generated + '    <meta name="viewport"', 1)
         text = text.replace('<script src="/script.js"></script>', '<script data-navigation>' + script + '</script>')
         if text != original:

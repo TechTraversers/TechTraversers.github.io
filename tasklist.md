@@ -2,6 +2,8 @@
 
 ## Completed in this update
 
+- [x] Install the owner-provided Google Analytics tag across all public pages and verify page views without polluting reports.
+
 - [x] Simplify mobile navigation and page layouts with compact headers, a labeled menu, consistent spacing, and subtle blue accents.
 
 - [x] Review sitemap coverage and canonical URLs; record modification dates for the updated public pages.

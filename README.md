@@ -24,7 +24,9 @@ On Windows, use `python` if `python3` is unavailable. Open http://localhost:8000
 
 ## Embedded assets and security
 
-After editing `style.css`, `aboutus/style.css`, or `script.js`, run `python scripts/sync_assets.py`. This embeds the shared sources in the public HTML and regenerates CSP hashes. Do not edit generated blocks directly. There is no build step required to serve the checked-in pages. The navigation runs before main content to avoid layout shifts. The homepage includes Organization and WebSite structured data using existing public details.
+After editing `style.css`, `aboutus/style.css`, `script.js`, or `analytics.js`, run `python scripts/sync_assets.py`. This embeds the shared sources in the public HTML and regenerates CSP hashes. Do not edit generated blocks directly. There is no build step required to serve the checked-in pages. The navigation runs before main content to avoid layout shifts. The homepage includes Organization and WebSite structured data using existing public details.
+
+Every public page includes the asynchronous Google tag for Analytics property `G-YHRY359L0X`. The generated CSP allows Google's Analytics endpoints and the tag's `goog#html` Trusted Types policy while retaining inline-script hashes and Trusted Types enforcement. See [Google's CSP guidance](https://developers.google.com/tag-platform/security/guides/csp). Layout tests stub the external tag; `scripts/analytics_check.py` loads the real tag and intercepts collection requests so test visits do not enter reports.
 
 The CSP meta policy restricts resources, disallows unapproved scripts/styles, and enforces Trusted Types in supporting browsers. It cannot set HSTS, COOP, or frame-ancestors. GitHub Pages controls response headers and currently serves assets with a ten-minute cache lifetime. Full header hardening and longer caching require a configurable host/CDN; HTML meta tags and a `_headers` file do not change these GitHub Pages response headers. Keep HTML revalidated; use versioned asset names before setting long immutable asset caching. Stage HSTS after checking all affected domains; do not enable includeSubDomains/preload without reviewing them.
 

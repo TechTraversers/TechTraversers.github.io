@@ -15,6 +15,12 @@ ROOT = Path(__file__).resolve().parents[1]
 ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/codesmith95/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/', '/ourservices/websites/']
 
 
+def stub_analytics(context):
+    # Layout tests stay offline and never send synthetic visits to Analytics.
+    context.route('https://www.googletagmanager.com/**', lambda route: route.fulfill(
+        status=200, content_type='application/javascript', body=''))
+
+
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
@@ -32,6 +38,7 @@ def run(executable=None, text_only=False):
             browser = p.chromium.launch(**options)
             errors = []
             context = browser.new_context()
+            stub_analytics(context)
             if text_only:
                 context.route('**/Pictures/ttIcon.png', lambda route: route.fulfill(status=204))
             context.on('page', lambda page: page.on('pageerror', lambda error: errors.append(str(error))))
@@ -77,6 +84,7 @@ def run(executable=None, text_only=False):
                         expect(nav).to_be_visible()
             # Embedded assets must avoid blocking requests and load without shifts.
             performance = browser.new_context(viewport={'width': 360, 'height': 900})
+            stub_analytics(performance)
             performance.add_init_script("""
                 window.layoutShiftScore = 0;
                 new PerformanceObserver(list => {
@@ -93,7 +101,9 @@ def run(executable=None, text_only=False):
             assert measured.evaluate('window.layoutShiftScore') < 0.01, 'mobile load shifts content'
             assert measured.locator('link[rel="preload"][as="image"]').get_attribute('fetchpriority') == 'high'
             assert measured.locator('#image').evaluate("el => getComputedStyle(el).backgroundImage.includes('.webp')")
-            assert measured.locator('script[src], link[rel=stylesheet]').count() == 0
+            assert measured.locator('link[rel=stylesheet], script[src]:not([async])').count() == 0
+            expect(measured.locator('script[src]')).to_have_count(1)
+            expect(measured.locator('script[data-analytics]')).to_have_count(1)
             assert not security_errors, security_errors
             # The policy must reject injected inline scripts and unsafe DOM HTML.
             assert measured.evaluate('''() => {

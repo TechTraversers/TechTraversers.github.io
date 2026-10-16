@@ -2,6 +2,8 @@
 
 ## Completed in this update
 
+- [x] Simplify mobile navigation and page layouts with compact headers, a labeled menu, consistent spacing, and subtle blue accents.
+
 - [x] Review sitemap coverage and canonical URLs; record modification dates for the updated public pages.
 
 - [x] Remove blocking style/script requests, enforce a hash-based CSP, add structured data, and check generated assets in CI.

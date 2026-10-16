@@ -128,3 +128,8 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 - Add the owner-provided Google tag G-YHRY359L0X to all ten public pages through the shared asset generator.
 - Allow Analytics endpoints and the Google tag Trusted Types policy while keeping inline hashes and Trusted Types enforcement.
 - Add a real-tag browser check that intercepts reporting; stub Analytics in layout regression checks.
+
+### 2026-10-16 - Schema.org structured data ###
+- Extend Organization and WebSite JSON-LD to all ten public pages with linked page, Service, Person, and SoftwareApplication entities.
+- Generate CSP hashes with structured data and validate graph references and page metadata.
+- Document maintenance and post-publication validation.

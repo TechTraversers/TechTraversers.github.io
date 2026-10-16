@@ -11,6 +11,7 @@ from urllib.parse import unquote, urlsplit
 import json
 import re
 import xml.etree.ElementTree as ET
+from sync_assets import digest
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = 'https://www.techtraversers.com'
@@ -122,6 +123,37 @@ def check(inventory=()):
         for key in ('description', 'viewport', 'og:title', 'og:description', 'og:url', 'og:image', 'og:image:alt', 'twitter:card', 'twitter:title', 'twitter:description', 'twitter:image'):
             require(bool(metas.get(key)), prefix + f'missing {key}')
         require(metas.get('og:url') == canonical, prefix + 'Open Graph URL differs from canonical')
+        source = (ROOT / name).read_text(encoding='utf-8')
+        blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', source, re.S)
+        require(len(blocks) == 1, prefix + 'needs one JSON-LD graph')
+        for block in blocks:
+            try:
+                data = json.loads(block)
+                require(data.get('@context') == 'https://schema.org', prefix + 'incorrect schema context')
+                graph = data['@graph']
+                entities = {entity['@id']: entity for entity in graph}
+                require(len(entities) == len(graph), prefix + 'duplicate schema IDs')
+                require(entities[ORIGIN + '/#organization']['@type'] == 'Organization', prefix + 'missing Organization')
+                require(entities[ORIGIN + '/#website']['@type'] == 'WebSite', prefix + 'missing WebSite')
+                webpage = entities[canonical + '#webpage']
+                require(webpage.get('url') == canonical and webpage.get('description') == metas.get('description'), prefix + 'schema differs from page metadata')
+                require(bool(webpage.get('name')), prefix + 'missing schema page name')
+
+                def check_references(value):
+                    if isinstance(value, dict):
+                        if set(value) == {'@id'}:
+                            require(value['@id'] in entities, prefix + 'unresolved schema reference ' + value['@id'])
+                        for child in value.values():
+                            check_references(child)
+                    elif isinstance(value, list):
+                        for child in value:
+                            check_references(child)
+
+                check_references(graph)
+                csp = next((a.get('content', '') for t, a in page.nodes if t == 'meta' and a.get('http-equiv') == 'Content-Security-Policy'), '')
+                require(digest(block) in csp, prefix + 'JSON-LD hash missing from CSP')
+            except (ValueError, KeyError, TypeError) as error:
+                require(False, prefix + f'invalid structured data: {error}')
         for key in ('og:image', 'twitter:image'):
             target = local_target(metas.get(key, ''), Path(name))
             require(target is not None and str(target) in known, prefix + f'missing {key} image')
@@ -140,7 +172,7 @@ def check(inventory=()):
         ET.parse(svg)
     if failures:
         raise SystemExit('\n'.join(failures))
-    print(f'PASS: {len(canonicals)} public pages; local links, fragments, metadata, navigation, SVGs, crawler files, and sitemap.')
+    print(f'PASS: {len(canonicals)} public pages; local links, fragments, metadata, structured data, navigation, SVGs, crawler files, and sitemap.')
 
 
 if __name__ == '__main__':

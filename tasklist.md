@@ -2,6 +2,8 @@
 
 ## Completed in this update
 
+- [x] Extend Schema.org JSON-LD to all ten public pages, including service, profile, and software entities; validate references, metadata, and CSP hashes.
+
 - [x] Install the owner-provided Google Analytics tag across all public pages and verify page views without polluting reports.
 
 - [x] Simplify mobile navigation and page layouts with compact headers, a labeled menu, consistent spacing, and subtle blue accents.

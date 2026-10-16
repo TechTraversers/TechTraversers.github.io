@@ -5,6 +5,7 @@ import base64
 import hashlib
 import json
 import re
+from structured_data import build_schema
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -28,15 +29,10 @@ def sync(check=False):
         analytics_tag = ('    <!-- Google tag (gtag.js) -->\n'
                          '    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHRY359L0X"></script>\n'
                          f'    <script data-analytics>{analytics}</script>\n')
-        schemas = ''
-        hashes = [digest(script), digest(analytics)]
-        if page == ROOT / 'index.html':
-            data = json.dumps({'@context': 'https://schema.org', '@graph': [
-                {'@type': 'Organization', '@id': 'https://www.techtraversers.com/#organization', 'name': 'Tech Traversers', 'url': 'https://www.techtraversers.com/', 'email': 'traversertech@gmail.com'},
-                {'@type': 'WebSite', '@id': 'https://www.techtraversers.com/#website', 'url': 'https://www.techtraversers.com/', 'name': 'Tech Traversers', 'publisher': {'@id': 'https://www.techtraversers.com/#organization'}}
-            ]}, separators=(',', ':'))
-            schemas = f'    <script type="application/ld+json">{data}</script>\n'
-            hashes.append(digest(data))
+        # Escape HTML-sensitive characters so future copy cannot close the script.
+        data = json.dumps(build_schema(text), separators=(',', ':')).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
+        schemas = f'    <script type="application/ld+json">{data}</script>\n'
+        hashes = [digest(script), digest(analytics), digest(data)]
         # Analytics-only endpoints; keep inline hashing and Trusted Types enforcement.
         policy = ("default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; "
                   "img-src 'self' https://www.googletagmanager.com https://*.google-analytics.com; "

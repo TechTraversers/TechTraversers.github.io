@@ -11,6 +11,8 @@ from pathlib import Path
 import json
 from threading import Thread
 from urllib.parse import parse_qs, urlsplit
+from urllib.request import Request, urlopen
+from time import sleep
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,12 +29,42 @@ def stub_analytics(context):
         status=200, content_type='application/javascript', body=''))
 
 
+def public_images():
+    """Fetch each real image anonymously once, then reuse its bytes for layout checks."""
+    images = {}
+    for name, asset in IMAGE_ASSETS.items():
+        if 'url' not in asset:
+            continue
+        expected = 'image/webp' if name.endswith('.webp') else ('image/png' if name.endswith('.png') else 'image/jpeg')
+        for attempt in range(3):
+            try:
+                with urlopen(Request(asset['url'], headers={'User-Agent': 'TechTraversers image check'}), timeout=20) as response:
+                    body = response.read()
+                    content_type = response.headers.get_content_type()
+                    assert response.status == 200 and content_type == expected and body, (name, content_type)
+                    images[asset['url']] = (content_type, body)
+                break
+            except Exception:
+                if attempt == 2:
+                    raise
+                sleep(attempt + 1)
+        print(f'PASS: anonymous public image {name}', flush=True)
+    return images
+
+
+def reuse_public_images(context, images):
+    for url, (content_type, body) in images.items():
+        context.route(url, lambda route, request, content_type=content_type, body=body: route.fulfill(
+            status=200, content_type=content_type, body=body))
+
+
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
 
 
 def run(executable=None, text_only=False):
+    images = public_images()
     server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
     origin = f'http://127.0.0.1:{server.server_port}'
@@ -44,6 +76,7 @@ def run(executable=None, text_only=False):
             browser = p.chromium.launch(**options)
             errors = []
             context = browser.new_context()
+            reuse_public_images(context, images)
             stub_analytics(context)
             if text_only:
                 context.route(ICON_URL, lambda route: route.fulfill(status=204))
@@ -98,6 +131,7 @@ def run(executable=None, text_only=False):
                         expect(nav).to_be_visible()
             # Embedded assets must avoid blocking requests and load without shifts.
             performance = browser.new_context(viewport={'width': 360, 'height': 900})
+            reuse_public_images(performance, images)
             stub_analytics(performance)
             performance.add_init_script("""
                 window.layoutShiftScore = 0;
@@ -203,6 +237,7 @@ def run(executable=None, text_only=False):
             context.unroute(origin + '/')
             # Test the actual JavaScript-disabled experience on every page.
             no_js = browser.new_context(java_script_enabled=False, viewport={'width': 360, 'height': 900})
+            reuse_public_images(no_js, images)
             if text_only:
                 no_js.route(ICON_URL, lambda route: route.fulfill(status=204))
             plain = no_js.new_page()

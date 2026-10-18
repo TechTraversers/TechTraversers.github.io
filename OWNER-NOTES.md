@@ -52,3 +52,7 @@ The owner has no approved testimonials to supply at this time. Keep existing pro
 ## Image storage update - 2026-10-18
 
 At the owner's request, all 16 image files were moved from the website repository into Documents/Tech Traversers/pictures, which syncs to the Tech Traverser Google Drive account. Destination copies were checked against the originals before repository copies were removed. Only this pictures folder was made publicly viewable, with Viewer access; the Tech Traversers parent folder remains unchanged. The five images used by public pages now load from Google Drive's image host. The image manifest records the original file hashes and cloud IDs. Site image loading now depends on Google Drive access and availability.
+
+## Mobile optimization - 2026-10-18
+
+Phone layouts use a shorter original-photo header, tighter content spacing, full-width primary contact actions, larger service-link targets, and less form padding. Form controls keep a 16px font and explicit email keyboard settings. Safe-area spacing accounts for phone cutouts. Short landscape windows use a compact banner. Phone banners and their preloads request 960px WebP images from the existing Drive files. The measured homepage banner is 63,964 bytes instead of 96,928 bytes (34% less); the services banner is 50,956 bytes instead of 90,536 bytes (44% less). The software banner is already below 960px and remains unchanged. Desktop images and original archived files remain unchanged.

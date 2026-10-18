@@ -26,7 +26,7 @@ On Windows, use `python` if `python3` is unavailable. Open http://localhost:8000
 
 Website images now load from the public `pictures` folder in Google Drive, synced from `Documents/Tech Traversers/pictures`. Original image files are no longer kept in this repository. `image-assets.json` records all 16 archived files, their Drive IDs and original SHA-256 hashes, and the five public image URLs used by the site. The originals include unused artwork and the old testing image.
 
-Keep the pictures folder accessible to anyone with the link as Viewer. This exposes the image folder only; its parent folder is not shared. Drive preview-page links cannot replace image URLs in HTML or CSS. Verify direct image URLs without a Google session whenever changing them, and update the manifest, CSS, HTML metadata, preload links, and favicons together. Google serves the images through `lh3.googleusercontent.com`, which the CSP permits for images only. WebP banner URLs request WebP output at up to 1920 pixels; PNG favicon and JPEG social-preview URLs preserve their respective formats. Remote availability and sharing settings now affect image loading. Browser checks fetch each image anonymously once, verify its image MIME type, and reuse those real bytes across all layout checks; browser decoding and CSP enforcement still run on every page.
+Keep the pictures folder accessible to anyone with the link as Viewer. This exposes the image folder only; its parent folder is not shared. Drive preview-page links cannot replace image URLs in HTML or CSS. Verify direct image URLs without a Google session whenever changing them, and update the manifest, CSS, HTML metadata, preload links, and favicons together. Google serves the images through `lh3.googleusercontent.com`, which the CSP permits for images only. WebP banner URLs request WebP output at up to 1920 pixels on desktop and 960 pixels on phones, with matching media-specific preloads to avoid downloading both; PNG favicon and JPEG social-preview URLs preserve their respective formats. Remote availability and sharing settings now affect image loading. Browser checks fetch each image anonymously once, verify its image MIME type, and reuse those real bytes across all layout checks; browser decoding and CSP enforcement still run on every page.
 
 ## Embedded assets and security
 
@@ -65,7 +65,7 @@ python3 -m playwright install chromium
 python3 scripts/browser_check.py
 ```
 
-On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all eleven public pages at 360, 768, 1024, and 1440 pixels, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
+On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all eleven public pages at 320, 360, 390, 768, 1024, and 1440 pixels, plus short-screen, landscape, and touch-emulated phone checks, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
 
 The GitHub Actions workflow runs static, menu, and browser checks on pull requests and pushes to main. It validates changes; it does not deploy them.
 

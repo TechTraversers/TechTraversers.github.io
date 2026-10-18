@@ -2,6 +2,8 @@
 
 ## Completed in this update
 
+- [x] Optimize phone banner downloads, mobile spacing, quote-form controls, safe areas, and touch targets; cover narrow and landscape layouts in browser checks.
+
 - [x] Move repository images to the synced Documents/Tech Traversers/pictures folder and replace public image references with verified Google Drive image URLs.
 
 - [x] Add prominent contact buttons and a static quote form with email drafting, webmail fallback, and service preselection.

@@ -14,6 +14,7 @@ def digest(text):
 
 def sync(check=False):
     stale = []
+    images = json.loads((ROOT / 'image-assets.json').read_text(encoding='utf-8'))['files']
     for page in ROOT.rglob('*.html'):
         original = page.read_text(encoding='utf-8')
         if '<header id="image">' not in original:
@@ -22,6 +23,15 @@ def sync(check=False):
         text = re.sub(r'<script data-navigation>.*?</script>', '<script src="/script.js"></script>', text, flags=re.S)
         text = re.sub(r'    <script data-contact>.*?</script>\n', '', text, flags=re.S)
         text = re.sub(r'    <link rel="stylesheet" href="/(?:style.css|aboutus/style.css)" />\n', '', text)
+        # Preload only the banner selected by the viewport's CSS media query.
+        text = re.sub(r'    <link rel="preload" as="image"[^>]+/>\n', '', text)
+        banner_name = ('pic2.webp' if 'class="services-page"' in text else
+                       'pic1.webp' if 'class="software-page"' in text else
+                       'what_is_a_programming_language.webp')
+        banner = images[banner_name]
+        preloads = (f'    <link rel="preload" as="image" type="image/webp" href="{banner["mobile_url"]}" media="(max-width: 768px)" fetchpriority="high" />\n'
+                    f'    <link rel="preload" as="image" type="image/webp" href="{banner["url"]}" media="(min-width: 769px)" fetchpriority="high" />\n')
+        text = text.replace('    <link rel="icon"', preloads + '    <link rel="icon"', 1)
         css = (ROOT / 'style.css').read_text().strip()
         if page.relative_to(ROOT).as_posix() in ('aboutus/index.html', 'aboutus/levi-bryan/index.html', 'codesmith95/index.html'):
             css += '\n' + (ROOT / 'aboutus/style.css').read_text().strip()

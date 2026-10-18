@@ -32,7 +32,9 @@ def stub_analytics(context):
 def public_images():
     """Fetch each real image anonymously once, then reuse its bytes for layout checks."""
     images = {}
-    for name, asset in IMAGE_ASSETS.items():
+    variants = [(name, {'url': asset[key]}) for name, asset in IMAGE_ASSETS.items()
+                for key in ('url', 'mobile_url') if key in asset]
+    for name, asset in variants:
         if 'url' not in asset:
             continue
         expected = 'image/webp' if name.endswith('.webp') else ('image/png' if name.endswith('.png') else 'image/jpeg')
@@ -84,9 +86,14 @@ def run(executable=None, text_only=False):
             page = context.new_page()
             page.on('console', lambda message: errors.append(message.text) if message.type == 'error' else None)
             page.on('response', lambda response: errors.append(f'HTTP {response.status}: {response.url}') if response.status >= 400 else None)
-            for width in (360, 768, 1024, 1440):
+            banner_urls = {asset[key] for name, asset in IMAGE_ASSETS.items() if name.endswith('.webp')
+                           for key in ('url', 'mobile_url')}
+            banner_requests = []
+            page.on('request', lambda request: banner_requests.append(request.url) if request.url in banner_urls else None)
+            for width in (320, 360, 390, 768, 1024, 1440):
                 page.set_viewport_size({'width': width, 'height': 900})
                 for route in ROUTES:
+                    banner_requests.clear()
                     response = page.goto(origin + route)
                     assert response.status == 200, route
                     expect(page.locator('h1')).to_have_count(1)
@@ -94,10 +101,17 @@ def run(executable=None, text_only=False):
                     # Decode the page's real remote banner without a signed-in Google session.
                     assert page.evaluate('''async () => {
                         const image = new Image();
-                        image.src = document.querySelector('link[rel="preload"][as="image"]').href;
+                        const preload = [...document.querySelectorAll('link[rel="preload"][as="image"]')]
+                            .find(link => matchMedia(link.media).matches);
+                        image.src = preload.href;
                         await image.decode();
                         return image.naturalWidth > 0;
                     }'''), (route, 'remote banner failed to decode')
+                    banner_name = ('pic2.webp' if route == '/ourservices/' else
+                                   'pic1.webp' if route == '/ourservices/softwaredevelopment/' else
+                                   'what_is_a_programming_language.webp')
+                    expected_banner = IMAGE_ASSETS[banner_name]['mobile_url' if width <= 768 else 'url']
+                    assert set(banner_requests) == {expected_banner}, (width, route, 'wrong or duplicate banner download', banner_requests)
                     expect(page.locator('a[aria-current="page"]')).to_have_count(1)
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (width, route, 'horizontal overflow')
                     assert page.locator('a button, button a').count() == 0
@@ -111,6 +125,11 @@ def run(executable=None, text_only=False):
                     toggle = page.locator('#menu-toggle')
                     nav = page.locator('#primary-navigation')
                     if width <= 768:
+                        for action in page.locator('main .cta-primary, #footer .cta-primary').all():
+                            if action.is_visible():
+                                assert action.bounding_box()['height'] >= 48, (route, 'small contact target')
+                        for field in page.locator('#quote-form input, #quote-form select, #quote-form textarea').all():
+                            assert field.evaluate('el => parseFloat(getComputedStyle(el).fontSize)') >= 16
                         expect(toggle).to_be_visible()
                         expect(nav).to_be_hidden()
                         # Hidden links must not remain in the keyboard tab order.
@@ -147,8 +166,8 @@ def run(executable=None, text_only=False):
             measured.goto(origin + '/')
             measured.wait_for_timeout(300)
             assert measured.evaluate('window.layoutShiftScore') < 0.01, 'mobile load shifts content'
-            assert measured.locator('link[rel="preload"][as="image"]').get_attribute('fetchpriority') == 'high'
-            assert IMAGE_ASSETS['what_is_a_programming_language.webp']['url'] in measured.locator('#image').evaluate('el => getComputedStyle(el).backgroundImage')
+            assert measured.locator('link[rel="preload"][as="image"][media="(max-width: 768px)"]').get_attribute('fetchpriority') == 'high'
+            assert IMAGE_ASSETS['what_is_a_programming_language.webp']['mobile_url'] in measured.locator('#image').evaluate('el => getComputedStyle(el).backgroundImage')
             assert measured.locator('link[rel=stylesheet], script[src]:not([async])').count() == 0
             expect(measured.locator('script[src]')).to_have_count(2)
             expect(measured.locator('script[data-analytics]')).to_have_count(1)
@@ -248,16 +267,45 @@ def run(executable=None, text_only=False):
             expect(plain.locator('#quote-form')).to_be_hidden()
             expect(plain.locator('main a[href="mailto:traversertech@gmail.com"]')).to_be_visible()
             page.goto(origin + '/')
+            for width, height in ((320, 480), (844, 390)):
+                page.set_viewport_size({'width': width, 'height': height})
+                for route in ('/', '/contact/'):
+                    page.goto(origin + route)
+                    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (width, height, route)
+                    page.locator('#footer a.cta-primary').scroll_into_view_if_needed()
+                    expect(page.locator('#footer a.cta-primary')).to_be_visible()
+            page.goto(origin + '/')
             page.set_viewport_size({'width': 1440, 'height': 1000})
             page.screenshot(path=str(ROOT / 'test-results' / 'home-desktop.png'), full_page=True)
             page.set_viewport_size({'width': 360, 'height': 900})
             page.screenshot(path=str(ROOT / 'test-results' / 'home-mobile.png'), full_page=True)
+            page.evaluate('window.scrollTo(0, 0)')
+            page.set_viewport_size({'width': 390, 'height': 844})
+            page.screenshot(path=str(ROOT / 'test-results' / 'home-mobile-viewport.png'))
+            touch = browser.new_context(is_mobile=True, has_touch=True, device_scale_factor=3,
+                                        viewport={'width': 390, 'height': 844})
+            reuse_public_images(touch, images)
+            stub_analytics(touch)
+            phone = touch.new_page()
+            phone.on('pageerror', lambda error: errors.append(str(error)))
+            phone.goto(origin + '/')
+            primary = phone.locator('main .cta-primary').first.bounding_box()
+            assert primary['y'] + primary['height'] <= 844, 'primary contact action is below the first phone screen'
+            phone.locator('#menu-toggle').tap()
+            expect(phone.locator('nav')).to_be_visible()
+            phone.locator('nav a[data-nav="contact"]').tap()
+            expect(phone).to_have_url(origin + '/contact/')
+            expect(phone.locator('nav')).to_be_hidden()
+            phone.locator('#quote-email-address').tap()
+            expect(phone.locator('#quote-email-address')).to_be_focused()
+            phone.screenshot(path=str(ROOT / 'test-results' / 'contact-mobile-initial.png'), full_page=True)
+            touch.close()
             assert not errors, errors
             browser.close()
     finally:
         server.shutdown()
         server.server_close()
-    print('PASS: eleven pages at four widths; navigation, accessibility, static quote form, email encoding, no submission, and JavaScript disabled.')
+    print('PASS: eleven pages at six widths, short screens and landscape; mobile banner selection, touch targets, form sizing, navigation, and JavaScript disabled.')
 
 
 if __name__ == '__main__':

@@ -161,3 +161,31 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
   #services > ul > li { padding: 24px 20px; }
   #services > ul > li:nth-child(odd) { background: #f7f9fb; }
 }
+
+/* Phone layouts keep the main action and form controls easy to reach. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (max-width: 768px) {
+  .container { padding: 0 max(18px, env(safe-area-inset-right)) 32px max(18px, env(safe-area-inset-left)); }
+  #image { height: 144px; padding: 64px 18px 22px; }
+  #webTop { font-size: 28px; }
+  main { padding-top: 24px; }
+  .menu-toggle { top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); min-height: 48px; }
+  body.menu-open .sidebar { top: max(72px, calc(env(safe-area-inset-top) + 64px)); max-height: calc(100dvh - 88px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+  .sidebar a { min-height: 48px; }
+  .cta-actions { gap: 8px; margin: 18px 0 22px; }
+  .cta-actions > .cta-secondary { min-height: 44px; border-color: transparent; padding: 8px 12px; text-decoration: underline; }
+  .service { padding-block: 18px; }
+  .service > a, #services > ul > li > a { min-height: 48px; padding-block: 10px; }
+  .next-step { margin-top: 28px; }
+  .quote-layout { gap: 24px; margin-top: 24px; }
+  .quote-form, .quote-result { padding: 16px; }
+  .quote-form input, .quote-form select, .quote-form textarea, .quote-result textarea { min-width: 0; font-size: 16px; scroll-margin-block: 88px; }
+  .quote-form .cta-primary, .quote-result .cta-primary, #footer a.cta-primary { width: 100%; min-height: 48px; }
+  .footer-inner { padding: 26px max(18px, env(safe-area-inset-right)) max(26px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); }
+  #image { background-image: url('https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w960-rw'); }
+  .services-page #image { background-image: url('https://lh3.googleusercontent.com/d/1YKMFFEIaqLrYC-lej26LdXxnOxzczuHJ=w960-rw'); }
+  .software-page #image { background-image: url('https://lh3.googleusercontent.com/d/1ksW5nTgqZGUs4L7wDy56RFI9D6ItuYq4=w960-rw'); }
+}
+@media (max-width: 1024px) and (max-height: 500px) {
+  #image { height: 120px; padding-block: 22px; }
+}

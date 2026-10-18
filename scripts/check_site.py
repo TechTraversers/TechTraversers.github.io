@@ -16,7 +16,7 @@ from sync_assets import digest
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = 'https://www.techtraversers.com'
 IMAGE_ASSETS = json.loads((ROOT / 'image-assets.json').read_text(encoding='utf-8'))['files']
-PUBLIC_IMAGE_URLS = {image['url'] for image in IMAGE_ASSETS.values() if 'url' in image}
+PUBLIC_IMAGE_URLS = {image[key] for image in IMAGE_ASSETS.values() for key in ('url', 'mobile_url') if key in image}
 HOSTS = {'www.techtraversers.com', 'techtraversers.com'}
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'}
 

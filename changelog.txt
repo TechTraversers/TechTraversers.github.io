@@ -148,3 +148,8 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 - Move all 16 repository image files into the owner's synced Documents/Tech Traversers/pictures folder after verifying identical copies.
 - Replace website banners, preloads, favicons, and social-preview image URLs with publicly viewable Drive-backed images; permit the image host in CSP.
 - Record cloud file IDs and original hashes in image-assets.json. Update static and browser checks for remote images and anonymous decoding.
+
+### 2026-10-18 - Mobile optimization ###
+- Use 960px mobile WebP banners and matching media-specific preloads to avoid desktop image downloads on phones.
+- Compact phone and landscape headers, improve spacing and touch targets, and simplify the static quote form on narrow screens.
+- Extend browser checks to 320px screens, short landscape windows, touch navigation, form text size, and viewport-specific image requests.

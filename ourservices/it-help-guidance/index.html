@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <!-- generated:head:start -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-/Mvk8zAw1gAxobWZQa4TnnkWFKmYYq+pE0WtujXLD+g='; style-src 'sha256-84j5c3c6RAX3xtE+dO59X5H+T21BHS23/0XtEeFh/Z0='; require-trusted-types-for 'script'; trusted-types goog#html default" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-/Mvk8zAw1gAxobWZQa4TnnkWFKmYYq+pE0WtujXLD+g='; style-src 'sha256-dHifp/QPEySvtOuT2Gwp8Je2fnYLdIIzr4/KP4Z0X1Q='; require-trusted-types-for 'script'; trusted-types goog#html default" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHRY359L0X"></script>
@@ -190,6 +190,34 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
   .project-list article, .feature-grid > article { padding-block: 26px; }
   #services > ul > li { padding: 24px 20px; }
   #services > ul > li:nth-child(odd) { background: #f7f9fb; }
+}
+
+/* Phone layouts keep the main action and form controls easy to reach. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (max-width: 768px) {
+  .container { padding: 0 max(18px, env(safe-area-inset-right)) 32px max(18px, env(safe-area-inset-left)); }
+  #image { height: 144px; padding: 64px 18px 22px; }
+  #webTop { font-size: 28px; }
+  main { padding-top: 24px; }
+  .menu-toggle { top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); min-height: 48px; }
+  body.menu-open .sidebar { top: max(72px, calc(env(safe-area-inset-top) + 64px)); max-height: calc(100dvh - 88px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+  .sidebar a { min-height: 48px; }
+  .cta-actions { gap: 8px; margin: 18px 0 22px; }
+  .cta-actions > .cta-secondary { min-height: 44px; border-color: transparent; padding: 8px 12px; text-decoration: underline; }
+  .service { padding-block: 18px; }
+  .service > a, #services > ul > li > a { min-height: 48px; padding-block: 10px; }
+  .next-step { margin-top: 28px; }
+  .quote-layout { gap: 24px; margin-top: 24px; }
+  .quote-form, .quote-result { padding: 16px; }
+  .quote-form input, .quote-form select, .quote-form textarea, .quote-result textarea { min-width: 0; font-size: 16px; scroll-margin-block: 88px; }
+  .quote-form .cta-primary, .quote-result .cta-primary, #footer a.cta-primary { width: 100%; min-height: 48px; }
+  .footer-inner { padding: 26px max(18px, env(safe-area-inset-right)) max(26px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); }
+  #image { background-image: url('https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w960-rw'); }
+  .services-page #image { background-image: url('https://lh3.googleusercontent.com/d/1YKMFFEIaqLrYC-lej26LdXxnOxzczuHJ=w960-rw'); }
+  .software-page #image { background-image: url('https://lh3.googleusercontent.com/d/1ksW5nTgqZGUs4L7wDy56RFI9D6ItuYq4=w960-rw'); }
+}
+@media (max-width: 1024px) and (max-height: 500px) {
+  #image { height: 120px; padding-block: 22px; }
 }</style>
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.techtraversers.com/#organization","name":"Tech Traversers","url":"https://www.techtraversers.com/","email":"traversertech@gmail.com"},{"@type":"WebSite","@id":"https://www.techtraversers.com/#website","url":"https://www.techtraversers.com/","name":"Tech Traversers","inLanguage":"en","publisher":{"@id":"https://www.techtraversers.com/#organization"}},{"@type":"WebPage","@id":"https://www.techtraversers.com/ourservices/it-help-guidance/#webpage","url":"https://www.techtraversers.com/ourservices/it-help-guidance/","name":"IT help and guidance","description":"Patient remote IT help worldwide, plus local help by arrangement. Levi Bryan is based in Buffalo, Wyoming.","inLanguage":"en","isPartOf":{"@id":"https://www.techtraversers.com/#website"},"publisher":{"@id":"https://www.techtraversers.com/#organization"},"mainEntity":{"@id":"https://www.techtraversers.com/ourservices/it-help-guidance/#service"}},{"@type":"Service","@id":"https://www.techtraversers.com/ourservices/it-help-guidance/#service","provider":{"@id":"https://www.techtraversers.com/#organization"},"name":"IT help and guidance","url":"https://www.techtraversers.com/ourservices/it-help-guidance/","description":"Patient remote IT help worldwide, plus local help by arrangement. Levi Bryan is based in Buffalo, Wyoming.","mainEntityOfPage":{"@id":"https://www.techtraversers.com/ourservices/it-help-guidance/#webpage"}}]}</script>
     <!-- generated:head:end -->
@@ -208,8 +236,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
     <meta name="twitter:title" content="Personal IT Help &amp; Guidance | Tech Traversers" />
     <meta name="twitter:description" content="Patient remote IT help worldwide, plus local help by arrangement. Levi Bryan is based in Buffalo, Wyoming." />
     <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1KfkchWBaQgKS4cEpzdsY2oXkWZ9upAQa=s0" />
-    <link rel="preload" as="image" type="image/webp" href="https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w1920-rw" fetchpriority="high" />
     
+    <link rel="preload" as="image" type="image/webp" href="https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w960-rw" media="(max-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/webp" href="https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w1920-rw" media="(min-width: 769px)" fetchpriority="high" />
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1BL1-9-z9y1XFDcHuBmADHsDpRNLzEaHg=s0" />
     <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1BL1-9-z9y1XFDcHuBmADHsDpRNLzEaHg=s0" />
   </head>

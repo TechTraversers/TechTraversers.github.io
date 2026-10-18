@@ -1,18 +1,21 @@
 """Browser regression checks. Install requirements-test.txt and Playwright Chromium.
 
 Use --executable /usr/bin/chromium for a system browser. --text-only-checkout
-skips the original PNG favicon request when binary downloads are unavailable;
-the file's presence must be verified separately with check_site.py --inventory.
+skips the remote PNG favicon request; public image URLs must be verified
+separately when using that option. Banner checks still load the public images.
 """
 from argparse import ArgumentParser
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+import json
 from threading import Thread
 from urllib.parse import parse_qs, urlsplit
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
+IMAGE_ASSETS = json.loads((ROOT / 'image-assets.json').read_text(encoding='utf-8'))['files']
+ICON_URL = IMAGE_ASSETS['ttIcon.png']['url']
 ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/codesmith95/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/', '/ourservices/websites/', '/contact/']
 
 
@@ -43,7 +46,7 @@ def run(executable=None, text_only=False):
             context = browser.new_context()
             stub_analytics(context)
             if text_only:
-                context.route('**/Pictures/ttIcon.png', lambda route: route.fulfill(status=204))
+                context.route(ICON_URL, lambda route: route.fulfill(status=204))
             context.on('page', lambda page: page.on('pageerror', lambda error: errors.append(str(error))))
             page = context.new_page()
             page.on('console', lambda message: errors.append(message.text) if message.type == 'error' else None)
@@ -55,6 +58,13 @@ def run(executable=None, text_only=False):
                     assert response.status == 200, route
                     expect(page.locator('h1')).to_have_count(1)
                     expect(page.locator('main')).to_be_visible()
+                    # Decode the page's real remote banner without a signed-in Google session.
+                    assert page.evaluate('''async () => {
+                        const image = new Image();
+                        image.src = document.querySelector('link[rel="preload"][as="image"]').href;
+                        await image.decode();
+                        return image.naturalWidth > 0;
+                    }'''), (route, 'remote banner failed to decode')
                     expect(page.locator('a[aria-current="page"]')).to_have_count(1)
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (width, route, 'horizontal overflow')
                     assert page.locator('a button, button a').count() == 0
@@ -104,7 +114,7 @@ def run(executable=None, text_only=False):
             measured.wait_for_timeout(300)
             assert measured.evaluate('window.layoutShiftScore') < 0.01, 'mobile load shifts content'
             assert measured.locator('link[rel="preload"][as="image"]').get_attribute('fetchpriority') == 'high'
-            assert measured.locator('#image').evaluate("el => getComputedStyle(el).backgroundImage.includes('.webp')")
+            assert IMAGE_ASSETS['what_is_a_programming_language.webp']['url'] in measured.locator('#image').evaluate('el => getComputedStyle(el).backgroundImage')
             assert measured.locator('link[rel=stylesheet], script[src]:not([async])').count() == 0
             expect(measured.locator('script[src]')).to_have_count(2)
             expect(measured.locator('script[data-analytics]')).to_have_count(1)
@@ -194,7 +204,7 @@ def run(executable=None, text_only=False):
             # Test the actual JavaScript-disabled experience on every page.
             no_js = browser.new_context(java_script_enabled=False, viewport={'width': 360, 'height': 900})
             if text_only:
-                no_js.route('**/Pictures/ttIcon.png', lambda route: route.fulfill(status=204))
+                no_js.route(ICON_URL, lambda route: route.fulfill(status=204))
             plain = no_js.new_page()
             for route in ROUTES:
                 plain.goto(origin + route)

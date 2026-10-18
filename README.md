@@ -22,6 +22,12 @@ On Windows, use `python` if `python3` is unavailable. Open http://localhost:8000
 - Keep prices and service commitments consistent across pages. Do not publish prices without current owner approval. Website development, maintenance, custom software, automation, and IT help are the current service areas.
 - See `OWNER-NOTES.md` for business decisions and verification limits. Update `tasklist.md` and `changelog.txt` with releases.
 
+## Images in Google Drive
+
+Website images now load from the public `pictures` folder in Google Drive, synced from `Documents/Tech Traversers/pictures`. Original image files are no longer kept in this repository. `image-assets.json` records all 16 archived files, their Drive IDs and original SHA-256 hashes, and the five public image URLs used by the site. The originals include unused artwork and the old testing image.
+
+Keep the pictures folder accessible to anyone with the link as Viewer. This exposes the image folder only; its parent folder is not shared. Drive preview-page links cannot replace image URLs in HTML or CSS. Verify direct image URLs without a Google session whenever changing them, and update the manifest, CSS, HTML metadata, preload links, and favicons together. Google serves the images through `lh3.googleusercontent.com`, which the CSP permits for images only. WebP banner URLs request WebP output at up to 1920 pixels; PNG favicon and JPEG social-preview URLs preserve their respective formats. Remote availability and sharing settings now affect image loading.
+
 ## Embedded assets and security
 
 After editing `style.css`, `aboutus/style.css`, `script.js`, `analytics.js`, `clarity.js`, `contact.js`, page headings/descriptions/canonical URLs, or `scripts/structured_data.py`, run `python scripts/sync_assets.py`. This embeds the shared sources in the public HTML and regenerates CSP hashes. Do not edit generated blocks directly. There is no build step required to serve the checked-in pages. The navigation runs before main content to avoid layout shifts.

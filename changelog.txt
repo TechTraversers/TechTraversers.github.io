@@ -143,3 +143,8 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 - Add an accessible static contact page with validated email preparation, a review step, and a copyable webmail draft. No server submission or delivery claim.
 - Preserve approved project evidence; defer testimonials until approved quotes are available.
 - Add ContactPage structured data and sitemap coverage; extend browser checks for form validation, encoding, no network submission, mobile layouts, and email fallback.
+
+### 2026-10-18 - Google Drive image storage ###
+- Move all 16 repository image files into the owner's synced Documents/Tech Traversers/pictures folder after verifying identical copies.
+- Replace website banners, preloads, favicons, and social-preview image URLs with publicly viewable Drive-backed images; permit the image host in CSP.
+- Record cloud file IDs and original hashes in image-assets.json. Update static and browser checks for remote images and anonymous decoding.

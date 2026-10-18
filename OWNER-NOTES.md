@@ -48,3 +48,7 @@ The current header-restoration update passed the static checker, JavaScript synt
 Contact and quote buttons now appear near page introductions, in primary navigation, and in the shared footer. Service pages link to a quote form with their service preselected. The static form prepares a visitor-reviewed email and provides a copyable draft for webmail; it does not submit requests to a server. No third-party form account or endpoint is configured. The public email remains the fallback with JavaScript unavailable.
 
 The owner has no approved testimonials to supply at this time. Keep existing project evidence and add customer quotes only when the wording and attribution are supplied and approved. No response-time, pricing, or outcome guarantees have been added. Conversion improvement should be assessed using actual inquiries after release; draft preparation alone does not prove a lead was sent.
+
+## Image storage update - 2026-10-18
+
+At the owner's request, all 16 image files were moved from the website repository into Documents/Tech Traversers/pictures, which syncs to the Tech Traverser Google Drive account. Destination copies were checked against the originals before repository copies were removed. Only this pictures folder was made publicly viewable, with Viewer access; the Tech Traversers parent folder remains unchanged. The five images used by public pages now load from Google Drive's image host. The image manifest records the original file hashes and cloud IDs. Site image loading now depends on Google Drive access and availability.

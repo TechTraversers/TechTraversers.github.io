@@ -15,6 +15,8 @@ from sync_assets import digest
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = 'https://www.techtraversers.com'
+IMAGE_ASSETS = json.loads((ROOT / 'image-assets.json').read_text(encoding='utf-8'))['files']
+PUBLIC_IMAGE_URLS = {image['url'] for image in IMAGE_ASSETS.values() if 'url' in image}
 HOSTS = {'www.techtraversers.com', 'techtraversers.com'}
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'}
 
@@ -90,6 +92,8 @@ def check(inventory=()):
                 if attr not in attrs:
                     continue
                 target = local_target(attrs[attr], Path(name))
+                if urlsplit(attrs[attr]).hostname == 'lh3.googleusercontent.com':
+                    require(attrs[attr] in PUBLIC_IMAGE_URLS, prefix + 'unknown remote image ' + attrs[attr])
                 if target is None:
                     continue
                 require(str(target) in known, prefix + f'missing target {attrs[attr]}')
@@ -156,7 +160,7 @@ def check(inventory=()):
                 require(False, prefix + f'invalid structured data: {error}')
         for key in ('og:image', 'twitter:image'):
             target = local_target(metas.get(key, ''), Path(name))
-            require(target is not None and str(target) in known, prefix + f'missing {key} image')
+            require((target is not None and str(target) in known) or metas.get(key) in PUBLIC_IMAGE_URLS, prefix + f'missing {key} image')
         descriptions.append(metas.get('description'))
     require(len(descriptions) == len(set(descriptions)), 'meta descriptions must be unique')
     sitemap = ET.parse(ROOT / 'sitemap.xml')

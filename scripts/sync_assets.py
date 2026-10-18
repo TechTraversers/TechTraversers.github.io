@@ -42,7 +42,7 @@ def sync(check=False):
             text = text.replace('  </body>', f'    <script data-contact>{contact}</script>\n  </body>')
         # Analytics endpoints; keep inline hashing and Trusted Types enforcement.
         policy = ("default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; "
-                  "img-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; "
+                  "img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; "
                   "connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; "
                   'script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms ' + ' '.join(hashes) +
                   '; style-src ' + digest(css) +

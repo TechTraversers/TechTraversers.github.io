@@ -2,6 +2,8 @@
 
 ## Completed in this update
 
+- [x] Move repository images to the synced Documents/Tech Traversers/pictures folder and replace public image references with verified Google Drive image URLs.
+
 - [x] Add prominent contact buttons and a static quote form with email drafting, webmail fallback, and service preselection.
 - [ ] Add customer testimonials when approved quotes and attribution are supplied.
 - [ ] Assess actual inquiry volume after release; direct website submissions require a configured form endpoint.

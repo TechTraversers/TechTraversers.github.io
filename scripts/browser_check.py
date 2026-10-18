@@ -19,6 +19,8 @@ def stub_analytics(context):
     # Layout tests stay offline and never send synthetic visits to Analytics.
     context.route('https://www.googletagmanager.com/**', lambda route: route.fulfill(
         status=200, content_type='application/javascript', body=''))
+    context.route('https://*.clarity.ms/**', lambda route: route.fulfill(
+        status=200, content_type='application/javascript', body=''))
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -102,7 +104,7 @@ def run(executable=None, text_only=False):
             assert measured.locator('link[rel="preload"][as="image"]').get_attribute('fetchpriority') == 'high'
             assert measured.locator('#image').evaluate("el => getComputedStyle(el).backgroundImage.includes('.webp')")
             assert measured.locator('link[rel=stylesheet], script[src]:not([async])').count() == 0
-            expect(measured.locator('script[src]')).to_have_count(1)
+            expect(measured.locator('script[src]')).to_have_count(2)
             expect(measured.locator('script[data-analytics]')).to_have_count(1)
             assert not security_errors, security_errors
             # The policy must reject injected inline scripts and unsafe DOM HTML.

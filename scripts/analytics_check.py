@@ -34,6 +34,8 @@ def run(executable=None):
                 route.fulfill(status=204, headers={'Access-Control-Allow-Origin': '*'})
 
             context.route('**/*', intercept)
+            context.route('https://*.clarity.ms/**', lambda route: route.fulfill(
+                status=200, content_type='application/javascript', body=''))
             context.add_init_script("""
                 window.cspViolations = [];
                 document.addEventListener('securitypolicyviolation', event => {
@@ -56,7 +58,7 @@ def run(executable=None):
                 location = urlsplit(params['dl'][0])
                 # Google normalizes page_location by dropping the preview server's port.
                 assert location.hostname == '127.0.0.1' and location.path == path, (path, location)
-                expect(page.locator('script[src]')).to_have_count(1)
+                expect(page.locator('script[src]')).to_have_count(2)
                 expect(page.locator('script[data-analytics]')).to_have_count(1)
                 assert not page.evaluate('window.cspViolations'), (path, page.evaluate('window.cspViolations'))
             assert len([request for request in collections if is_pageview(request)]) == len(ROUTES)

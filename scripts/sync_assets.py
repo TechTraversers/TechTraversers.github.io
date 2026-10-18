@@ -26,20 +26,22 @@ def sync(check=False):
             css += '\n' + (ROOT / 'aboutus/style.css').read_text().strip()
         script = (ROOT / 'script.js').read_text().strip()
         analytics = (ROOT / 'analytics.js').read_text().strip()
+        clarity = (ROOT / 'clarity.js').read_text().strip()
         analytics_tag = ('    <!-- Google tag (gtag.js) -->\n'
                          '    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHRY359L0X"></script>\n'
                          f'    <script data-analytics>{analytics}</script>\n')
+        analytics_tag += f'    <script type="text/javascript" data-clarity>{clarity}</script>\n'
         # Escape HTML-sensitive characters so future copy cannot close the script.
         data = json.dumps(build_schema(text), separators=(',', ':')).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
         schemas = f'    <script type="application/ld+json">{data}</script>\n'
-        hashes = [digest(script), digest(analytics), digest(data)]
-        # Analytics-only endpoints; keep inline hashing and Trusted Types enforcement.
+        hashes = [digest(script), digest(analytics), digest(clarity), digest(data)]
+        # Analytics endpoints; keep inline hashing and Trusted Types enforcement.
         policy = ("default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; "
-                  "img-src 'self' https://www.googletagmanager.com https://*.google-analytics.com; "
-                  "connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; "
-                  'script-src https://www.googletagmanager.com ' + ' '.join(hashes) +
+                  "img-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; "
+                  "connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; "
+                  'script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms ' + ' '.join(hashes) +
                   '; style-src ' + digest(css) +
-                  "; require-trusted-types-for 'script'; trusted-types goog#html")
+                  "; require-trusted-types-for 'script'; trusted-types goog#html default")
         generated = f'    <!-- generated:head:start -->\n    <meta http-equiv="Content-Security-Policy" content="{policy}" />\n    <meta name="referrer" content="strict-origin-when-cross-origin" />\n{analytics_tag}    <style>{css}</style>\n{schemas}    <!-- generated:head:end -->\n'
         text = text.replace('    <meta name="viewport"', generated + '    <meta name="viewport"', 1)
         text = text.replace('<script src="/script.js"></script>', '<script data-navigation>' + script + '</script>')

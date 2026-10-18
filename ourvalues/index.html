@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <!-- generated:head:start -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://www.googletagmanager.com https://*.google-analytics.com; connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; script-src https://www.googletagmanager.com 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-BIi0oook//Xg5cDvAjgbkbJv3j9mFrBrm3++kzO2018='; style-src 'sha256-ThkPIrw0NiQmSJ9i9Z8AwujgV5H449dXc1cr5yo7/8I='; require-trusted-types-for 'script'; trusted-types goog#html" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-BIi0oook//Xg5cDvAjgbkbJv3j9mFrBrm3++kzO2018='; style-src 'sha256-ThkPIrw0NiQmSJ9i9Z8AwujgV5H449dXc1cr5yo7/8I='; require-trusted-types-for 'script'; trusted-types goog#html default" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHRY359L0X"></script>
@@ -11,6 +11,23 @@
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YHRY359L0X');</script>
+    <script type="text/javascript" data-clarity>// Allow only Clarity's script URLs through the existing Trusted Types enforcement.
+if (window.trustedTypes) {
+    window.trustedTypes.createPolicy('default', {
+        createScriptURL: function(url) {
+            if (url === 'https://www.clarity.ms/tag/yzgnnv7sl9' ||
+                /^https:\/\/scripts\.clarity\.ms\/\d+\.\d+\.\d+\/clarity\.js$/.test(url)) {
+                return url;
+            }
+            throw new TypeError('Unapproved script URL');
+        }
+    });
+}
+(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "yzgnnv7sl9");</script>
     <style>:root {
   --primary: #175da6;
   --text: #24282d;

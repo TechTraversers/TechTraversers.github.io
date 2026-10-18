@@ -153,3 +153,8 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 - Use 960px mobile WebP banners and matching media-specific preloads to avoid desktop image downloads on phones.
 - Compact phone and landscape headers, improve spacing and touch targets, and simplify the static quote form on narrow screens.
 - Extend browser checks to 320px screens, short landscape windows, touch navigation, form text size, and viewport-specific image requests.
+
+### 2026-10-18 - LCP resource discovery ###
+- Move responsive banner preloads before styles and analytics on all eleven public pages, with viewport metadata first for mobile selection.
+- Preconnect to the Google image host and permit that origin in CSP connect-src.
+- Verify resource-hint order and single-banner downloads in browser checks. Confirmed the homepage banner is the LCP element locally; production PageSpeed validation remains pending publication.

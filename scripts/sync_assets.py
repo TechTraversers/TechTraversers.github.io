@@ -31,7 +31,10 @@ def sync(check=False):
         banner = images[banner_name]
         preloads = (f'    <link rel="preload" as="image" type="image/webp" href="{banner["mobile_url"]}" media="(max-width: 768px)" fetchpriority="high" />\n'
                     f'    <link rel="preload" as="image" type="image/webp" href="{banner["url"]}" media="(min-width: 769px)" fetchpriority="high" />\n')
-        text = text.replace('    <link rel="icon"', preloads + '    <link rel="icon"', 1)
+        # Discover the LCP image before CSS and third-party scripts. The viewport
+        # meta must precede media-specific preloads on real mobile devices.
+        image_hints = ('    <link rel="preconnect" href="https://lh3.googleusercontent.com" />\n'
+                       + preloads)
         css = (ROOT / 'style.css').read_text().strip()
         if page.relative_to(ROOT).as_posix() in ('aboutus/index.html', 'aboutus/levi-bryan/index.html', 'codesmith95/index.html'):
             css += '\n' + (ROOT / 'aboutus/style.css').read_text().strip()
@@ -53,12 +56,12 @@ def sync(check=False):
         # Analytics endpoints; keep inline hashing and Trusted Types enforcement.
         policy = ("default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; "
                   "img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; "
-                  "connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; "
+                  "connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; "
                   'script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms ' + ' '.join(hashes) +
                   '; style-src ' + digest(css) +
                   "; require-trusted-types-for 'script'; trusted-types goog#html default")
-        generated = f'    <!-- generated:head:start -->\n    <meta http-equiv="Content-Security-Policy" content="{policy}" />\n    <meta name="referrer" content="strict-origin-when-cross-origin" />\n{analytics_tag}    <style>{css}</style>\n{schemas}    <!-- generated:head:end -->\n'
-        text = text.replace('    <meta name="viewport"', generated + '    <meta name="viewport"', 1)
+        generated = f'    <!-- generated:head:start -->\n    <meta http-equiv="Content-Security-Policy" content="{policy}" />\n    <meta name="referrer" content="strict-origin-when-cross-origin" />\n{image_hints}    <style>{css}</style>\n{analytics_tag}{schemas}    <!-- generated:head:end -->\n'
+        text = re.sub(r'    <meta name="viewport"[^>]+/>\n', lambda match: match[0] + generated, text, count=1)
         text = text.replace('<script src="/script.js"></script>', '<script data-navigation>' + script + '</script>')
         if text != original:
             stale.append(page.relative_to(ROOT).as_posix())

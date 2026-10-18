@@ -2,6 +2,9 @@
 
 ## Completed in this update
 
+- [x] Prioritize LCP banner discovery before styles and analytics, preconnect to the image host, and place viewport metadata before responsive preloads; verify generated order and banner selection on all public pages.
+- [ ] Rerun production PageSpeed Insights after publishing the LCP changes; the supplied 3.7-second result cannot be compared directly with local browser timings.
+
 - [x] Optimize phone banner downloads, mobile spacing, quote-form controls, safe areas, and touch targets; cover narrow and landscape layouts in browser checks.
 
 - [x] Move repository images to the synced Documents/Tech Traversers/pictures folder and replace public image references with verified Google Drive image URLs.

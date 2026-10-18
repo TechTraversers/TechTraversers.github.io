@@ -96,6 +96,17 @@ def run(executable=None, text_only=False):
                     banner_requests.clear()
                     response = page.goto(origin + route)
                     assert response.status == 200, route
+                    assert page.evaluate('''() => {
+                        const head = [...document.head.children];
+                        const viewport = head.findIndex(el => el.name === 'viewport');
+                        const connection = head.findIndex(el => el.rel === 'preconnect' &&
+                            el.href === 'https://lh3.googleusercontent.com/');
+                        const preloads = head.map((el, index) => el.rel === 'preload' ? index : -1)
+                            .filter(index => index >= 0);
+                        const firstWork = head.findIndex(el => el.tagName === 'STYLE' || el.tagName === 'SCRIPT');
+                        return viewport >= 0 && connection > viewport && preloads.length === 2 &&
+                            preloads.every(index => index > connection && index < firstWork);
+                    }'''), (route, 'LCP hints must follow viewport metadata and precede styles/scripts')
                     expect(page.locator('h1')).to_have_count(1)
                     expect(page.locator('main')).to_be_visible()
                     # Decode the page's real remote banner without a signed-in Google session.

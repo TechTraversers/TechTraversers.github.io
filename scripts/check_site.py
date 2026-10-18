@@ -93,7 +93,9 @@ def check(inventory=()):
                     continue
                 target = local_target(attrs[attr], Path(name))
                 if urlsplit(attrs[attr]).hostname == 'lh3.googleusercontent.com':
-                    require(attrs[attr] in PUBLIC_IMAGE_URLS, prefix + 'unknown remote image ' + attrs[attr])
+                    image_connection = (tag == 'link' and attrs.get('rel') == 'preconnect'
+                                        and attrs[attr] == 'https://lh3.googleusercontent.com')
+                    require(image_connection or attrs[attr] in PUBLIC_IMAGE_URLS, prefix + 'unknown remote image ' + attrs[attr])
                 if target is None:
                     continue
                 require(str(target) in known, prefix + f'missing target {attrs[attr]}')

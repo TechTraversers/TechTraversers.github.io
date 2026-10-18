@@ -52,6 +52,8 @@ def build_schema(text):
         page_type = 'AboutPage'
     elif route == '/ourservices/':
         page_type = 'CollectionPage'
+    elif route == '/contact/':
+        page_type = 'ContactPage'
     page = {
         '@type': page_type, '@id': url + '#webpage', 'url': url,
         'name': metadata.heading.strip(), 'description': metadata.description,

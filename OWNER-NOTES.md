@@ -42,3 +42,9 @@ BookCatalog.exe was not executed or audited. If you want to promote it later, pr
 The static checker verifies links, fragments, metadata, headings, shared navigation, crawler files, and sitemap coverage. The menu tests exercise state and focus decisions without a browser. The full Playwright suite also checks rendering at four widths, navigation with JavaScript disabled or blocked, and keyboard behavior.
 
 The current header-restoration update passed the static checker, JavaScript syntax checks, three menu behavior tests, and the full Chromium suite across all ten pages at four widths. Original banner and favicon assets were downloaded, and desktop/mobile homepage screenshots were inspected. Live DNS, HTTPS, social previews, and assistive-technology behavior still need separate confirmation.
+
+## Contact flow update — 2026-10-18
+
+Contact and quote buttons now appear near page introductions, in primary navigation, and in the shared footer. Service pages link to a quote form with their service preselected. The static form prepares a visitor-reviewed email and provides a copyable draft for webmail; it does not submit requests to a server. No third-party form account or endpoint is configured. The public email remains the fallback with JavaScript unavailable.
+
+The owner has no approved testimonials to supply at this time. Keep existing project evidence and add customer quotes only when the wording and attribution are supplied and approved. No response-time, pricing, or outcome guarantees have been added. Conversion improvement should be assessed using actual inquiries after release; draft preparation alone does not prove a lead was sent.

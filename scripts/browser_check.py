@@ -9,10 +9,11 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
+from urllib.parse import parse_qs, urlsplit
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
-ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/codesmith95/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/', '/ourservices/websites/']
+ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/codesmith95/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/', '/ourservices/websites/', '/contact/']
 
 
 def stub_analytics(context):
@@ -58,6 +59,7 @@ def run(executable=None, text_only=False):
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (width, route, 'horizontal overflow')
                     assert page.locator('a button, button a').count() == 0
                     assert page.locator('#footer a[href^="mailto:"]').count() > 0
+                    expect(page.locator('#footer a[href="/contact/"]')).to_be_visible()
                     assert page.locator('main .contact-card').count() == 0
                     for image in page.locator('img').all():
                         image.scroll_into_view_if_needed()
@@ -140,6 +142,45 @@ def run(executable=None, text_only=False):
             expect(page.locator('.skip-link')).to_be_focused()
             page.keyboard.press('Enter')
             expect(page.locator('main')).to_be_focused()
+            # The static quote form validates locally and prepares, but never sends, an email.
+            page.goto(origin + '/contact/?service=Website%20maintenance')
+            expect(page.locator('#quote-service')).to_have_value('Website maintenance')
+            expect(page.locator('#quote-form')).to_be_visible()
+            expect(page.locator('#quote-result')).to_be_hidden()
+            page.get_by_role('button', name='Prepare email', exact=True).click()
+            expect(page.locator('#quote-name')).to_be_focused()
+            expect(page.locator('#quote-result')).to_be_hidden()
+            page.locator('#quote-name').fill('Test & Example')
+            page.locator('#quote-email-address').fill('visitor@example.com')
+            page.locator('#quote-details').fill('Improve my site & contact flow. <b>Example</b>\nKeep the current content.')
+            page.locator('#quote-timing').fill('Next month')
+            contact_requests = []
+            page.on('request', lambda request: contact_requests.append(request))
+            page.get_by_role('button', name='Prepare email', exact=True).click()
+            expect(page.locator('#quote-result')).to_be_visible()
+            expect(page.locator('#quote-result-heading')).to_be_focused()
+            expect(page.locator('#quote-status')).to_contain_text('Nothing has been sent')
+            email = urlsplit(page.locator('#quote-email').get_attribute('href'))
+            assert email.scheme == 'mailto' and email.path == 'traversertech@gmail.com'
+            params = parse_qs(email.query)
+            assert params['subject'] == ['Project inquiry: Website maintenance']
+            body = params['body'][0]
+            assert 'Test & Example' in body and 'visitor@example.com' in body
+            assert '<b>Example</b>\nKeep the current content.' in body
+            assert 'Next month' in body
+            expect(page.locator('#quote-draft')).to_have_value(body)
+            assert not contact_requests, 'Preparing the draft must not send visitor data'
+            page.locator('#quote-details').fill('Updated request')
+            expect(page.locator('#quote-result')).to_be_hidden()
+            assert page.locator('#quote-email').get_attribute('href') is None
+            page.get_by_role('button', name='Prepare email', exact=True).click()
+            assert 'Updated request' in page.locator('#quote-draft').input_value()
+            page.set_viewport_size({'width': 1440, 'height': 1000})
+            page.screenshot(path=str(ROOT / 'test-results' / 'contact-desktop.png'), full_page=True)
+            page.set_viewport_size({'width': 360, 'height': 900})
+            page.screenshot(path=str(ROOT / 'test-results' / 'contact-mobile.png'), full_page=True)
+            page.goto(origin + '/contact/?service=unrecognized')
+            expect(page.locator('#quote-service')).to_have_value('')
             # Navigation works with the enhancement request blocked.
             import re
             def remove_enhancement(route):
@@ -159,6 +200,8 @@ def run(executable=None, text_only=False):
                 plain.goto(origin + route)
                 expect(plain.locator('nav')).to_be_visible()
                 expect(plain.locator('#menu-toggle')).to_be_hidden()
+            expect(plain.locator('#quote-form')).to_be_hidden()
+            expect(plain.locator('main a[href="mailto:traversertech@gmail.com"]')).to_be_visible()
             page.goto(origin + '/')
             page.set_viewport_size({'width': 1440, 'height': 1000})
             page.screenshot(path=str(ROOT / 'test-results' / 'home-desktop.png'), full_page=True)
@@ -169,7 +212,7 @@ def run(executable=None, text_only=False):
     finally:
         server.shutdown()
         server.server_close()
-    print('PASS: ten pages at four widths; menu keyboard, resize, links, images, skip link, script failure, and JavaScript disabled.')
+    print('PASS: eleven pages at four widths; navigation, accessibility, static quote form, email encoding, no submission, and JavaScript disabled.')
 
 
 if __name__ == '__main__':

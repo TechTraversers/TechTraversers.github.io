@@ -137,3 +137,9 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 ### 2026-10-17 - Microsoft Clarity ###
 - Add owner-provided Clarity project yzgnnv7sl9 across all ten public pages through the shared generator.
 - Allow Clarity endpoints with hashed inline code and restricted Trusted Types script URLs; stub Clarity in existing browser checks.
+
+### 2026-10-18 - Contact and quote flow ###
+- Add prominent contact buttons, service-specific quote links, and a shared navigation/footer contact action across public pages.
+- Add an accessible static contact page with validated email preparation, a review step, and a copyable webmail draft. No server submission or delivery claim.
+- Preserve approved project evidence; defer testimonials until approved quotes are available.
+- Add ContactPage structured data and sitemap coverage; extend browser checks for form validation, encoding, no network submission, mobile layouts, and email fallback.

@@ -24,7 +24,7 @@ On Windows, use `python` if `python3` is unavailable. Open http://localhost:8000
 
 ## Embedded assets and security
 
-After editing `style.css`, `aboutus/style.css`, `script.js`, `analytics.js`, `clarity.js`, page headings/descriptions/canonical URLs, or `scripts/structured_data.py`, run `python scripts/sync_assets.py`. This embeds the shared sources in the public HTML and regenerates CSP hashes. Do not edit generated blocks directly. There is no build step required to serve the checked-in pages. The navigation runs before main content to avoid layout shifts.
+After editing `style.css`, `aboutus/style.css`, `script.js`, `analytics.js`, `clarity.js`, `contact.js`, page headings/descriptions/canonical URLs, or `scripts/structured_data.py`, run `python scripts/sync_assets.py`. This embeds the shared sources in the public HTML and regenerates CSP hashes. Do not edit generated blocks directly. There is no build step required to serve the checked-in pages. The navigation runs before main content to avoid layout shifts.
 
 Every public page includes Schema.org JSON-LD for the Organization, WebSite, and page, linked by stable canonical IDs. Service detail pages add Service entities, profiles add Person entities within ProfilePage, and Wood Bank Software adds SoftwareApplication. Page names and descriptions come from the existing h1 and meta description. Keep business details in `scripts/structured_data.py` consistent with visible, approved copy. No prices, reviews, or unsupported platform claims are inferred. `check_site.py` checks JSON parsing, entity references, metadata consistency, and CSP hashes; this is local validation, not a guarantee of search rich results. After publishing, check representative URLs with the [Schema.org validator](https://validator.schema.org/) and [Google Rich Results Test](https://search.google.com/test/rich-results).
 
@@ -33,6 +33,12 @@ Every public page includes the asynchronous Google tag for Analytics property `G
 Every public page also includes Microsoft Clarity project `yzgnnv7sl9`. The generator permits the [Clarity CSP endpoints](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-csp). A restricted default Trusted Types policy accepts only this project tag and versioned Clarity runtime script URLs; HTML and other script URLs remain blocked. Browser layout checks stub Clarity to avoid recording test sessions.
 
 The CSP meta policy restricts resources, disallows unapproved scripts/styles, and enforces Trusted Types in supporting browsers. It cannot set HSTS, COOP, or frame-ancestors. GitHub Pages controls response headers and currently serves assets with a ten-minute cache lifetime. Full header hardening and longer caching require a configurable host/CDN; HTML meta tags and a `_headers` file do not change these GitHub Pages response headers. Keep HTML revalidated; use versioned asset names before setting long immutable asset caching. Stage HSTS after checking all affected domains; do not enable includeSubDomains/preload without reviewing them.
+
+## Contact and quote requests
+
+`/contact/` works on static GitHub Pages without a submission service. The form validates locally and prepares a `mailto:` draft for the visitor to review and send. It never claims an inquiry was submitted or stores form content. A read-only message lets webmail users copy it manually; the business email remains visible if JavaScript or the form enhancement is unavailable. Service-page calls to action preselect a known service via `?service=`; other query values are ignored. Form and draft regions are masked for Clarity.
+
+Edit the form markup in `contact/index.html` and behavior in `contact.js`, then regenerate embedded assets and CSP hashes. A server or configured form service is required before adding direct website submissions. Do not mark draft preparation as a completed lead. Customer testimonials require supplied, approved wording and attribution; the current site uses approved project descriptions instead.
 
 ## Checks
 
@@ -53,7 +59,7 @@ python3 -m playwright install chromium
 python3 scripts/browser_check.py
 ```
 
-On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all ten public pages at 360, 768, 1024, and 1440 pixels, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
+On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all eleven public pages at 360, 768, 1024, and 1440 pixels, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
 
 The GitHub Actions workflow runs static, menu, and browser checks on pull requests and pushes to main. It validates changes; it does not deploy them.
 

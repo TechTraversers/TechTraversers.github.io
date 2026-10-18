@@ -20,6 +20,7 @@ def sync(check=False):
             continue
         text = re.sub(r'    <!-- generated:head:start -->.*?    <!-- generated:head:end -->\n', '', original, flags=re.S)
         text = re.sub(r'<script data-navigation>.*?</script>', '<script src="/script.js"></script>', text, flags=re.S)
+        text = re.sub(r'    <script data-contact>.*?</script>\n', '', text, flags=re.S)
         text = re.sub(r'    <link rel="stylesheet" href="/(?:style.css|aboutus/style.css)" />\n', '', text)
         css = (ROOT / 'style.css').read_text().strip()
         if page.relative_to(ROOT).as_posix() in ('aboutus/index.html', 'aboutus/levi-bryan/index.html', 'codesmith95/index.html'):
@@ -35,6 +36,10 @@ def sync(check=False):
         data = json.dumps(build_schema(text), separators=(',', ':')).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
         schemas = f'    <script type="application/ld+json">{data}</script>\n'
         hashes = [digest(script), digest(analytics), digest(clarity), digest(data)]
+        if page.relative_to(ROOT).as_posix() == 'contact/index.html':
+            contact = (ROOT / 'contact.js').read_text().strip()
+            hashes.append(digest(contact))
+            text = text.replace('  </body>', f'    <script data-contact>{contact}</script>\n  </body>')
         # Analytics endpoints; keep inline hashing and Trusted Types enforcement.
         policy = ("default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; "
                   "img-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; "

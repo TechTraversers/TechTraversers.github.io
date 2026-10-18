@@ -54,7 +54,7 @@ class Page(HTMLParser):
 def check(inventory=()):
     failures = []
     known = set(inventory) | {str(p.relative_to(ROOT)) for p in ROOT.rglob('*') if p.is_file()}
-    pages = {str(p.relative_to(ROOT)): Page(p.read_text()) for p in ROOT.rglob('*.html')}
+    pages = {str(p.relative_to(ROOT)): Page(p.read_text(encoding='utf-8')) for p in ROOT.rglob('*.html')}
 
     def require(condition, message):
         if not condition:
@@ -77,7 +77,7 @@ def check(inventory=()):
 
     canonicals = set()
     descriptions = []
-    nav_reference = [('home', '/'), ('services', '/ourservices/'), ('woodbank', '/wood-bank-software/'), ('values', '/ourvalues/'), ('about', '/aboutus/')]
+    nav_reference = [('home', '/'), ('services', '/ourservices/'), ('woodbank', '/wood-bank-software/'), ('values', '/ourvalues/'), ('about', '/aboutus/'), ('contact', '/contact/')]
     for name, page in pages.items():
         if name == 'sidebar.html':
             continue
@@ -101,7 +101,7 @@ def check(inventory=()):
         if name == 'index-dev.html':
             require(any(t == 'meta' and a.get('name') == 'robots' and a.get('content') == 'noindex' for t, a in page.nodes), prefix + 'preview must be noindex')
             continue
-        prices = re.findall(r'\$(\d+(?:\.\d+)?)', (ROOT / name).read_text())
+        prices = re.findall(r'\$(\d+(?:\.\d+)?)', (ROOT / name).read_text(encoding='utf-8'))
         require(not prices, prefix + 'public prices need fresh owner approval')
         counts = Counter(tag for tag, _ in page.nodes)
         require(counts['h1'] == counts['main'] == counts['title'] == 1, prefix + 'needs one h1, main, and title')

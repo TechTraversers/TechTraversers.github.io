@@ -2,6 +2,10 @@
 
 ## Completed in this update
 
+- [x] Add prominent contact buttons and a static quote form with email drafting, webmail fallback, and service preselection.
+- [ ] Add customer testimonials when approved quotes and attribution are supplied.
+- [ ] Assess actual inquiry volume after release; direct website submissions require a configured form endpoint.
+
 - [x] Add Microsoft Clarity project yzgnnv7sl9 to all public pages with CSP and Trusted Types compatibility.
 
 - [x] Extend Schema.org JSON-LD to all ten public pages, including service, profile, and software entities; validate references, metadata, and CSP hashes.

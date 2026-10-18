@@ -133,3 +133,7 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 - Extend Organization and WebSite JSON-LD to all ten public pages with linked page, Service, Person, and SoftwareApplication entities.
 - Generate CSP hashes with structured data and validate graph references and page metadata.
 - Document maintenance and post-publication validation.
+
+### 2026-10-17 - Microsoft Clarity ###
+- Add owner-provided Clarity project yzgnnv7sl9 across all ten public pages through the shared generator.
+- Allow Clarity endpoints with hashed inline code and restricted Trusted Types script URLs; stub Clarity in existing browser checks.

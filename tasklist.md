@@ -2,6 +2,8 @@
 
 ## Completed in this update
 
+- [x] Add Microsoft Clarity project yzgnnv7sl9 to all public pages with CSP and Trusted Types compatibility.
+
 - [x] Extend Schema.org JSON-LD to all ten public pages, including service, profile, and software entities; validate references, metadata, and CSP hashes.
 
 - [x] Install the owner-provided Google Analytics tag across all public pages and verify page views without polluting reports.

@@ -72,6 +72,13 @@
     "wood-bank.svg": {
       "drive_id": "1mF0mVIZCTlVQ626LJI_RiWQ8O3v-fADK",
       "sha256": "c2fe19ee32c231d231bf039ccdf0c05f3fadf4bef0378110fade58a3a4d823aa"
+    },
+    "books-by-gene-showcase.webp": {
+      "drive_id": "1ogSLT1eJzT94b1av-KxElYFO2V1aHSau",
+      "sha256": "2947a45467f07ffd83700c3b2a1dc011d10a5bc1d403d0098236ee56fb68a176",
+      "url": "https://lh3.googleusercontent.com/d/1ogSLT1eJzT94b1av-KxElYFO2V1aHSau=w1000-rw",
+      "source_url": "https://booksbygene.com/",
+      "captured_date": "2026-10-24"
     }
   }
 }

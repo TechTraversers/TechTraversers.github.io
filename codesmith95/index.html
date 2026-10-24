@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- generated:head:start -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-ISWVR62geYKVEBrHLVNtelGbMU+u67AVEJFWEoBs/hU='; style-src 'sha256-AxaKC1R8+Dk0YOfh6l1JBHt39fki2FnKnfR1FWIrFd0='; require-trusted-types-for 'script'; trusted-types goog#html default" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-ISWVR62geYKVEBrHLVNtelGbMU+u67AVEJFWEoBs/hU='; style-src 'sha256-LXzeDxT5uJX6jSgGqHvrC41TLnOVTJycjzLDRGyphyI='; require-trusted-types-for 'script'; trusted-types goog#html default" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://lh3.googleusercontent.com" />
     <link rel="preload" as="image" type="image/webp" href="https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w960-rw" media="(max-width: 768px)" fetchpriority="high" />
@@ -200,6 +200,14 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 @media (max-width: 1024px) and (max-height: 500px) {
   #image { height: 120px; padding-block: 22px; }
 }
+
+/* A real project example on the website-development page. */
+.project-showcase { margin: 28px 0; padding: 24px 0; border-block: 1px solid var(--border); }
+.project-showcase h2 { margin-top: 0; }
+.project-preview { max-width: 760px; margin: 20px 0; }
+.project-preview img { display: block; width: 100%; height: auto; border: 1px solid var(--border); }
+.project-preview figcaption { margin-top: 8px; color: var(--muted); font-size: 14px; }
+.project-showcase .cta-actions { margin-bottom: 0; }
 .team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin: 22px 0 30px; }
 .team-card { padding: 20px 0 0; border-top: 1px solid var(--border); }
 .team-card p, .profile-card-detail p { color: var(--text); }

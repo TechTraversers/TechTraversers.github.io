@@ -2,6 +2,8 @@
 
 ## Completed in this update
 
+- [x] Replace Clear Creek Printers with the owner-confirmed Cloud Peak Silver Labradors website project on the website-development and About pages.
+
 - [x] Expand the Books by Gene example into a project showcase with an authentic screenshot, live-site link, and website-quote action.
 - [ ] After release, inspect the website-development URL in Search Console and compare equal 28-day reporting periods after 4–8 weeks.
 

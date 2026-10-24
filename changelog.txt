@@ -162,3 +162,6 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 ### Books by Gene project showcase - 2026-10-24 ###
 - Add an authentic homepage screenshot, project description, live-site link, and website-quote action to the website-development page.
 - Preserve Drive image storage and responsive image dimensions.
+
+### Project reference correction - 2026-10-24 ###
+- Remove public Clear Creek Printers references and add the owner-confirmed Cloud Peak Silver Labradors website project with a live-site link on the website-development and About pages.

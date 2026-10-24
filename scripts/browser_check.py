@@ -86,7 +86,7 @@ def run(executable=None, text_only=False):
             page = context.new_page()
             page.on('console', lambda message: errors.append(message.text) if message.type == 'error' else None)
             page.on('response', lambda response: errors.append(f'HTTP {response.status}: {response.url}') if response.status >= 400 else None)
-            banner_urls = {asset[key] for name, asset in IMAGE_ASSETS.items() if name.endswith('.webp')
+            banner_urls = {asset[key] for name, asset in IMAGE_ASSETS.items() if name.endswith('.webp') and 'mobile_url' in asset
                            for key in ('url', 'mobile_url')}
             banner_requests = []
             page.on('request', lambda request: banner_requests.append(request.url) if request.url in banner_urls else None)

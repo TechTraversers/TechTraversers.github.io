@@ -2,6 +2,9 @@
 
 ## Completed in this update
 
+- [x] Expand the Books by Gene example into a project showcase with an authentic screenshot, live-site link, and website-quote action.
+- [ ] After release, inspect the website-development URL in Search Console and compare equal 28-day reporting periods after 4–8 weeks.
+
 - [x] Prioritize LCP banner discovery before styles and analytics, preconnect to the image host, and place viewport metadata before responsive preloads; verify generated order and banner selection on all public pages.
 - [ ] Rerun production PageSpeed Insights after publishing the LCP changes; the supplied 3.7-second result cannot be compared directly with local browser timings.
 

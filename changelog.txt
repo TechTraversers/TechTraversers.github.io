@@ -158,3 +158,7 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 - Move responsive banner preloads before styles and analytics on all eleven public pages, with viewport metadata first for mobile selection.
 - Preconnect to the Google image host and permit that origin in CSP connect-src.
 - Verify resource-hint order and single-banner downloads in browser checks. Confirmed the homepage banner is the LCP element locally; production PageSpeed validation remains pending publication.
+
+### Books by Gene project showcase - 2026-10-24 ###
+- Add an authentic homepage screenshot, project description, live-site link, and website-quote action to the website-development page.
+- Preserve Drive image storage and responsive image dimensions.

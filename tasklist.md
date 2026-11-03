@@ -85,4 +85,5 @@
 - [x] Integrate values in About while preserving legacy profile/value URLs.
 - [x] Improve quote guidance, validation, copy fallback, delivery states, and recovery.
 - [x] Validate structure, sitemap, schema/CSP, API, and responsive browser behavior.
-- [ ] Deploy and verify the proposed design on the Railway generated domain.
+- [x] Deploy and verify the proposed design on the Railway generated domain: https://website-preview-3fdf.up.railway.app (12 live routes, health, noindex, and direct-send form verified).
+

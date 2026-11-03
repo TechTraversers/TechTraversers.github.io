@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- generated:head:start -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-Rojfhr1Y1nGKsFC4xllb7c6NeXxe1v+2upBtx4Y2jMw='; style-src 'sha256-zu79ZFgWlAn9a4K56KJyTqa3qcJxgLs+oI1Gk4ZvjKU='; require-trusted-types-for 'script'; trusted-types goog#html default" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-Rojfhr1Y1nGKsFC4xllb7c6NeXxe1v+2upBtx4Y2jMw='; style-src 'sha256-XF9lx62wXFtow3SFRpL0LfQU1uD4kv/f4eu4WS93QYM='; require-trusted-types-for 'script'; trusted-types goog#html default" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://lh3.googleusercontent.com" />
     <style>:root { --primary:#175da6; --ink:#183247; --text:#253b4b; --muted:#536776; --border:#dce5e9; --paper:#f5f8fa; --radius:8px; color-scheme:light; }
@@ -273,7 +273,25 @@ button:disabled { opacity:.65; cursor:wait; }
 .quote-form-header h2 { font-size:22px; }
 .quote-layout aside { padding-top:0; }
 .quote-form input,.quote-form select,.quote-form textarea { border-color:#7b8e9c; }
-@media(max-width:520px) { .quote-form { padding:20px 16px; } .quote-section legend { font-size:15px; } }</style>
+@media(max-width:520px) { .quote-form { padding:20px 16px; } .quote-section legend { font-size:15px; } }
+
+/* Original Tech Traversers identity, with readable green actions. */
+:root { --primary:#14633d; --ink:#18372b; }
+.brand-symbol { background:#10251b; width:48px; height:42px; padding:7px 4px; border-radius:7px; }
+.brand-symbol img { width:40px; height:28px; object-fit:contain; }
+a:hover { color:#0d482b; }
+.cta-primary:hover,.sidebar .nav-contact:hover,.sidebar .nav-contact[aria-current='page'] { background:#0d482b; }
+.sidebar a:hover,.sidebar a[aria-current='page'] { background:#edf5ee; }
+.sidebar .nav-contact[aria-current='page'] { background:#0d482b; }
+.branded-hero { margin-top:30px; padding:44px; border-radius:14px; background:linear-gradient(90deg,rgba(8,27,19,.95),rgba(8,27,19,.80)),url('/assets/banner-home.webp') center/cover; color:#edf7ee; }
+.branded-hero h1 { color:white; }.branded-hero h1 span { color:#84ed8b; }
+.branded-hero .eyebrow,.branded-hero .hero-note { color:#c4ddcb; }
+.branded-hero .text-link { color:#d2f4dc; }
+.branded-hero .hero-project { color:var(--text); background:#eff4ef; }
+.services-hero { max-width:none; margin:30px 0 36px; padding:46px; border-radius:14px; color:#f1f8f3; background:linear-gradient(90deg,rgba(8,27,19,.94),rgba(8,27,19,.55)),url('/assets/banner-services-original.jpg') center/cover; }
+.services-hero h1 { color:white; max-width:20ch; }.services-hero .eyebrow { color:#bcecc5; }.services-hero .lead { max-width:50ch; }
+.featured-work,.quote-next { background:#18372b; }
+@media(max-width:768px) { .branded-hero { padding:28px 22px; margin-top:20px; }.branded-hero h1 { font-size:clamp(36px,8vw,52px); }.services-hero { margin-top:20px; padding:30px 24px; }.brand-symbol { width:40px; height:36px; }.brand-symbol img { width:32px; height:24px; } }</style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHRY359L0X"></script>
     <script data-analytics>window.dataLayer = window.dataLayer || [];
@@ -316,7 +334,7 @@ if (window.trustedTypes) {
     
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1BL1-9-z9y1XFDcHuBmADHsDpRNLzEaHg=s0" />
     <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1BL1-9-z9y1XFDcHuBmADHsDpRNLzEaHg=s0" />
-  </head><body><a class="skip-link" href="#main-content">Skip to content</a><header id="image"><p id="webTop"><a data-nav="home" href="/"><span class="brand-symbol" aria-hidden="true">tt.</span>Tech Traversers</a></p><button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation" hidden><span class="menu-label">Menu</span><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button><nav id="primary-navigation" class="sidebar" aria-label="Primary"><a data-nav="services" href="/ourservices/">Services</a><a data-nav="work" href="/work/">Work</a><a data-nav="woodbank" href="/wood-bank-software/">Wood Bank Software</a><a data-nav="about" href="/aboutus/" aria-current="page">About</a><a data-nav="contact" href="/contact/" class="nav-contact">Contact</a></nav></header><script data-navigation>// Navigation remains usable without JavaScript.
+  </head><body><a class="skip-link" href="#main-content">Skip to content</a><header id="image"><p id="webTop"><a data-nav="home" href="/"><span class="brand-symbol"><img src="/assets/logo.svg" alt="Tech Traversers logo" width="42" height="30" /></span>Tech Traversers</a></p><button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation" hidden><span class="menu-label">Menu</span><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button><nav id="primary-navigation" class="sidebar" aria-label="Primary"><a data-nav="services" href="/ourservices/">Services</a><a data-nav="work" href="/work/">Work</a><a data-nav="woodbank" href="/wood-bank-software/">Wood Bank Software</a><a data-nav="about" href="/aboutus/" aria-current="page">About</a><a data-nav="contact" href="/contact/" class="nav-contact">Contact</a></nav></header><script data-navigation>// Navigation remains usable without JavaScript.
 (() => {
   const toggle = document.getElementById('menu-toggle');
   const navigation = document.getElementById('primary-navigation');

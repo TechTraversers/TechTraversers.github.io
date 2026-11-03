@@ -1,3 +1,4 @@
+2026-11-03 — Removed duplicate Books by Gene section, added real Cloud Peak and Wood Bank public screenshots, restored original green logo and Home/Services hero imagery.
 2026-11-03 — Proposed responsive redesign: compact header, 12 reviewed pages including Work, consistent service journeys, consolidated About/values, grouped Wood Bank workflows, reduced repeated contact panels, and accessible quote improvements. Railway preview only.
 
 ### Update 1.0.1 ###

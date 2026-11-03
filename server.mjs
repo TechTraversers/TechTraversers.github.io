@@ -111,7 +111,7 @@ export function createApp({ env = process.env, fetchEmail = fetch, now = Date.no
       }
       let body = await readFile(file);
       if (path === '/contact/') body = body.toString('utf8').replace('</head>', '<meta name="contact-api" content="same-origin" /></head>');
-      const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.xml': 'application/xml', '.txt': 'text/plain' };
+      const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.xml': 'application/xml', '.txt': 'text/plain', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml' };
       res.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
       res.end(req.method === 'HEAD' ? undefined : body);
     } catch {

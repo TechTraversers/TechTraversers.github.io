@@ -93,7 +93,7 @@ Spam controls include a honeypot, signed time-limited form token, strict origin/
 
 The shared compact header uses visible desktop navigation and the existing 768px mobile menu behavior. Work is the project directory; values are integrated into About. Existing values and contributor URLs remain available as secondary pages. The existing blue identity, no-JavaScript navigation, reduced motion, and direct email fallback are retained.
 
-All service pages use the same introduction, task-focused content, and closing action. The homepage highlights the existing Books by Gene screenshot. Cloud Peak and Wood Bank project panels are explicitly labeled feature/workflow overviews, not application screenshots. No fabricated metrics, testimonials, rates, or support promises are used.
+All service pages use the same introduction, task-focused content, and closing action. The homepage highlights the existing Books by Gene screenshot. Cloud Peak uses a public homepage screenshot; Wood Bank uses its public welcome screen, without private records. These snapshots and the original logo/hero artwork ship in assets/. Home and Services use original brand imagery with readable overlays. No fabricated metrics, testimonials, rates, or support promises are used.
 
 The quote form supports direct submission on configured Railway hosts, service-specific hints, a character count, linked inline validation, disabled fields during sending, preserved values after a failed request, accessible completion/error focus, a refreshed token for long sessions, and a copy-message fallback on static hosting. Browser API tests use a mocked email transport and never send real mail.
 

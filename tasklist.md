@@ -87,3 +87,5 @@
 - [x] Validate structure, sitemap, schema/CSP, API, and responsive browser behavior.
 - [x] Deploy and verify the proposed design on the Railway generated domain: https://website-preview-3fdf.up.railway.app (12 live routes, health, noindex, and direct-send form verified).
 
+
+- [x] Remove duplicate project section; add project screenshots and restore original brand imagery.

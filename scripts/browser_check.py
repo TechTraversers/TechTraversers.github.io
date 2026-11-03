@@ -273,6 +273,13 @@ def run(executable=None, text_only=False):
             page.evaluate('window.scrollTo(0, 0)')
             page.set_viewport_size({'width': 390, 'height': 844})
             page.screenshot(path=str(ROOT / 'test-results' / 'home-mobile-viewport.png'))
+            page.set_viewport_size({'width': 1440, 'height': 1000})
+            page.goto(origin + '/work/')
+            expect(page.get_by_role('heading', name='Books by Gene', exact=True)).to_have_count(1)
+            expect(page.locator('.project-card img')).to_have_count(3)
+            page.screenshot(path=str(ROOT / 'test-results' / 'work-desktop.png'), full_page=True)
+            page.set_viewport_size({'width': 390, 'height': 844})
+            page.screenshot(path=str(ROOT / 'test-results' / 'work-mobile.png'), full_page=True)
             touch = browser.new_context(is_mobile=True, has_touch=True, device_scale_factor=3,
                                         viewport={'width': 390, 'height': 844})
             reuse_public_images(touch, images)

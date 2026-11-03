@@ -2,7 +2,7 @@ import { readFile, mkdir, copyFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const sitemap = await readFile(resolve(root, 'sitemap.xml'), 'utf8');
-const files = ['robots.txt', 'sitemap.xml', 'style.css', 'aboutus/style.css', 'script.js', 'contact.js'];
+const files = ['robots.txt', 'sitemap.xml', 'style.css', 'aboutus/style.css', 'script.js', 'contact.js', 'assets/cloud-peak.png', 'assets/wood-bank.png', 'assets/logo.svg', 'assets/banner-home.webp', 'assets/banner-services-original.jpg'];
 for (const match of sitemap.matchAll(/<loc>(.*?)<\/loc>/g)) {
   files.push(new URL(match[1]).pathname.slice(1) + 'index.html');
 }

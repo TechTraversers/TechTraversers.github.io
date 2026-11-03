@@ -10,6 +10,7 @@ COPY ourservices ./ourservices
 COPY ourvalues ./ourvalues
 COPY wood-bank-software ./wood-bank-software
 COPY work ./work
+COPY assets ./assets
 RUN node scripts/build-public.mjs
 USER node
 ENV NODE_ENV=production

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- generated:head:start -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-a2644P9JAK8RKHM0PV5CcDbjlIZ1woA60J94dyeWKa8='; style-src 'sha256-aViloCYhnULAo2hk84S/oZa1aoKjLHD2GM4RnPeF/Fw='; require-trusted-types-for 'script'; trusted-types goog#html default" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-a2644P9JAK8RKHM0PV5CcDbjlIZ1woA60J94dyeWKa8='; style-src 'sha256-57zKv44YBZWZnkoINbjixzlAqsjja8GimC+Xd+7Y/JE='; require-trusted-types-for 'script'; trusted-types goog#html default" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://lh3.googleusercontent.com" />
     <style>:root { --primary:#175da6; --ink:#183247; --text:#253b4b; --muted:#536776; --border:#dce5e9; --paper:#f5f8fa; --radius:8px; color-scheme:light; }
@@ -50,7 +50,7 @@ main:focus { outline:none; }
 .lead { font-size:19px; line-height:1.65; max-width:58ch; }
 .page-intro { padding:64px 0 44px; max-width:900px; }
 .page-intro h1 { max-width:22ch; }
-.home-hero { display:grid; grid-template-columns:1.08fr 1fr; gap:54px; align-items:center; padding:72px 0 64px; }
+.home-hero { display:grid; grid-template-columns:1fr; gap:54px; align-items:center; padding:72px 0 64px; }
 .home-hero h1 { font-size:clamp(42px,4.7vw,66px); line-height:1.06; letter-spacing:-.045em; }
 .home-hero h1 span { color:var(--primary); }
 .home-hero .lead { font-size:19px; max-width:41ch; }
@@ -292,6 +292,12 @@ a:hover { color:#0d482b; }
 .services-hero h1 { color:white; max-width:20ch; }.services-hero .eyebrow { color:#bcecc5; }.services-hero .lead { max-width:50ch; }
 .featured-work,.quote-next { background:#18372b; }
 @media(max-width:768px) { .branded-hero { padding:28px 22px; margin-top:20px; }.branded-hero h1 { font-size:clamp(36px,8vw,52px); }.services-hero { margin-top:20px; padding:30px 24px; }.brand-symbol { width:40px; height:36px; }.brand-symbol img { width:32px; height:24px; } }
+
+/* The homepage introduces services; individual projects live on Work. */
+.home-hero > div { max-width:800px; }
+.home-hero .lead { max-width:54ch; }
+.home-hero.branded-hero { padding-block:60px; }
+@media(max-width:768px) { .home-hero.branded-hero { padding-block:32px; } }
 .team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin: 22px 0 30px; }
 .team-card { padding: 20px 0 0; border-top: 1px solid var(--border); }
 .team-card p, .profile-card-detail p { color: var(--text); }

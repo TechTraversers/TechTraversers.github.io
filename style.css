@@ -41,7 +41,7 @@ main:focus { outline:none; }
 .lead { font-size:19px; line-height:1.65; max-width:58ch; }
 .page-intro { padding:64px 0 44px; max-width:900px; }
 .page-intro h1 { max-width:22ch; }
-.home-hero { display:grid; grid-template-columns:1.08fr 1fr; gap:54px; align-items:center; padding:72px 0 64px; }
+.home-hero { display:grid; grid-template-columns:1fr; gap:54px; align-items:center; padding:72px 0 64px; }
 .home-hero h1 { font-size:clamp(42px,4.7vw,66px); line-height:1.06; letter-spacing:-.045em; }
 .home-hero h1 span { color:var(--primary); }
 .home-hero .lead { font-size:19px; max-width:41ch; }
@@ -283,3 +283,9 @@ a:hover { color:#0d482b; }
 .services-hero h1 { color:white; max-width:20ch; }.services-hero .eyebrow { color:#bcecc5; }.services-hero .lead { max-width:50ch; }
 .featured-work,.quote-next { background:#18372b; }
 @media(max-width:768px) { .branded-hero { padding:28px 22px; margin-top:20px; }.branded-hero h1 { font-size:clamp(36px,8vw,52px); }.services-hero { margin-top:20px; padding:30px 24px; }.brand-symbol { width:40px; height:36px; }.brand-symbol img { width:32px; height:24px; } }
+
+/* The homepage introduces services; individual projects live on Work. */
+.home-hero > div { max-width:800px; }
+.home-hero .lead { max-width:54ch; }
+.home-hero.branded-hero { padding-block:60px; }
+@media(max-width:768px) { .home-hero.branded-hero { padding-block:32px; } }

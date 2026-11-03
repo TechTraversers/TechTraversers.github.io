@@ -155,7 +155,6 @@ def run(executable=None, text_only=False):
             measured.goto(origin + '/')
             measured.wait_for_timeout(300)
             assert measured.evaluate('window.layoutShiftScore') < 0.01, 'mobile load shifts content'
-            assert measured.locator('.hero-project img').get_attribute('fetchpriority') == 'high'
             assert measured.locator('#image').evaluate('el => getComputedStyle(el).backgroundImage') == 'none'
             assert measured.locator('link[rel=stylesheet], script[src]:not([async])').count() == 0
             expect(measured.locator('script[src]')).to_have_count(2)

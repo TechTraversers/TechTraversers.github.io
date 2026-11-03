@@ -89,3 +89,5 @@
 
 
 - [x] Remove duplicate project section; add project screenshots and restore original brand imagery.
+
+- [x] Research homepage usability and simplify Home: clear service headline, branded hero, service paths, introduction, and contact; individual projects remain on Work.

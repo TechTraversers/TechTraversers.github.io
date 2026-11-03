@@ -173,3 +173,5 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 ### 2026-11-03 - Railway contact preview ###
 - Add a separate Railway deployment with a Resend contact endpoint, validation, spam limits, retry-safe sending, and clear success/failure states.
 - Keep GitHub Pages domain unchanged; block indexing of the preview and serve only public assets.
+- Verified techtraversers.com in Resend using email-only DNS records; confirmed a preview-form test was delivered to the business inbox.
+- Explicitly read embedded source files as UTF-8 to preserve form-status punctuation on Windows.

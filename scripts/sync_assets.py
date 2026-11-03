@@ -37,12 +37,12 @@ def sync(check=False):
         # meta must precede media-specific preloads on real mobile devices.
         image_hints = ('    <link rel="preconnect" href="https://lh3.googleusercontent.com" />\n'
                        + preloads)
-        css = (ROOT / 'style.css').read_text().strip()
+        css = (ROOT / 'style.css').read_text(encoding='utf-8').strip()
         if page.relative_to(ROOT).as_posix() in ('aboutus/index.html', 'aboutus/levi-bryan/index.html', 'codesmith95/index.html'):
-            css += '\n' + (ROOT / 'aboutus/style.css').read_text().strip()
-        script = (ROOT / 'script.js').read_text().strip()
-        analytics = (ROOT / 'analytics.js').read_text().strip()
-        clarity = (ROOT / 'clarity.js').read_text().strip()
+            css += '\n' + (ROOT / 'aboutus/style.css').read_text(encoding='utf-8').strip()
+        script = (ROOT / 'script.js').read_text(encoding='utf-8').strip()
+        analytics = (ROOT / 'analytics.js').read_text(encoding='utf-8').strip()
+        clarity = (ROOT / 'clarity.js').read_text(encoding='utf-8').strip()
         analytics_tag = ('    <!-- Google tag (gtag.js) -->\n'
                          '    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHRY359L0X"></script>\n'
                          f'    <script data-analytics>{analytics}</script>\n')
@@ -52,7 +52,7 @@ def sync(check=False):
         schemas = f'    <script type="application/ld+json">{data}</script>\n'
         hashes = [digest(script), digest(analytics), digest(clarity), digest(data)]
         if page.relative_to(ROOT).as_posix() == 'contact/index.html':
-            contact = (ROOT / 'contact.js').read_text().strip()
+            contact = (ROOT / 'contact.js').read_text(encoding='utf-8').strip()
             hashes.append(digest(contact))
             text = text.replace('  </body>', f'    <script data-contact>{contact}</script>\n  </body>')
         # Analytics endpoints; keep inline hashing and Trusted Types enforcement.

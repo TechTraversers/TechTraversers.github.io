@@ -76,3 +76,4 @@
 
 - [x] Build Railway preview and Resend contact integration.
 - [ ] Switch the custom website domain only after explicit owner approval.
+- [x] Verify Resend domain, deploy Railway preview, and confirm test inquiry delivery.

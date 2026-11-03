@@ -91,3 +91,6 @@
 - [x] Remove duplicate project section; add project screenshots and restore original brand imagery.
 
 - [x] Research homepage usability and simplify Home: clear service headline, branded hero, service paths, introduction, and contact; individual projects remain on Work.
+
+- [x] Remove retired contributor profile, sitemap entry, and build references; visually separate individual project examples.
+- [x] Review 15 homepage and supporting usability articles and identify remaining homepage gaps.

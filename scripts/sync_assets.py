@@ -27,7 +27,7 @@ def sync(check=False):
         text = re.sub(r'    <link rel="stylesheet" href="/(?:style.css|aboutus/style.css)" />\n', '', text)
         image_hints = '    <link rel="preconnect" href="https://lh3.googleusercontent.com" />\n'
         css = (ROOT / 'style.css').read_text(encoding='utf-8').strip()
-        if page.relative_to(ROOT).as_posix() in ('aboutus/index.html', 'aboutus/levi-bryan/index.html', 'codesmith95/index.html'):
+        if page.relative_to(ROOT).as_posix() in ('aboutus/index.html', 'aboutus/levi-bryan/index.html'):
             css += '\n' + (ROOT / 'aboutus/style.css').read_text(encoding='utf-8').strip()
         script = (ROOT / 'script.js').read_text(encoding='utf-8').strip()
         analytics = (ROOT / 'analytics.js').read_text(encoding='utf-8').strip()

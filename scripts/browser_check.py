@@ -18,7 +18,7 @@ from playwright.sync_api import sync_playwright, expect
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE_ASSETS = json.loads((ROOT / 'image-assets.json').read_text(encoding='utf-8'))['files']
 ICON_URL = IMAGE_ASSETS['ttIcon.png']['url']
-ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/codesmith95/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/', '/ourservices/websites/', '/contact/', '/work/']
+ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/', '/ourservices/websites/', '/contact/', '/work/']
 
 
 def stub_analytics(context):
@@ -302,7 +302,7 @@ def run(executable=None, text_only=False):
     finally:
         server.shutdown()
         server.server_close()
-    print('PASS: twelve pages at six widths, short screens and landscape; no decorative banner downloads, touch targets, form sizing, navigation, and JavaScript disabled.')
+    print('PASS: eleven pages at six widths, short screens and landscape; touch targets, form sizing, navigation, and JavaScript disabled.')
 
 
 if __name__ == '__main__':

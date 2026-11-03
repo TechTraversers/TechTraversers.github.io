@@ -9,7 +9,7 @@ SERVICE_ROUTES = {
     '/ourservices/softwaredevelopment/',
     '/ourservices/it-help-guidance/',
 }
-PROFILE_ROUTES = {'/aboutus/levi-bryan/', '/codesmith95/'}
+PROFILE_ROUTES = {'/aboutus/levi-bryan/'}
 
 
 class Metadata(HTMLParser):

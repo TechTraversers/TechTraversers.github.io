@@ -5,7 +5,6 @@ COPY scripts/build-public.mjs ./scripts/build-public.mjs
 COPY sitemap.xml robots.txt style.css script.js contact.js index.html ./
 COPY aboutus ./aboutus
 COPY contact ./contact
-COPY codesmith95 ./codesmith95
 COPY ourservices ./ourservices
 COPY ourvalues ./ourvalues
 COPY wood-bank-software ./wood-bank-software

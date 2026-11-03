@@ -67,7 +67,7 @@ python3 -m playwright install chromium
 python3 scripts/browser_check.py
 ```
 
-On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all twelve public pages at 320, 360, 390, 768, 1024, and 1440 pixels, plus short-screen, landscape, and touch-emulated phone checks, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
+On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all eleven public pages at 320, 360, 390, 768, 1024, and 1440 pixels, plus short-screen, landscape, and touch-emulated phone checks, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
 
 The GitHub Actions workflow runs static, menu, and browser checks on pull requests and pushes to main. It validates changes; it does not deploy them.
 

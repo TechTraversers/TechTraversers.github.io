@@ -4,12 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- generated:head:start -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-/Mvk8zAw1gAxobWZQa4TnnkWFKmYYq+pE0WtujXLD+g='; style-src 'sha256-KkFO4r9dHVL4gV47wIr8uhwtqYzPVHQX53kUJhtH7q0='; require-trusted-types-for 'script'; trusted-types goog#html default" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-/Mvk8zAw1gAxobWZQa4TnnkWFKmYYq+pE0WtujXLD+g='; style-src 'sha256-3wP+fmeTqFXUu5qPCLcOo98bzB84JYv/8ShJuG3bs8Q='; require-trusted-types-for 'script'; trusted-types goog#html default" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://lh3.googleusercontent.com" />
     <link rel="preload" as="image" type="image/webp" href="https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w960-rw" media="(max-width: 768px)" fetchpriority="high" />
     <link rel="preload" as="image" type="image/webp" href="https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w1920-rw" media="(min-width: 769px)" fetchpriority="high" />
     <style>:root {
+  --motion-reveal: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-spring: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
   --primary: #175da6;
   --text: #24282d;
   --muted: #515962;
@@ -142,6 +144,28 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .quote-result label { display: block; margin: 18px 0 8px; font-weight: 600; }
 .quote-status:empty { display: none; }
 .quote-status { margin: 20px 0; font-weight: 600; }
+/* Small, local motion keeps controls responsive without delaying their actions. */
+.button, .cta-primary, .cta-secondary, .menu-toggle, .service > a {
+  transition: transform var(--motion-spring), background-color 160ms ease, color 160ms ease;
+}
+.button:active, .cta-primary:active, .cta-secondary:active, .menu-toggle:active, .service > a:active {
+  transform: scale(0.95);
+  transition-duration: 80ms;
+  transition-timing-function: ease-out;
+}
+.quote-result:not([hidden]) { animation: panel-reveal var(--motion-reveal) both; }
+.draft-ready-icon { display: inline-block; width: 28px; height: 28px; margin-right: 10px; vertical-align: -5px; color: var(--primary); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.draft-ready-icon circle, .draft-ready-icon path { stroke-dasharray: 1; }
+.quote-result:not([hidden]) .draft-ready-icon circle { animation: draw-ready 240ms ease-out both; }
+.quote-result:not([hidden]) .draft-ready-icon path { animation: draw-ready 230ms 240ms ease-out both; }
+@keyframes draw-ready { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes panel-reveal {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 768px) {
+  body.menu-open .sidebar { transform-origin: top right; animation: panel-reveal var(--motion-reveal) both; }
+}
 @media (max-width: 768px) {
   .quote-layout { grid-template-columns: 1fr; gap: 28px; }
   .quote-form, .quote-result, .next-step { padding: 20px; }

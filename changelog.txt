@@ -165,3 +165,7 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 
 ### Project reference correction - 2026-10-24 ###
 - Remove public Clear Creek Printers references and add the owner-confirmed Cloud Peak Silver Labradors website project with a live-site link on the website-development and About pages.
+
+### 2026-11-03 - Motion details ###
+- Add 95% button presses with a spring-like return, 350ms eased mobile menu and draft reveals, and a 470ms circle-then-check draft-ready icon.
+- Respect reduced-motion preferences and preserve immediate navigation and explicit unsent-draft messaging.

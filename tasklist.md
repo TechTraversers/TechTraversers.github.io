@@ -71,3 +71,5 @@
 - [ ] Review contrast, layout, and assistive-technology behavior in real browsers.
 - [ ] Inspect social sharing previews and decide on a branded preview image.
 - [ ] Review pull request checks before merging; verify the live site after publishing.
+
+- [x] Apply motion details to buttons, mobile navigation, and contact draft readiness with reduced-motion support.

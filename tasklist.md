@@ -77,3 +77,12 @@
 - [x] Build Railway preview and Resend contact integration.
 - [ ] Switch the custom website domain only after explicit owner approval.
 - [x] Verify Resend domain, deploy Railway preview, and confirm test inquiry delivery.
+
+## Responsive preview refresh (2026-11-03)
+- [x] Review and improve every existing page and shared header/footer.
+- [x] Add Work, consistent service grouping, and focused project presentations.
+- [x] Retain responsive navigation, keyboard focus, no-JS navigation, and reduced motion.
+- [x] Integrate values in About while preserving legacy profile/value URLs.
+- [x] Improve quote guidance, validation, copy fallback, delivery states, and recovery.
+- [x] Validate structure, sitemap, schema/CSP, API, and responsive browser behavior.
+- [ ] Deploy and verify the proposed design on the Railway generated domain.

@@ -79,7 +79,7 @@ def check(inventory=()):
 
     canonicals = set()
     descriptions = []
-    nav_reference = [('home', '/'), ('services', '/ourservices/'), ('woodbank', '/wood-bank-software/'), ('values', '/ourvalues/'), ('about', '/aboutus/'), ('contact', '/contact/')]
+    nav_reference = [('home', '/'), ('services', '/ourservices/'), ('work', '/work/'), ('woodbank', '/wood-bank-software/'), ('about', '/aboutus/'), ('contact', '/contact/')]
     for name, page in pages.items():
         if name == 'sidebar.html':
             continue

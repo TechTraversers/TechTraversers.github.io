@@ -2,6 +2,7 @@
 from pathlib import Path
 from argparse import ArgumentParser
 import subprocess
+import socket
 from time import sleep
 from urllib.request import urlopen
 from playwright.sync_api import sync_playwright, expect
@@ -10,12 +11,16 @@ root = Path(__file__).resolve().parents[1]
 parser = ArgumentParser(description=__doc__)
 parser.add_argument('--executable')
 args = parser.parse_args()
-origin = 'http://localhost:3219'
+with socket.socket() as probe:
+    probe.bind(('127.0.0.1', 0))
+    port = probe.getsockname()[1]
+origin = f'http://localhost:{port}'
 code = """
 import {createApp} from './server.mjs';
 createApp({env:{PORT:'3219',APP_ORIGIN:'http://localhost:3219',RESEND_API_KEY:'test-only',CONTACT_FROM:'test@example.com'},
 fetchEmail:async (_,request)=> JSON.parse(request.body).text.includes('SIMULATE_FAILURE') ? Response.json({error:'test'},{status:500}) : Response.json({id:'mock-email'})}).listen(3219,'127.0.0.1');
 """
+code = code.replace('3219', str(port))
 server = subprocess.Popen(['node','--input-type=module','-e',code],cwd=root)
 try:
     for _ in range(40):

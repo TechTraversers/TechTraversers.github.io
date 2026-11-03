@@ -9,6 +9,7 @@ COPY codesmith95 ./codesmith95
 COPY ourservices ./ourservices
 COPY ourvalues ./ourvalues
 COPY wood-bank-software ./wood-bank-software
+COPY work ./work
 RUN node scripts/build-public.mjs
 USER node
 ENV NODE_ENV=production

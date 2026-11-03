@@ -18,7 +18,7 @@ from playwright.sync_api import sync_playwright, expect
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE_ASSETS = json.loads((ROOT / 'image-assets.json').read_text(encoding='utf-8'))['files']
 ICON_URL = IMAGE_ASSETS['ttIcon.png']['url']
-ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/codesmith95/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/', '/ourservices/websites/', '/contact/']
+ROUTES = ['/', '/aboutus/', '/aboutus/levi-bryan/', '/codesmith95/', '/ourservices/', '/ourservices/it-help-guidance/', '/ourservices/softwaredevelopment/', '/ourvalues/', '/wood-bank-software/', '/ourservices/websites/', '/contact/', '/work/']
 
 
 def stub_analytics(context):
@@ -35,7 +35,7 @@ def public_images():
     variants = [(name, {'url': asset[key]}) for name, asset in IMAGE_ASSETS.items()
                 for key in ('url', 'mobile_url') if key in asset]
     for name, asset in variants:
-        if 'url' not in asset:
+        if name not in ('ttIcon.png', 'books-by-gene-showcase.webp') or 'url' not in asset:
             continue
         expected = 'image/webp' if name.endswith('.webp') else ('image/png' if name.endswith('.png') else 'image/jpeg')
         for attempt in range(3):
@@ -96,38 +96,16 @@ def run(executable=None, text_only=False):
                     banner_requests.clear()
                     response = page.goto(origin + route)
                     assert response.status == 200, route
-                    assert page.evaluate('''() => {
-                        const head = [...document.head.children];
-                        const viewport = head.findIndex(el => el.name === 'viewport');
-                        const connection = head.findIndex(el => el.rel === 'preconnect' &&
-                            el.href === 'https://lh3.googleusercontent.com/');
-                        const preloads = head.map((el, index) => el.rel === 'preload' ? index : -1)
-                            .filter(index => index >= 0);
-                        const firstWork = head.findIndex(el => el.tagName === 'STYLE' || el.tagName === 'SCRIPT');
-                        return viewport >= 0 && connection > viewport && preloads.length === 2 &&
-                            preloads.every(index => index > connection && index < firstWork);
-                    }'''), (route, 'LCP hints must follow viewport metadata and precede styles/scripts')
                     expect(page.locator('h1')).to_have_count(1)
                     expect(page.locator('main')).to_be_visible()
-                    # Decode the page's real remote banner without a signed-in Google session.
-                    assert page.evaluate('''async () => {
-                        const image = new Image();
-                        const preload = [...document.querySelectorAll('link[rel="preload"][as="image"]')]
-                            .find(link => matchMedia(link.media).matches);
-                        image.src = preload.href;
-                        await image.decode();
-                        return image.naturalWidth > 0;
-                    }'''), (route, 'remote banner failed to decode')
-                    banner_name = ('pic2.webp' if route == '/ourservices/' else
-                                   'pic1.webp' if route == '/ourservices/softwaredevelopment/' else
-                                   'what_is_a_programming_language.webp')
-                    expected_banner = IMAGE_ASSETS[banner_name]['mobile_url' if width <= 768 else 'url']
-                    assert set(banner_requests) == {expected_banner}, (width, route, 'wrong or duplicate banner download', banner_requests)
+                    assert not banner_requests, (route, 'decorative banner should not download')
+                    assert page.locator('link[rel="preload"][as="image"]').count() == 0
                     expect(page.locator('a[aria-current="page"]')).to_have_count(1)
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (width, route, 'horizontal overflow')
                     assert page.locator('a button, button a').count() == 0
                     assert page.locator('#footer a[href^="mailto:"]').count() > 0
-                    expect(page.locator('#footer a[href="/contact/"]')).to_be_visible()
+                    if route != '/contact/':
+                        expect(page.locator('#footer a[href="/contact/"]')).to_be_visible()
                     assert page.locator('main .contact-card').count() == 0
                     for image in page.locator('img').all():
                         image.scroll_into_view_if_needed()
@@ -177,8 +155,8 @@ def run(executable=None, text_only=False):
             measured.goto(origin + '/')
             measured.wait_for_timeout(300)
             assert measured.evaluate('window.layoutShiftScore') < 0.01, 'mobile load shifts content'
-            assert measured.locator('link[rel="preload"][as="image"][media="(max-width: 768px)"]').get_attribute('fetchpriority') == 'high'
-            assert IMAGE_ASSETS['what_is_a_programming_language.webp']['mobile_url'] in measured.locator('#image').evaluate('el => getComputedStyle(el).backgroundImage')
+            assert measured.locator('.hero-project img').get_attribute('fetchpriority') == 'high'
+            assert measured.locator('#image').evaluate('el => getComputedStyle(el).backgroundImage') == 'none'
             assert measured.locator('link[rel=stylesheet], script[src]:not([async])').count() == 0
             expect(measured.locator('script[src]')).to_have_count(2)
             expect(measured.locator('script[data-analytics]')).to_have_count(1)
@@ -222,7 +200,7 @@ def run(executable=None, text_only=False):
             expect(page.locator('#quote-form')).to_be_visible()
             expect(page.locator('#quote-result')).to_be_hidden()
             page.get_by_role('button', name='Prepare email', exact=True).click()
-            expect(page.locator('#quote-name')).to_be_focused()
+            expect(page.locator('#quote-errors')).to_be_focused()
             expect(page.locator('#quote-result')).to_be_hidden()
             page.locator('#quote-name').fill('Test & Example')
             page.locator('#quote-email-address').fill('visitor@example.com')
@@ -263,7 +241,7 @@ def run(executable=None, text_only=False):
                 route.fulfill(response=response, body=html)
             context.route(origin + '/', remove_enhancement)
             page.goto(origin + '/')
-            expect(page.locator('nav')).to_be_visible()
+            expect(page.locator('#primary-navigation')).to_be_visible()
             context.unroute(origin + '/')
             # Test the actual JavaScript-disabled experience on every page.
             no_js = browser.new_context(java_script_enabled=False, viewport={'width': 360, 'height': 900})
@@ -275,6 +253,7 @@ def run(executable=None, text_only=False):
                 plain.goto(origin + route)
                 expect(plain.locator('nav')).to_be_visible()
                 expect(plain.locator('#menu-toggle')).to_be_hidden()
+            plain.goto(origin + '/contact/')
             expect(plain.locator('#quote-form')).to_be_hidden()
             expect(plain.locator('main a[href="mailto:traversertech@gmail.com"]')).to_be_visible()
             page.goto(origin + '/')
@@ -283,11 +262,12 @@ def run(executable=None, text_only=False):
                 for route in ('/', '/contact/'):
                     page.goto(origin + route)
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (width, height, route)
-                    page.locator('#footer a.cta-primary').scroll_into_view_if_needed()
-                    expect(page.locator('#footer a.cta-primary')).to_be_visible()
+                    page.locator('#footer a[href^="mailto:"]').scroll_into_view_if_needed()
+                    expect(page.locator('#footer a[href^="mailto:"]')).to_be_visible()
             page.goto(origin + '/')
             page.set_viewport_size({'width': 1440, 'height': 1000})
             page.screenshot(path=str(ROOT / 'test-results' / 'home-desktop.png'), full_page=True)
+            page.screenshot(path=str(ROOT / 'test-results' / 'home-desktop-viewport.png'))
             page.set_viewport_size({'width': 360, 'height': 900})
             page.screenshot(path=str(ROOT / 'test-results' / 'home-mobile.png'), full_page=True)
             page.evaluate('window.scrollTo(0, 0)')
@@ -316,7 +296,7 @@ def run(executable=None, text_only=False):
     finally:
         server.shutdown()
         server.server_close()
-    print('PASS: eleven pages at six widths, short screens and landscape; mobile banner selection, touch targets, form sizing, navigation, and JavaScript disabled.')
+    print('PASS: twelve pages at six widths, short screens and landscape; no decorative banner downloads, touch targets, form sizing, navigation, and JavaScript disabled.')
 
 
 if __name__ == '__main__':

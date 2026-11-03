@@ -25,18 +25,7 @@ def sync(check=False):
         text = re.sub(r'<script data-navigation>.*?</script>', '<script src="/script.js"></script>', text, flags=re.S)
         text = re.sub(r'    <script data-contact>.*?</script>\n', '', text, flags=re.S)
         text = re.sub(r'    <link rel="stylesheet" href="/(?:style.css|aboutus/style.css)" />\n', '', text)
-        # Preload only the banner selected by the viewport's CSS media query.
-        text = re.sub(r'    <link rel="preload" as="image"[^>]+/>\n', '', text)
-        banner_name = ('pic2.webp' if 'class="services-page"' in text else
-                       'pic1.webp' if 'class="software-page"' in text else
-                       'what_is_a_programming_language.webp')
-        banner = images[banner_name]
-        preloads = (f'    <link rel="preload" as="image" type="image/webp" href="{banner["mobile_url"]}" media="(max-width: 768px)" fetchpriority="high" />\n'
-                    f'    <link rel="preload" as="image" type="image/webp" href="{banner["url"]}" media="(min-width: 769px)" fetchpriority="high" />\n')
-        # Discover the LCP image before CSS and third-party scripts. The viewport
-        # meta must precede media-specific preloads on real mobile devices.
-        image_hints = ('    <link rel="preconnect" href="https://lh3.googleusercontent.com" />\n'
-                       + preloads)
+        image_hints = '    <link rel="preconnect" href="https://lh3.googleusercontent.com" />\n'
         css = (ROOT / 'style.css').read_text(encoding='utf-8').strip()
         if page.relative_to(ROOT).as_posix() in ('aboutus/index.html', 'aboutus/levi-bryan/index.html', 'codesmith95/index.html'):
             css += '\n' + (ROOT / 'aboutus/style.css').read_text(encoding='utf-8').strip()

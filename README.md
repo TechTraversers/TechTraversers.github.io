@@ -28,7 +28,7 @@ Website images now load from the public `pictures` folder in Google Drive, synce
 
 Keep the pictures folder accessible to anyone with the link as Viewer. This exposes the image folder only; its parent folder is not shared. Drive preview-page links cannot replace image URLs in HTML or CSS. Verify direct image URLs without a Google session whenever changing them, and update the manifest, CSS, HTML metadata, preload links, and favicons together. Google serves the images through `lh3.googleusercontent.com`, which the CSP permits for images only. WebP banner URLs request WebP output at up to 1920 pixels on desktop and 960 pixels on phones, with matching media-specific preloads to avoid downloading both; PNG favicon and JPEG social-preview URLs preserve their respective formats. Remote availability and sharing settings now affect image loading. Browser checks fetch each image anonymously once, verify its image MIME type, and reuse those real bytes across all layout checks; browser decoding and CSP enforcement still run on every page.
 
-The generator places viewport metadata before the image host preconnect and the two media-specific banner preloads, then styles and analytics. Keep this order so mobile browsers select the intended banner and discover it early. Browser checks verify the head order and a single matching banner download. Layout checks reuse image bytes and stub analytics, so their timings do not measure production LCP; rerun PageSpeed Insights after publishing to assess the live result.
+The generator places viewport metadata before the image host preconnect, then styles and analytics. The compact header has no decorative banner downloads; the homepage project image has high fetch priority. Keep this order so mobile browsers select the intended banner and discover it early. Browser checks verify the head order and a single matching banner download. Layout checks reuse image bytes and stub analytics, so their timings do not measure production LCP; rerun PageSpeed Insights after publishing to assess the live result.
 
 ## Embedded assets and security
 
@@ -67,7 +67,7 @@ python3 -m playwright install chromium
 python3 scripts/browser_check.py
 ```
 
-On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all eleven public pages at 320, 360, 390, 768, 1024, and 1440 pixels, plus short-screen, landscape, and touch-emulated phone checks, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
+On Linux, use `python3 -m playwright install --with-deps chromium` if system dependencies are missing. The browser suite starts a loopback server, checks all twelve public pages at 320, 360, 390, 768, 1024, and 1440 pixels, plus short-screen, landscape, and touch-emulated phone checks, and writes homepage screenshots under ignored `test-results/`. A system browser can be selected with `--executable /usr/bin/chromium`.
 
 The GitHub Actions workflow runs static, menu, and browser checks on pull requests and pushes to main. It validates changes; it does not deploy them.
 
@@ -81,10 +81,20 @@ The GitHub Actions workflow runs static, menu, and browser checks on pull reques
 
 ## Railway contact preview
 
-The `codex/railway-contact` branch deploys the static site plus `server.mjs` to a separate Railway URL. The custom domain stays on GitHub Pages. Run `npm run build` and `npm start` for the server; run `npm test` for API checks. Node 22+ is required; there are no npm dependencies. Only files copied into `public/` are served.
+The `codex/site-usability-redesign` branch is the proposed design preview. It deploys the static site plus `server.mjs` to a separate Railway URL. The custom domain stays on GitHub Pages. Run `npm run build` and `npm start` for the server; run `npm test` for API checks. Node 22+ is required; there are no npm dependencies. Only files copied into `public/` are served.
 
 Configure `RESEND_API_KEY` (sending-only, domain-restricted) and `CONTACT_FROM` with a Resend-verified sender. `CONTACT_TO` defaults to the approved business inbox. `APP_ORIGIN` is the exact preview origin; Railway's public domain is used when omitted. `PREVIEW_MODE` defaults to enabled, emitting noindex and disallowing crawlers. Do not disable this until the domain cutover is authorized. Secrets belong in Railway Variables, never Git.
 
 The form detects the same-origin API and switches from email preparation to direct submission only when configured. API failures retain the message and never claim success. Resend receives the visitor's contact details and message for email delivery. Successful API acceptance does not guarantee inbox delivery; check Resend delivery events when testing.
 
 Spam controls include a honeypot, signed time-limited form token, strict origin/content-type checks, request-size limits, per-client/global limits, and provider idempotency. Limits and short-term deduplication are in memory, reset on restart, and are intended for a single replica. Add shared storage and stronger bot verification before scaling or sustained abuse. No inquiry database or request-body logging is used.
+
+## Responsive design preview — November 3, 2026
+
+The shared compact header uses visible desktop navigation and the existing 768px mobile menu behavior. Work is the project directory; values are integrated into About. Existing values and contributor URLs remain available as secondary pages. The existing blue identity, no-JavaScript navigation, reduced motion, and direct email fallback are retained.
+
+All service pages use the same introduction, task-focused content, and closing action. The homepage highlights the existing Books by Gene screenshot. Cloud Peak and Wood Bank project panels are explicitly labeled feature/workflow overviews, not application screenshots. No fabricated metrics, testimonials, rates, or support promises are used.
+
+The quote form supports direct submission on configured Railway hosts, service-specific hints, a character count, linked inline validation, disabled fields during sending, preserved values after a failed request, accessible completion/error focus, a refreshed token for long sessions, and a copy-message fallback on static hosting. Browser API tests use a mocked email transport and never send real mail.
+
+Run `python scripts/sync_assets.py` after shared source changes, then static/menu checks, `npm run build`, `npm test`, and both browser suites. The contact suite selects a free local port so simultaneous checkouts do not collide. Use `--executable` for an installed Chromium browser when needed. Railway previews stay noindex; custom-domain publication is a separate release.

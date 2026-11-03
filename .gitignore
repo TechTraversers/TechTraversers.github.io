@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 .venv/
 test-results/
+public/
+.env
+.env.*
+node_modules/

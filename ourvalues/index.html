@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- generated:head:start -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-BIi0oook//Xg5cDvAjgbkbJv3j9mFrBrm3++kzO2018='; style-src 'sha256-3wP+fmeTqFXUu5qPCLcOo98bzB84JYv/8ShJuG3bs8Q='; require-trusted-types-for 'script'; trusted-types goog#html default" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-BIi0oook//Xg5cDvAjgbkbJv3j9mFrBrm3++kzO2018='; style-src 'sha256-MCiISwfDy75Ph3V1zg9AGR78vfmqGldxLeN/7vVYFPo='; require-trusted-types-for 'script'; trusted-types goog#html default" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://lh3.googleusercontent.com" />
     <link rel="preload" as="image" type="image/webp" href="https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w960-rw" media="(max-width: 768px)" fetchpriority="high" />
@@ -144,6 +144,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .quote-result label { display: block; margin: 18px 0 8px; font-weight: 600; }
 .quote-status:empty { display: none; }
 .quote-status { margin: 20px 0; font-weight: 600; }
+.contact-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+button:disabled { opacity: 0.65; cursor: wait; }
 /* Small, local motion keeps controls responsive without delaying their actions. */
 .button, .cta-primary, .cta-secondary, .menu-toggle, .service > a {
   transition: transform var(--motion-spring), background-color 160ms ease, color 160ms ease;

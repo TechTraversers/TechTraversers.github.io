@@ -133,6 +133,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .quote-result label { display: block; margin: 18px 0 8px; font-weight: 600; }
 .quote-status:empty { display: none; }
 .quote-status { margin: 20px 0; font-weight: 600; }
+.contact-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+button:disabled { opacity: 0.65; cursor: wait; }
 /* Small, local motion keeps controls responsive without delaying their actions. */
 .button, .cta-primary, .cta-secondary, .menu-toggle, .service > a {
   transition: transform var(--motion-spring), background-color 160ms ease, color 160ms ease;

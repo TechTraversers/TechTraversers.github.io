@@ -78,3 +78,13 @@ The GitHub Actions workflow runs static, menu, and browser checks on pull reques
 3. Confirm sitemap/canonical URLs and any changes to prices or service scope.
 4. Check GitHub Pages domain settings, HTTPS, and the apex-domain redirect.
 5. Merge only after reviewing the pull request. Confirm the live site after publishing.
+
+## Railway contact preview
+
+The `codex/railway-contact` branch deploys the static site plus `server.mjs` to a separate Railway URL. The custom domain stays on GitHub Pages. Run `npm run build` and `npm start` for the server; run `npm test` for API checks. Node 22+ is required; there are no npm dependencies. Only files copied into `public/` are served.
+
+Configure `RESEND_API_KEY` (sending-only, domain-restricted) and `CONTACT_FROM` with a Resend-verified sender. `CONTACT_TO` defaults to the approved business inbox. `APP_ORIGIN` is the exact preview origin; Railway's public domain is used when omitted. `PREVIEW_MODE` defaults to enabled, emitting noindex and disallowing crawlers. Do not disable this until the domain cutover is authorized. Secrets belong in Railway Variables, never Git.
+
+The form detects the same-origin API and switches from email preparation to direct submission only when configured. API failures retain the message and never claim success. Resend receives the visitor's contact details and message for email delivery. Successful API acceptance does not guarantee inbox delivery; check Resend delivery events when testing.
+
+Spam controls include a honeypot, signed time-limited form token, strict origin/content-type checks, request-size limits, per-client/global limits, and provider idempotency. Limits and short-term deduplication are in memory, reset on restart, and are intended for a single replica. Add shared storage and stronger bot verification before scaling or sustained abuse. No inquiry database or request-body logging is used.

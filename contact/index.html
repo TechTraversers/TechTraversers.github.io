@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- generated:head:start -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-DcIDcnqtZE7ywgwMilcFGQq4v+eQfXAQZKeAHpKdxyA=' 'sha256-B4bj9NtAkZEPI6KpNIbWWJSgPdW9lbiLGsuV4CfKFX4='; style-src 'sha256-3wP+fmeTqFXUu5qPCLcOo98bzB84JYv/8ShJuG3bs8Q='; require-trusted-types-for 'script'; trusted-types goog#html default" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-DcIDcnqtZE7ywgwMilcFGQq4v+eQfXAQZKeAHpKdxyA=' 'sha256-A9OjGr683A4AJ7FuJR2bMK1k2XMOCvOgt9ZAk2Q6qXc='; style-src 'sha256-MCiISwfDy75Ph3V1zg9AGR78vfmqGldxLeN/7vVYFPo='; require-trusted-types-for 'script'; trusted-types goog#html default" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://lh3.googleusercontent.com" />
     <link rel="preload" as="image" type="image/webp" href="https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w960-rw" media="(max-width: 768px)" fetchpriority="high" />
@@ -144,6 +144,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .quote-result label { display: block; margin: 18px 0 8px; font-weight: 600; }
 .quote-status:empty { display: none; }
 .quote-status { margin: 20px 0; font-weight: 600; }
+.contact-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+button:disabled { opacity: 0.65; cursor: wait; }
 /* Small, local motion keeps controls responsive without delaying their actions. */
 .button, .cta-primary, .cta-secondary, .menu-toggle, .service > a {
   transition: transform var(--motion-spring), background-color 160ms ease, color 160ms ease;
@@ -370,6 +372,7 @@ if (window.trustedTypes) {
               <p id="details-help" class="form-note">What would you like to do? What is already in place, or what is going wrong? A short description is enough to start.</p>
               <label for="quote-timing">Preferred timing (optional)</label>
               <input id="quote-timing" name="timing" maxlength="100" placeholder="For example: next month, or flexible" />
+              <div class="contact-trap" aria-hidden="true"><label for="quote-website">Leave this field empty</label><input id="quote-website" name="website" tabindex="-1" autocomplete="off" /></div>
               <button class="cta-primary" type="submit">Prepare email</button>
             </form>
             <p id="quote-status" class="quote-status" role="status" aria-live="polite"></p>
@@ -415,7 +418,7 @@ if (window.trustedTypes) {
         </div>
       </div>
     </footer>
-    <script data-contact>// Prepare a visitor-reviewed email; no form data is sent to a server.
+    <script data-contact>// Static hosting keeps the email-draft fallback; Railway enables direct sending.
 (() => {
   const form = document.getElementById('quote-form');
   if (!form) return;
@@ -428,6 +431,15 @@ if (window.trustedTypes) {
   const draft = document.getElementById('quote-draft');
   const emailLink = document.getElementById('quote-email');
   const status = document.getElementById('quote-status');
+  const submit = form.querySelector('button[type="submit"]');
+  let config = null;
+  let busy = false;
+  if (document.querySelector('meta[name="contact-api"]')) fetch('/api/contact/config', { cache: 'no-store' }).then(response => response.ok ? response.json() : null).then(value => {
+    if (!value?.enabled) return;
+    config = value;
+    submit.textContent = 'Send inquiry';
+    document.getElementById('quote-instructions').textContent = 'Send your inquiry directly to Tech Traversers. We use Resend to deliver your message by email.';
+  }).catch(() => {});
 
   form.addEventListener('input', () => {
     result.hidden = true;
@@ -435,10 +447,41 @@ if (window.trustedTypes) {
     draft.value = '';
     status.textContent = '';
   });
-  form.addEventListener('submit', event => {
+  form.addEventListener('submit', async event => {
     event.preventDefault();
-    if (!form.reportValidity()) return;
+    if (busy || !form.reportValidity()) return;
     const fields = new FormData(form);
+    if (config) {
+      busy = true;
+      submit.disabled = true;
+      form.setAttribute('aria-busy', 'true');
+      status.textContent = 'Sending your inquiryâ€¦';
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...Object.fromEntries(fields), token: config.token }),
+          signal: AbortSignal.timeout(20000),
+        });
+        const outcome = await response.json();
+        if (!response.ok || !outcome.ok) throw new Error(outcome.error || 'Sending could not be confirmed. Please retry or email us directly.');
+        status.textContent = 'Your inquiry has been sent to Tech Traversers. Thank you.';
+        // Keep the existing accessible result region and its completion animation.
+        result.hidden = false;
+        result.querySelector('h2').lastChild.textContent = 'Inquiry sent';
+        result.querySelector('p').textContent = 'Thank you for getting in touch. You can reply to our response by email.';
+        for (const child of result.children) if (!['H2', 'P'].includes(child.tagName) || child.id === 'copy-help') child.hidden = true;
+        form.hidden = true;
+        document.getElementById('quote-result-heading').focus();
+      } catch (error) {
+        status.textContent = error.name === 'TimeoutError' || error.name === 'TypeError'
+          ? 'Sending could not be confirmed. Your message is still here. Retry or email traversertech@gmail.com.' : error.message;
+      } finally {
+        busy = false;
+        submit.disabled = false;
+        form.removeAttribute('aria-busy');
+      }
+      return;
+    }
     const body = [
       'Hi Levi,', '',
       `I would like to discuss: ${service.value}`, '',

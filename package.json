@@ -1,0 +1,7 @@
+{
+  "name": "tech-traversers-website",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": { "build": "node scripts/build-public.mjs", "start": "node server.mjs", "test": "node --test scripts/contact-api.test.mjs" }
+}

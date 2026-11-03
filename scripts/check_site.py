@@ -56,7 +56,7 @@ class Page(HTMLParser):
 def check(inventory=()):
     failures = []
     known = set(inventory) | {str(p.relative_to(ROOT)) for p in ROOT.rglob('*') if p.is_file()}
-    pages = {str(p.relative_to(ROOT)): Page(p.read_text(encoding='utf-8')) for p in ROOT.rglob('*.html')}
+    pages = {str(p.relative_to(ROOT)): Page(p.read_text(encoding='utf-8')) for p in ROOT.rglob('*.html') if 'public' not in p.relative_to(ROOT).parts}
 
     def require(condition, message):
         if not condition:

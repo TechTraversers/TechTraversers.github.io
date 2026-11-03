@@ -73,3 +73,6 @@
 - [ ] Review pull request checks before merging; verify the live site after publishing.
 
 - [x] Apply motion details to buttons, mobile navigation, and contact draft readiness with reduced-motion support.
+
+- [x] Build Railway preview and Resend contact integration.
+- [ ] Switch the custom website domain only after explicit owner approval.

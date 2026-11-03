@@ -169,3 +169,7 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 ### 2026-11-03 - Motion details ###
 - Add 95% button presses with a spring-like return, 350ms eased mobile menu and draft reveals, and a 470ms circle-then-check draft-ready icon.
 - Respect reduced-motion preferences and preserve immediate navigation and explicit unsent-draft messaging.
+
+### 2026-11-03 - Railway contact preview ###
+- Add a separate Railway deployment with a Resend contact endpoint, validation, spam limits, retry-safe sending, and clear success/failure states.
+- Keep GitHub Pages domain unchanged; block indexing of the preview and serve only public assets.

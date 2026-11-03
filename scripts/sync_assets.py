@@ -16,6 +16,8 @@ def sync(check=False):
     stale = []
     images = json.loads((ROOT / 'image-assets.json').read_text(encoding='utf-8'))['files']
     for page in ROOT.rglob('*.html'):
+        if 'public' in page.relative_to(ROOT).parts:
+            continue
         original = page.read_text(encoding='utf-8')
         if '<header id="image">' not in original:
             continue
@@ -56,7 +58,7 @@ def sync(check=False):
         # Analytics endpoints; keep inline hashing and Trusted Types enforcement.
         policy = ("default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; "
                   "img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; "
-                  "connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; "
+                  "connect-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; "
                   'script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms ' + ' '.join(hashes) +
                   '; style-src ' + digest(css) +
                   "; require-trusted-types-for 'script'; trusted-types goog#html default")

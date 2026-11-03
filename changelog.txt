@@ -1,3 +1,4 @@
+2026-11-03: Added explicit Home navigation, personal approach copy, and a three-step homepage explanation of the inquiry process.
 2026-11-03: Removed retired contributor profile and references; grouped project examples in distinct responsive cards with visible boundaries and category labels.
 2026-11-03: Simplified Home around services, personal introduction, and contact; individual project examples remain on Work.
 2026-11-03 — Removed duplicate Books by Gene section, added real Cloud Peak and Wood Bank public screenshots, restored original green logo and Home/Services hero imagery.

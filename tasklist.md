@@ -94,3 +94,5 @@
 
 - [x] Remove retired contributor profile, sitemap entry, and build references; visually separate individual project examples.
 - [x] Review 15 homepage and supporting usability articles and identify remaining homepage gaps.
+
+- [x] Add Home navigation, highlight direct communication and patient guidance, and explain what happens after an inquiry.

@@ -1,11 +1,15 @@
 """Exercise the real server and form with mocked email transport; never sends mail."""
 from pathlib import Path
+from argparse import ArgumentParser
 import subprocess
 from time import sleep
 from urllib.request import urlopen
 from playwright.sync_api import sync_playwright, expect
 
 root = Path(__file__).resolve().parents[1]
+parser = ArgumentParser(description=__doc__)
+parser.add_argument('--executable')
+args = parser.parse_args()
 origin = 'http://localhost:3219'
 code = """
 import {createApp} from './server.mjs';
@@ -19,7 +23,7 @@ try:
             urlopen(origin+'/healthz'); break
         except OSError: sleep(.1)
     with sync_playwright() as p:
-        browser=p.chromium.launch(executable_path='C:/Program Files/Google/Chrome/Application/chrome.exe')
+        browser=p.chromium.launch(**({'executable_path':args.executable} if args.executable else {}))
         for width in [360,1440]:
             context=browser.new_context(viewport={'width':width,'height':900},reduced_motion='reduce')
             context.route('https://**/*',lambda route:route.abort())

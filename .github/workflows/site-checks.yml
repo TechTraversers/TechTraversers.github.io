@@ -20,6 +20,9 @@ jobs:
       - run: python scripts/check_site.py
       - run: node --check script.js
       - run: node scripts/menu_check.cjs
+      - run: npm run build
+      - run: npm test
       - run: pip install -r requirements-test.txt
       - run: python -m playwright install --with-deps chromium
       - run: python scripts/browser_check.py
+      - run: python scripts/contact_browser_check.py

@@ -76,3 +76,5 @@
 - [ ] Review pull request checks before merging; verify the live site after publishing.
 
 - [x] Apply motion details to buttons, mobile navigation, and contact draft readiness with reduced-motion support.
+
+- [x] Add approved business phone (307) 620-5230 to contact page, shared footers and structured data.

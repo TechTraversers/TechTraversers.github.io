@@ -62,7 +62,7 @@ def build_schema(text):
     }
     graph = [
         {'@type': 'Organization', '@id': ORGANIZATION, 'name': 'Tech Traversers',
-         'url': ORIGIN + '/', 'email': 'traversertech@gmail.com'},
+         'url': ORIGIN + '/', 'telephone': '+1-307-620-5230', 'email': 'traversertech@gmail.com'},
         {'@type': 'WebSite', '@id': WEBSITE, 'url': ORIGIN + '/',
          'name': 'Tech Traversers', 'inLanguage': 'en',
          'publisher': {'@id': ORGANIZATION}},

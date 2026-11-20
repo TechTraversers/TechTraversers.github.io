@@ -172,3 +172,6 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 
 ### Dynamic quote submission - 2026-11-19 ###
 Replaced email drafting with inline quote submissions to the Tech Traversers portal, with email verification, input validation, duplicate-safe retries, business/phone/contact preferences and accessible feedback. Kept direct email as the JavaScript-disabled fallback. No public prices or service commitments changed.
+
+### November 20, 2026
+Added owner-approved (307) 620-5230 click-to-call contact details in every public footer, the contact page, and Organization structured data.

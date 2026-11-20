@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- generated:head:start -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-DcIDcnqtZE7ywgwMilcFGQq4v+eQfXAQZKeAHpKdxyA=' 'sha256-B4bj9NtAkZEPI6KpNIbWWJSgPdW9lbiLGsuV4CfKFX4='; style-src 'sha256-3wP+fmeTqFXUu5qPCLcOo98bzB84JYv/8ShJuG3bs8Q='; require-trusted-types-for 'script'; trusted-types goog#html default" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms https://portal.techtraversers.com; script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'sha256-kGYqhtYhX1tCXZEJD33EKP9Cq1/8GSCb5R1z4R/OKz0=' 'sha256-Kjkutx+OEPKqUe4GM1WJ7BD+gPz+c9yGJNU9ZOlbA9U=' 'sha256-ChU8l3djNGBgEY3+DuVGLAPBNWKYgPLGO6oxUam7Fyo=' 'sha256-DcIDcnqtZE7ywgwMilcFGQq4v+eQfXAQZKeAHpKdxyA=' 'sha256-vih67Wv/4NiI4Nmpv2BsbVSs0mrJ5J7qgt9NMvpDIQI='; style-src 'sha256-3wP+fmeTqFXUu5qPCLcOo98bzB84JYv/8ShJuG3bs8Q='; require-trusted-types-for 'script'; trusted-types goog#html default" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://lh3.googleusercontent.com" />
     <link rel="preload" as="image" type="image/webp" href="https://lh3.googleusercontent.com/d/1Bst78tWvCWPReoIaPNXwTTywhud8MnJ4=w960-rw" media="(max-width: 768px)" fetchpriority="high" />
@@ -349,12 +349,18 @@ if (window.trustedTypes) {
           <div>
             <form id="quote-form" class="quote-form" aria-labelledby="quote-heading" aria-describedby="quote-instructions" data-clarity-mask="true" hidden>
               <h2 id="quote-heading">Request a quote or ask a question</h2>
-              <p id="quote-instructions">Prepare an email, then review and send it in your email app. Nothing is sent here.</p>
+              <p id="quote-instructions">Submit your request securely here. We will email you a link to confirm your email address, then follow up about your project.</p>
               <p class="form-note">Required unless marked optional. Leave out passwords, payment details, and other sensitive information.</p>
               <label for="quote-name">Your name</label>
               <input id="quote-name" name="name" autocomplete="name" maxlength="100" required />
+              <label for="quote-business">Business (optional)</label>
+              <input id="quote-business" name="business" autocomplete="organization" maxlength="200" />
               <label for="quote-email-address">Your email address</label>
               <input id="quote-email-address" name="email" type="email" inputmode="email" autocapitalize="none" spellcheck="false" autocomplete="email" maxlength="200" required />
+              <label for="quote-phone">Phone number (optional unless you prefer a call)</label>
+              <input id="quote-phone" name="phone" type="tel" autocomplete="tel" maxlength="100" />
+              <label for="quote-preference">Preferred contact method</label>
+              <select id="quote-preference" name="preferred_contact"><option value="Email">Email</option><option value="Phone">Phone</option></select>
               <label for="quote-service">What do you need help with?</label>
               <select id="quote-service" name="service" required>
                 <option value="">Choose a service</option>
@@ -366,27 +372,26 @@ if (window.trustedTypes) {
                 <option value="Not sure yet">Not sure yet</option>
               </select>
               <label for="quote-details">Tell me about your project or question</label>
-              <textarea id="quote-details" name="details" rows="5" maxlength="1500" aria-describedby="details-help" required></textarea>
+              <textarea id="quote-details" name="details" rows="5" minlength="10" maxlength="1500" aria-describedby="details-help" required></textarea>
               <p id="details-help" class="form-note">What would you like to do? What is already in place, or what is going wrong? A short description is enough to start.</p>
               <label for="quote-timing">Preferred timing (optional)</label>
               <input id="quote-timing" name="timing" maxlength="100" placeholder="For example: next month, or flexible" />
-              <button class="cta-primary" type="submit">Prepare email</button>
+              <div hidden aria-hidden="true"><label for="quote-website">Leave this field empty</label><input id="quote-website" name="website" tabindex="-1" autocomplete="off" /></div>
+              <button class="cta-primary" type="submit">Submit quote request</button>
             </form>
             <p id="quote-status" class="quote-status" role="status" aria-live="polite"></p>
             <section id="quote-result" class="quote-result" aria-labelledby="quote-result-heading" data-clarity-mask="true" hidden>
-              <h2 id="quote-result-heading" tabindex="-1"><svg class="draft-ready-icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><circle cx="14" cy="14" r="11" pathLength="1"/><path d="m8.5 14 3.5 3.5 7.5-7.5" pathLength="1"/></svg>Review and send your inquiry</h2>
-              <p>Your request has not been sent. Open the draft in your email app, review it, and select Send there.</p>
-              <a id="quote-email" class="cta-primary">Open email draft</a>
-              <label for="quote-draft">Message to copy if you use webmail</label>
-              <textarea id="quote-draft" rows="10" readonly aria-describedby="copy-help"></textarea>
-              <p id="copy-help" class="form-note">If the email app does not open or the message is incomplete, select and copy the message above into your email service. Send it to traversertech@gmail.com.</p>
+              <h2 id="quote-result-heading" tabindex="-1">Check your email to confirm your request</h2>
+              <p id="quote-result-message"></p>
+              <p>For your privacy, the request is added to our customer system only after you confirm your email. You do not need a portal account.</p>
+              <button id="quote-again" class="cta-primary" type="button">Send another request</button>
             </section>
-            <noscript><p>The email preparation form needs JavaScript. You can email your request directly using the address below.</p></noscript>
+            <noscript><p>The secure submission form needs JavaScript. You can email your request directly using the address below.</p></noscript>
           </div>
           <aside aria-labelledby="next-heading">
             <h2 id="next-heading">What happens next?</h2>
             <ol>
-              <li>Send a short description of what you need.</li>
+              <li>Submit a short description and confirm your email address.</li>
               <li>We can discuss your requirements and any questions.</li>
               <li>We can work out the scope, timing, and costs before starting.</li>
             </ol>
@@ -415,44 +420,86 @@ if (window.trustedTypes) {
         </div>
       </div>
     </footer>
-    <script data-contact>// Prepare a visitor-reviewed email; no form data is sent to a server.
+    <script data-contact>// Submit from the website to the CRM's public quote endpoint.
 (() => {
   const form = document.getElementById('quote-form');
   if (!form) return;
   const service = document.getElementById('quote-service');
-  const requestedService = new URLSearchParams(window.location.search).get('service');
-  if (Array.from(service.options).some(option => option.value === requestedService)) {
-    service.value = requestedService;
-  }
+  const requested = new URLSearchParams(location.search).get('service');
+  if (Array.from(service.options).some(option => option.value === requested)) service.value = requested;
   const result = document.getElementById('quote-result');
-  const draft = document.getElementById('quote-draft');
-  const emailLink = document.getElementById('quote-email');
+  const heading = document.getElementById('quote-result-heading');
   const status = document.getElementById('quote-status');
-
+  const submit = form.querySelector('button[type="submit"]');
+  const preference = document.getElementById('quote-preference');
+  const phone = document.getElementById('quote-phone');
+  let busy = false;
+  let key = crypto.randomUUID();
+  const updatePhone = () => { phone.required = preference.value === 'Phone'; };
+  preference.addEventListener('change', updatePhone);
+  updatePhone();
   form.addEventListener('input', () => {
+    if (busy) return;
+    key = crypto.randomUUID();
     result.hidden = true;
-    emailLink.removeAttribute('href');
-    draft.value = '';
     status.textContent = '';
+    status.setAttribute('role', 'status');
   });
-  form.addEventListener('submit', event => {
+  form.addEventListener('submit', async event => {
     event.preventDefault();
-    if (!form.reportValidity()) return;
+    if (busy || !form.reportValidity()) return;
+    busy = true;
+    submit.disabled = true;
+    submit.textContent = 'Submittingâ€¦';
+    form.setAttribute('aria-busy', 'true');
+    result.hidden = true;
+    status.setAttribute('role', 'status');
+    status.textContent = 'Sending your request securelyâ€¦';
     const fields = new FormData(form);
-    const body = [
-      'Hi Levi,', '',
-      `I would like to discuss: ${service.value}`, '',
-      String(fields.get('details')).trim(), '',
-      `Preferred timing: ${String(fields.get('timing')).trim() || 'To discuss'}`,
-      `Name: ${String(fields.get('name')).trim()}`,
-      `Reply email: ${String(fields.get('email')).trim()}`,
-    ].join('\n');
-    draft.value = body;
-    emailLink.href = 'mailto:traversertech@gmail.com?subject=' +
-      encodeURIComponent('Project inquiry: ' + service.value) + '&body=' + encodeURIComponent(body);
-    result.hidden = false;
-    status.textContent = 'Your email draft is ready. Nothing has been sent.';
-    document.getElementById('quote-result-heading').focus();
+    const timing = String(fields.get('timing') || '').trim();
+    const payload = {
+      name: String(fields.get('name') || '').trim(),
+      business: String(fields.get('business') || '').trim(),
+      email: String(fields.get('email') || '').trim(),
+      phone: String(fields.get('phone') || '').trim(),
+      service: service.value,
+      description: String(fields.get('details') || '').trim() + (timing ? '\n\nPreferred timing: ' + timing : ''),
+      preferred_contact: preference.value,
+      website: String(fields.get('website') || ''),
+      idempotency_key: key,
+    };
+    try {
+      const response = await fetch('https://portal.techtraversers.com/api/public/quote', {
+        method: 'POST', mode: 'cors', credentials: 'omit',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload), signal: AbortSignal.timeout(20000),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Your request could not be submitted. Please try again.');
+      heading.textContent = response.status === 202 ? 'Check your email to confirm your request' : 'Your quote request has been received';
+      document.getElementById('quote-result-message').textContent = data.message;
+      result.hidden = false;
+      status.textContent = response.status === 202 ? 'Verification email requested. Open the link in your inbox to confirm your quote request.' : 'Your quote request has been saved.';
+      for (const control of form.elements) control.disabled = true;
+      heading.focus();
+    } catch (error) {
+      status.setAttribute('role', 'alert');
+      status.textContent = error.name === 'TimeoutError' ? 'The request timed out. Your details are still here; retrying will not create a duplicate request.' : error.message || 'Could not connect. Please try again or email us directly.';
+      submit.disabled = false;
+    } finally {
+      busy = false;
+      submit.textContent = 'Submit quote request';
+      form.removeAttribute('aria-busy');
+    }
+  });
+  document.getElementById('quote-again').addEventListener('click', () => {
+    for (const control of form.elements) control.disabled = false;
+    form.reset();
+    updatePhone();
+    key = crypto.randomUUID();
+    result.hidden = true;
+    status.textContent = '';
+    form.querySelector('input').focus();
   });
   form.hidden = false;
 })();</script>

@@ -2,6 +2,9 @@
 
 ## Completed in this update
 
+- [x] Replace email-draft preparation with dynamic in-website CRM quote submission, email verification, retry protection, business/contact fields, and accessible success/error feedback.
+- [x] Test form validation, API failures, input retention, idempotent retries, phone requirements and 320–1440 pixel layouts; keep JavaScript-disabled email contact available.
+
 - [x] Replace Clear Creek Printers with the owner-confirmed Cloud Peak Silver Labradors website project on the website-development and About pages.
 
 - [x] Expand the Books by Gene example into a project showcase with an authentic screenshot, live-site link, and website-quote action.
@@ -16,7 +19,7 @@
 
 - [x] Add prominent contact buttons and a static quote form with email drafting, webmail fallback, and service preselection.
 - [ ] Add customer testimonials when approved quotes and attribution are supplied.
-- [ ] Assess actual inquiry volume after release; direct website submissions require a configured form endpoint.
+- [ ] Assess verified inquiry volume after release using the connected CRM; verification emails alone do not count as confirmed leads.
 
 - [x] Add Microsoft Clarity project yzgnnv7sl9 to all public pages with CSP and Trusted Types compatibility.
 

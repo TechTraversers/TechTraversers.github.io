@@ -53,10 +53,12 @@ def sync(check=False):
             contact = (ROOT / 'contact.js').read_text().strip()
             hashes.append(digest(contact))
             text = text.replace('  </body>', f'    <script data-contact>{contact}</script>\n  </body>')
+        # Only the contact page can connect to the portal quote API.
+        portal_connection = ' https://portal.techtraversers.com' if page.relative_to(ROOT).as_posix() == 'contact/index.html' else ''
         # Analytics endpoints; keep inline hashing and Trusted Types enforcement.
         policy = ("default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; "
                   "img-src 'self' https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com; "
-                  "connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms; "
+                  "connect-src https://lh3.googleusercontent.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms" + portal_connection + "; "
                   'script-src https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms ' + ' '.join(hashes) +
                   '; style-src ' + digest(css) +
                   "; require-trusted-types-for 'script'; trusted-types goog#html default")

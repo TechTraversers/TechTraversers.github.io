@@ -110,11 +110,11 @@
 - Keep original headers, current copy, and public-information approvals unchanged.
 - Clarify Buffalo, Wyoming as the business base and worldwide availability for remote services; distinguish local in-person help.
 
-### Mobile performance — 2026-10-15 ###
+### Mobile performance ï¿½ 2026-10-15 ###
 Keep original banner photos while serving compressed WebP assets with high-priority preloads.
 Initialize navigation immediately after its HTML, before main content is parsed, to avoid the mobile menu collapsing after content appears. Prevent flex layouts from shrinking the banner.
 
-### PageSpeed follow-up — 2026-10-15 ###
+### PageSpeed follow-up ï¿½ 2026-10-15 ###
 Embed shared styles and navigation to remove render-blocking asset requests. Add a sync/check tool and CI verification for generated copies and CSP hashes. Add a hash-based CSP with Trusted Types, a referrer policy, and homepage Organization/WebSite structured data. Extend browser checks for security enforcement and script fallback. Document GitHub Pages cache/header limitations.
 
 Reviewed sitemap against all ten canonical public pages, sorted entries, and recorded the 2026-10-15 page modifications.
@@ -169,3 +169,6 @@ Reviewed sitemap against all ten canonical public pages, sorted entries, and rec
 ### 2026-11-03 - Motion details ###
 - Add 95% button presses with a spring-like return, 350ms eased mobile menu and draft reveals, and a 470ms circle-then-check draft-ready icon.
 - Respect reduced-motion preferences and preserve immediate navigation and explicit unsent-draft messaging.
+
+### Dynamic quote submission - 2026-11-19 ###
+Replaced email drafting with inline quote submissions to the Tech Traversers portal, with email verification, input validation, duplicate-safe retries, business/phone/contact preferences and accessible feedback. Kept direct email as the JavaScript-disabled fallback. No public prices or service commitments changed.

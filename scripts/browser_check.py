@@ -216,39 +216,58 @@ def run(executable=None, text_only=False):
             expect(page.locator('.skip-link')).to_be_focused()
             page.keyboard.press('Enter')
             expect(page.locator('main')).to_be_focused()
-            # The static quote form validates locally and prepares, but never sends, an email.
+            # Quote submissions stay on the website and use the CRM API. Stub mail-producing requests.
+            quote_payloads = []
+            quote_mode = {'value': 'success'}
+            quote_endpoint = 'https://portal.techtraversers.com/api/public/quote'
+            def quote_api(route):
+                headers = {'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Headers': 'Content-Type',
+                           'Access-Control-Allow-Methods': 'POST, OPTIONS'}
+                if route.request.method == 'OPTIONS':
+                    route.fulfill(status=204, headers=headers)
+                    return
+                quote_payloads.append(route.request.post_data_json)
+                if quote_mode['value'] == 'error':
+                    route.fulfill(status=503, headers=headers, content_type='application/json',
+                                  body=json.dumps({'error': 'Temporary failure. Please retry.'}))
+                else:
+                    route.fulfill(status=202, headers=headers, content_type='application/json',
+                                  body=json.dumps({'message': 'Check your email to verify and submit your quote request.'}))
+            page.route(quote_endpoint, quote_api)
             page.goto(origin + '/contact/?service=Website%20maintenance')
             expect(page.locator('#quote-service')).to_have_value('Website maintenance')
             expect(page.locator('#quote-form')).to_be_visible()
             expect(page.locator('#quote-result')).to_be_hidden()
-            page.get_by_role('button', name='Prepare email', exact=True).click()
+            page.get_by_role('button', name='Submit quote request', exact=True).click()
             expect(page.locator('#quote-name')).to_be_focused()
             expect(page.locator('#quote-result')).to_be_hidden()
             page.locator('#quote-name').fill('Test & Example')
             page.locator('#quote-email-address').fill('visitor@example.com')
             page.locator('#quote-details').fill('Improve my site & contact flow. <b>Example</b>\nKeep the current content.')
             page.locator('#quote-timing').fill('Next month')
-            contact_requests = []
-            page.on('request', lambda request: contact_requests.append(request))
-            page.get_by_role('button', name='Prepare email', exact=True).click()
+            page.locator('#quote-business').fill('Example business')
+            quote_mode['value'] = 'error'
+            page.get_by_role('button', name='Submit quote request', exact=True).click()
+            expect(page.locator('#quote-status')).to_contain_text('Temporary failure')
+            expect(page.locator('#quote-name')).to_have_value('Test & Example')
+            first_key = quote_payloads[-1]['idempotency_key']
+            quote_mode['value'] = 'success'
+            page.get_by_role('button', name='Submit quote request', exact=True).click()
             expect(page.locator('#quote-result')).to_be_visible()
             expect(page.locator('#quote-result-heading')).to_be_focused()
-            expect(page.locator('#quote-status')).to_contain_text('Nothing has been sent')
-            email = urlsplit(page.locator('#quote-email').get_attribute('href'))
-            assert email.scheme == 'mailto' and email.path == 'traversertech@gmail.com'
-            params = parse_qs(email.query)
-            assert params['subject'] == ['Project inquiry: Website maintenance']
-            body = params['body'][0]
-            assert 'Test & Example' in body and 'visitor@example.com' in body
-            assert '<b>Example</b>\nKeep the current content.' in body
-            assert 'Next month' in body
-            expect(page.locator('#quote-draft')).to_have_value(body)
-            assert not contact_requests, 'Preparing the draft must not send visitor data'
-            page.locator('#quote-details').fill('Updated request')
+            expect(page.locator('#quote-status')).to_contain_text('Verification email requested')
+            assert quote_payloads[-1]['idempotency_key'] == first_key, 'Retries must reuse the submission key'
+            payload = quote_payloads[-1]
+            assert payload['name'] == 'Test & Example' and payload['email'] == 'visitor@example.com'
+            assert payload['business'] == 'Example business' and payload['service'] == 'Website maintenance'
+            assert '<b>Example</b>\nKeep the current content.' in payload['description']
+            assert 'Next month' in payload['description']
+            assert payload['preferred_contact'] == 'Email'
+            expect(page.get_by_role('button', name='Submit quote request', exact=True)).to_be_disabled()
+            page.get_by_role('button', name='Send another request', exact=True).click()
             expect(page.locator('#quote-result')).to_be_hidden()
-            assert page.locator('#quote-email').get_attribute('href') is None
-            page.get_by_role('button', name='Prepare email', exact=True).click()
-            assert 'Updated request' in page.locator('#quote-draft').input_value()
+            page.locator('#quote-preference').select_option('Phone')
+            assert page.locator('#quote-phone').get_attribute('required') is not None
             page.set_viewport_size({'width': 1440, 'height': 1000})
             page.screenshot(path=str(ROOT / 'test-results' / 'contact-desktop.png'), full_page=True)
             page.set_viewport_size({'width': 360, 'height': 900})

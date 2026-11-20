@@ -44,9 +44,9 @@ The CSP meta policy restricts resources, disallows unapproved scripts/styles, an
 
 ## Contact and quote requests
 
-`/contact/` works on static GitHub Pages without a submission service. The form validates locally and prepares a `mailto:` draft for the visitor to review and send. It never claims an inquiry was submitted or stores form content. A read-only message lets webmail users copy it manually; the business email remains visible if JavaScript or the form enhancement is unavailable. Service-page calls to action preselect a known service via `?service=`; other query values are ignored. Form and draft regions are masked for Clarity.
+`/contact/` submits quote requests dynamically without leaving the website. The form validates name, email, requested service and description, supports business/phone/contact preferences, preserves input on errors, and reuses its submission key when retrying. It calls the portal's public quote endpoint with no cookies or credentials. Email verification is required before a lead is added to the CRM; the page clearly explains this next step. Service links preselect an allowlisted service via `?service=`. The form and confirmation remain masked for Clarity. The business email is the JavaScript-disabled fallback.
 
-Edit the form markup in `contact/index.html` and behavior in `contact.js`, then regenerate embedded assets and CSP hashes. A server or configured form service is required before adding direct website submissions. Do not mark draft preparation as a completed lead. Customer testimonials require supplied, approved wording and attribution; the current site uses approved project descriptions instead.
+Edit `contact/index.html` and `contact.js`, then regenerate assets and CSP hashes. Only the contact page permits connections to `https://portal.techtraversers.com`. The backend allows CORS only for this public quote endpoint and the two Tech Traversers website origins; authenticated portal routes remain protected. Never place mail/database credentials in the public site. Customer testimonials still require approved wording and attribution.
 
 ## Checks
 
